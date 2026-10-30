@@ -8,6 +8,7 @@ import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
 import QuoteSection from './QuoteSection';
+import ServiceLocal from './ServiceLocal';
 import styles from './PPFPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
@@ -565,6 +566,8 @@ export default function PPFPage() {
         </div>
       </section>
 
+      {/* ── Waterloo Region note — src/data/serviceLocal.js ── */}
+      <ServiceLocal service="ppf" />
       <QuoteSection
         id="cta"
         initialService="ppf"

@@ -37,14 +37,19 @@
 
 # /blog/ held the wrap articles, so it goes to /learn/. (/articles/, the
 # old press page, is a real page again: In The Press.)
-# Blog categories → the matching Learn category. The three old posts were
-# written for businesses (logo placement, fleet changes, brand awareness),
-# so they go to the Wraps page's commercial & fleet section rather than a
-# listing of consumer guides.
+# Blog categories → the matching Learn category.
+# The three old posts, reviewed one by one (2026-10-30):
+# - "designing a vehicle wrap" (vehicle type, logo placement, colours for
+#   advertising) and "boost brand awareness" (branding) are written for
+#   businesses → the Wraps page's commercial & fleet section;
+# - "5 things you might not know" is general: partial wraps and leased
+#   cars as well as fleet changes → the Wraps page itself, which covers
+#   partial wraps, colour changes and commercial wraps (leased cars are a
+#   Learn guide linked from it).
 /category/vehicle-wrap/         /learn/category/vehicle-wraps/   301
 /category/custom-vinyl-wrap/    /learn/category/vehicle-wraps/   301
 /what-you-need-to-know-before-designing-a-vehicle-wrap/        /services/wraps/#commercial-wraps   301
-/5-things-you-might-not-know-about-vehicle-wraps/              /services/wraps/#commercial-wraps   301
+/5-things-you-might-not-know-about-vehicle-wraps/              /services/wraps/                    301
 /4-surprising-ways-custom-vinyl-wraps-can-boost-brand-awareness/  /services/wraps/#commercial-wraps  301
 
 # Individual FAQ pages (/ufaq/<slug>/, noindex on the old site) → the same

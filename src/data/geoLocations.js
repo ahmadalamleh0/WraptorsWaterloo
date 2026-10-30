@@ -33,6 +33,10 @@ export { SITE_URL } from '../lib/siteConfig.js';
 const STUDIO = `${LOCATION.address.street}, ${LOCATION.address.locality}`;
 
 
+// One line under the homepage "Service Areas" heading: there is a single
+// studio, and the area pages are about where its customers come from.
+export const SERVICE_AREAS_INTRO = `${LOCATION.brandName} works from one studio, at ${LOCATION.address.display}. Drivers from Waterloo, Kitchener, Cambridge and the surrounding townships bring their vehicles to us.`;
+
 export const SERVICE_CATALOG = {
   wraps:     { label: 'Vehicle Wraps',        path: '/services/wraps/' },
   ppf:       { label: 'Paint Protection Film', path: '/services/ppf/' },

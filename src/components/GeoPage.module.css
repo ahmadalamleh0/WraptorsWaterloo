@@ -22,21 +22,7 @@
   max-width: 760px;
 }
 
-.backBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-ui);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
-  text-decoration: none;
-  margin-bottom: 40px;
-  transition: color 0.25s ease;
-  width: fit-content;
-}
-.backBtn:hover { color: rgba(255, 255, 255, 0.80); }
+.crumbs { margin-bottom: 40px; }
 
 .eyebrow {
   display: block;

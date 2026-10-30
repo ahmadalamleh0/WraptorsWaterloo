@@ -343,6 +343,9 @@
   overflow: hidden;
 }
 
+/* One stat on its own: a single cell's width, not a stretched bar. */
+.statsRowSingle { max-width: 310px; }
+
 .stat {
   flex: 1;
   display: flex;

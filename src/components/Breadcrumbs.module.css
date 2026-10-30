@@ -1,0 +1,40 @@
+/* ══ BREADCRUMBS ══
+   Same type treatment as the area pages' former "All Service Areas" back
+   link: small uppercase UI type, low-contrast white. Spacing around the
+   trail is set by the host (className), so it fits each hero's rhythm. */
+.trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+}
+
+.trail a {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.trail a:hover,
+.trail a:focus-visible { color: #fff; }
+
+.sep {
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.current { color: rgba(255, 255, 255, 0.8); }
+
+@media (max-width: 480px) {
+  .trail { font-size: 0.56rem; letter-spacing: 0.18em; }
+  .sep   { margin: 0 8px; }
+}

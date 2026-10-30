@@ -8,6 +8,7 @@ import ServiceProcess from './ServiceProcess';
 import AftercareSection from './AftercareSection';
 import RelatedInsights from './RelatedInsights';
 import QuoteSection from './QuoteSection';
+import ServiceLocal from './ServiceLocal';
 import ServiceFaqSection from './ServiceFaqSection';
 import styles from './WrapsPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -328,6 +329,8 @@ export default function WrapsPage() {
           <span className={styles.wagonOverlayText}>Built Different.</span>
         </section>
 
+        {/* ── Waterloo Region note — src/data/serviceLocal.js ── */}
+        <ServiceLocal service="wraps" />
         <QuoteSection
           id="cta"
           initialService="wraps"

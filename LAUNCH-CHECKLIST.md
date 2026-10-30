@@ -14,14 +14,14 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 | 2 | **Netlify deploy preview** | No site | Staging per `MIGRATION-DOCS/NETLIFY-STAGING-PLAN.md`, **only when approved**; then `verify-migration.mjs --base <preview> --expect-noindex` and the checks in audit §8 (real 301s and 404s, percent-encoded FAQ URL, case variants) | NOT STARTED |
 | 3 | **Web3Forms keys** | Quote, Booking and Franchise forms are disabled (phone/email shown instead) | A Tri-City key (shop inbox wrap@wraptorstricity.com) and a franchise key in Netlify; never reuse Hamilton's or Dubai's. Test delivery on the preview | NOT STARTED |
 | 4 | **Map pin and Maps link** | From the live site's Google listing (43.511926, -80.5237892); about 16 m from OpenStreetMap's point for no. 745 | Confirm the pin marks #8 (the address itself is confirmed) | CLIENT APPROVAL REQUIRED |
-| 5 | **Network counter** | The inherited "Wraptors worldwide" globe (homepage, `/locations/`) shows "16 Locations · 4 Countries · Canada 9"; the old site said 13 in places and 16 in others | Confirm the numbers, or approve removing the counter | CLIENT APPROVAL REQUIRED |
-| 6 | **Launch sign-off** | — | Written GO from the client; backups of the WordPress site; DNS records recorded; rollback owner (playbook phase 12) | NOT STARTED |
+| 5 | **Launch sign-off** | — | Written GO from the client; backups of the WordPress site; DNS records recorded; rollback owner (playbook phase 12) | NOT STARTED |
 
 ### P1: before launch if possible
 
 | # | Item | Current state | Needed | Status |
 |---|---|---|---|---|
-| 7 | **New visible copy** | 3 area pages, 4 Learn guides, gallery model names and finish tags (sign-off table below) | Client review | CLIENT APPROVAL REQUIRED |
+| 6 | **New visible copy** | 3 area pages, 4 Learn guides, gallery model names and finish tags (sign-off table below); **the Waterloo Region sections on Wraps, PPF, Ceramic, Tint and Detailing and the homepage one-studio line** (`src/data/serviceLocal.js`, `SERVICE_AREAS_INTRO`; audit §10) | Client review | CLIENT APPROVAL REQUIRED |
+| 7 | **Network total** | The unconfirmed "16 Locations" counter was removed (15 studios are listed); only "4 Countries" shows, with per-country counts derived from the listing | Only if the client wants a total shown: the confirmed number and the full list | CLIENT APPROVAL REQUIRED (optional) |
 | 8 | **Hero video** | Stand-in Wraptors car-meet footage (Toronto) | Tri-City footage | CLIENT APPROVAL REQUIRED |
 | 9 | **Google reviews** | Section hidden. The old homepage's 7 reviews include one for "Wraptors Toronto", so they aren't reused | The client supplies Tri-City reviews, rating and count from the Tri-City Google listing | NOT STARTED |
 | 10 | **6 FAQ answers** | Held back; their old `/ufaq/` URLs land on `/faqs/` | Approve or rewrite each; then point its rule at the new anchor | CLIENT APPROVAL REQUIRED |
@@ -32,12 +32,11 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 
 | # | Item | Status |
 |---|---|---|
-| 13 | A short Waterloo-specific section on the core service pages (wraps, PPF, tint, ceramic); per-location `TRUST_COPY` for more unique area pages (audit §5.3) | CLIENT APPROVAL REQUIRED (new copy) |
+| 13 | Per-location `TRUST_COPY` for more unique area pages (audit §5.3); the service-page local sections are done (#6) | CLIENT APPROVAL REQUIRED (new copy) |
 | 14 | Homepage H1 is the slogan, without service or city (as on Hamilton) | CLIENT APPROVAL REQUIRED (visible design) |
-| 15 | Visible breadcrumbs + BreadcrumbList on service and area pages | CLIENT APPROVAL REQUIRED (visible design) |
-| 16 | Legal pages / online store (hidden until they exist) | NOT STARTED |
-| 17 | Map still image and Tri-City emblem (`media.mapImage`, `media.studioEmblem`) | NOT STARTED |
-| 18 | "Built with the world's most iconic names" brand strip wording | CLIENT APPROVAL REQUIRED (low) |
+| 15 | Legal pages / online store (hidden until they exist) | NOT STARTED |
+| 16 | Map still image and Tri-City emblem (`media.mapImage`, `media.studioEmblem`) | NOT STARTED |
+| 17 | "Built with the world's most iconic names" brand strip wording | CLIENT APPROVAL REQUIRED (low) |
 
 ### Done
 
@@ -45,8 +44,11 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 |---|---|
 | **Address and contact** (client, 2026-10-30): 745 Bridge St W #8, Waterloo, ON N2V 2G6, Canada · 647.990.WRAP (9727) · wrap@wraptorstricity.com · www.wraptorstricity.com. In the footer, Visit Us, `/book/`, `/locations/` and the LocalBusiness schema | VERIFIED LOCALLY |
 | **Redirect map**: 68 rows in `SEO-URL-MAPPING.csv`; 70 legacy URLs pass in one hop or as a real 404 | VERIFIED LOCALLY |
-| **Technical SEO**: titles, descriptions, H1s, canonicals, trailing slashes, internal links, sitemap, robots.txt, schema, prerendering; noindex on preview/branch/local builds only | VERIFIED LOCALLY (`MIGRATION-CHECK.md`, 576/576) |
+| **Technical SEO**: titles, descriptions, H1s, canonicals, trailing slashes, internal links, breadcrumbs, sitemap, robots.txt, schema, prerendering; noindex on preview/branch/local builds only | VERIFIED LOCALLY (`MIGRATION-CHECK.md`, 623/623) |
 | Unverified `priceRange: "$$$"` removed from the schema | VERIFIED LOCALLY |
+| Visible breadcrumbs + BreadcrumbList on all 11 service pages (in the hero text group) and the 3 area pages (replacing the back link) | VERIFIED LOCALLY (623/623; browser at 1440/834/390) |
+| Old blog posts reviewed one by one; "5 things you might not know about vehicle wraps" → `/services/wraps/` (the other two stay on the commercial section) | VERIFIED LOCALLY |
+| Global Locations accents red → white/off-white (also on Hamilton and Dubai, on request) | VERIFIED LOCALLY |
 
 ## Forms setup
 

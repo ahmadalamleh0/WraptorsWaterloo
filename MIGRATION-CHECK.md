@@ -1,8 +1,8 @@
 # Migration check — local dist/ (Netlify emulation)
 
-Generated 2026-10-30T14:19:07.684Z by `node scripts/verify-migration.mjs --report MIGRATION-CHECK.md`.
+Generated 2026-10-30T14:57:32.647Z by `node scripts/verify-migration.mjs --report MIGRATION-CHECK.md`.
 
-**576 passed, 0 failed.**
+**623 passed, 0 failed.**
 
 | Group | Checks | Passed | Failed |
 |---|---|---|---|
@@ -12,9 +12,9 @@ Generated 2026-10-30T14:19:07.684Z by `node scripts/verify-migration.mjs --repor
 | Metadata | 165 | 165 | 0 |
 | Indexing | 33 | 33 | 0 |
 | Content | 67 | 67 | 0 |
-| Structured data | 71 | 71 | 0 |
+| Structured data | 117 | 117 | 0 |
 | NAP | 66 | 66 | 0 |
-| Internal links | 35 | 35 | 0 |
+| Internal links | 36 | 36 | 0 |
 | Legacy URLs | 70 | 70 | 0 |
 
 ## Legacy URLs
@@ -48,7 +48,7 @@ Generated 2026-10-30T14:19:07.684Z by `node scripts/verify-migration.mjs --repor
 | PASS | `/category/custom-vinyl-wrap/ -> /learn/category/vehicle-wraps/` | got 200 /learn/category/vehicle-wraps/ in 1 hop(s) |
 | PASS | `/category/uncategorized/ -> 404` | got 404 after 0 hop(s) |
 | PASS | `/what-you-need-to-know-before-designing-a-vehicle-wrap/ -> /services/wraps/#commercial-wraps` | got 200 /services/wraps/#commercial-wraps in 1 hop(s) |
-| PASS | `/5-things-you-might-not-know-about-vehicle-wraps/ -> /services/wraps/#commercial-wraps` | got 200 /services/wraps/#commercial-wraps in 1 hop(s) |
+| PASS | `/5-things-you-might-not-know-about-vehicle-wraps/ -> /services/wraps/` | got 200 /services/wraps/ in 1 hop(s) |
 | PASS | `/4-surprising-ways-custom-vinyl-wraps-can-boost-brand-awareness/ -> /services/wraps/#commercial-wraps` | got 200 /services/wraps/#commercial-wraps in 1 hop(s) |
 | PASS | `/contact-wraptors -> /book/` | got 200 /book/ in 1 hop(s) |
 | PASS | `/services/vehicle-wrapping -> /services/wraps/` | got 200 /services/wraps/ in 1 hop(s) |

@@ -9,6 +9,7 @@ import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
 import QuoteSection from './QuoteSection';
+import ServiceLocal from './ServiceLocal';
 import styles from './TintPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
@@ -104,6 +105,9 @@ export default function TintPage() {
         </div>
         <span className={styles.showcaseOverlayText}>Comfort Meets Presence.</span>
       </section>
+
+      {/* ── Waterloo Region note — src/data/serviceLocal.js ── */}
+      <ServiceLocal service="tint" />
 
       {/* ── 3. Shared quote section ── */}
       <QuoteSection

@@ -6,7 +6,13 @@
 
 **Companion files:**
 - `SEO-URL-MAPPING.csv`: one row per old URL or URL pattern (68 rows): old metadata, action, new URL, risk, local verification result.
-- `MIGRATION-CHECK.md`: pass/fail output of `node scripts/verify-migration.mjs` on the production-context build (576 checks, including 70 legacy URLs).
+- `MIGRATION-CHECK.md`: pass/fail output of `node scripts/verify-migration.mjs` on the production-context build (623 checks, including 70 legacy URLs and the breadcrumb checks).
+
+**Refinement pass (2026-10-30, §10):**
+- Waterloo Region sections on the core service pages, plus a one-studio line on the homepage.
+- Each old blog post reviewed; one retargeted.
+- The unconfirmed "16 Locations" total removed.
+- Breadcrumbs on the service and area pages.
 - `LAUNCH-CHECKLIST.md`: blockers and approvals. `TRICITY-DISCOVERY.md`: business details and what was copied from Hamilton.
 
 Status labels: `NOT STARTED`, `COMPLETED`, `VERIFIED LOCALLY`, `VERIFIED ON HOSTING`, `CLIENT APPROVAL REQUIRED` (playbook definitions). **Nothing here is `VERIFIED ON HOSTING`**: there is no Netlify site yet.
@@ -87,7 +93,7 @@ Search terms the old site used, all kept in the new titles and H1s: vehicle wrap
 | Claim | Where on the old site | New site |
 |---|---|---|
 | "Rated number one car boutique", "best car wrap company" | Home (H1s), About | Not published |
-| "Biggest wrap shop with **16** locations" (home) vs "over **13** locations" (About, Services) | Home, About, Services | Not published in copy. **The inherited "Wraptors worldwide" globe on the homepage and `/locations/` shows "16 Locations · 4 Countries · Canada 9"**: CLIENT APPROVAL REQUIRED (confirm or remove the counter) |
+| "Biggest wrap shop with **16** locations" (home) vs "over **13** locations" (About, Services) | Home, About, Services | Not published. The inherited "Wraptors worldwide" section showed a "16 Locations" counter while listing 15 studios. **Removed on 2026-10-30**: no network total is shown until the client confirms one. The stats row now shows only "4 Countries", and the per-country counts are computed from the listing (1 / 9 / 4 / 1). The listing itself is unchanged |
 | "World's largest and most experienced vehicle wrap shop" | Home, About | Not published. The inherited homepage brand strip says "Built with the world's most iconic names" (car brands, not a claim about Wraptors): CLIENT APPROVAL REQUIRED, low |
 | Warranty: "full warranty of **3 years**" (FAQ) vs "our **5 year** warranty" (Services) vs "Wraptors **Lifetime** Guarantee Warranty, including fading" (Tint) | FAQs, Services, Tint | **Not published.** The FAQ answer is held in `FAQS_PENDING_APPROVAL` |
 | "9000+ vehicles wrapped / 9000+ happy clients / 10+ years" | Home | Not published |
@@ -116,11 +122,7 @@ Shared 8-word sequences in the visible main text of the new builds (city names m
 
 Between the three Tri-City area pages, 40–51% of 8-word sequences are shared, which is about half of each page's text. That's lower uniqueness than Hamilton's area pages (52–60% unique). There is no keyword overlap with Hamilton: Tri-City targets Waterloo, Kitchener and Cambridge, while Hamilton targets Hamilton and its own areas.
 
-**Recommendation (P2, CLIENT APPROVAL REQUIRED for new copy):**
-- Add a short Waterloo-specific section to the four core service pages (wraps, PPF, tint, ceramic), using facts the client supplies (e.g. the studio's real work, common local requests).
-- Make `TRUST_COPY` per-location if more area-page uniqueness is wanted.
-
-Neither is a launch blocker.
+**Done 2026-10-30 (§10):** a Waterloo Region section on Wraps, PPF, Ceramic Coating, Window Tint and Detailing, and a one-studio line on the homepage. **Still optional:** making `TRUST_COPY` per-location if more area-page uniqueness is wanted. Not a launch blocker.
 
 ## 6. Phase 8: redirect map (COMPLETED, VERIFIED LOCALLY)
 
@@ -135,7 +137,8 @@ Neither is a launch blocker.
 | `/blog/` | `/learn/` | Article hub |
 | 9 renamed service URLs | `/services/wraps/`, `/ppf/`, `/tint/`, `/detailing/`, `/custom-interiors/`, `/starlight/` (×2: headliner, galaxy ceilings), `/stripes-decals/` (×2: racing stripes, decals) | Equivalent services |
 | `/category/vehicle-wrap/`, `/category/custom-vinyl-wrap/` | `/learn/category/vehicle-wraps/` | Category → matching category |
-| 3 posts (logo placement, fleet changes, brand awareness) | `/services/wraps/#commercial-wraps` | Business intent; the commercial & fleet section of the Wraps page. The old posts weren't republished (generic text shared with Hamilton). |
+| "What you need to know before designing a vehicle wrap", "4 surprising ways custom vinyl wraps can boost brand awareness" | `/services/wraps/#commercial-wraps` | Reviewed individually: both are written for business owners (logo placement, advertising, brand identity), so they go to the commercial & fleet section |
+| "5 things you might not know about vehicle wraps" | `/services/wraps/` | Reviewed individually: a general post covering partial wraps, leased cars and fleet changes, so it goes to the Wraps page itself rather than its commercial section (changed 2026-10-30). Its useful points already exist on the new site: partial wraps on the Wraps page, the leased-car guide, and the wrap-removal FAQ. None of the three posts is republished; they're generic and shared word for word with Hamilton. |
 | 9 `/ufaq/<slug>/` with approved answers | `/faqs/#<slug>` | Same answer, scroll target |
 | 6 `/ufaq/<slug>/` awaiting approval, `/ufaq/`, `/ufaq/*` | `/faqs/` | Lands on the FAQ page; point each at its anchor once the answer is approved |
 | `/author/wtconline/`, `/home/` | `/` | The old site already redirected these there |
@@ -153,7 +156,7 @@ Netlify behaviour relied on, checked in the Netlify docs on 2026-10-30 via Conte
 
 ## 7. Phase 9: technical SEO (VERIFIED LOCALLY)
 
-Build: `CONTEXT=production npm run build` → 33 prerendered routes, sitemap (33 URLs), robots.txt, 404.html. Check: `node scripts/verify-migration.mjs --report MIGRATION-CHECK.md` → **576/576 passed**, with Netlify's documented routing emulated on `dist/`.
+Build: `CONTEXT=production npm run build` → 33 prerendered routes, sitemap (33 URLs), robots.txt, 404.html. Check: `node scripts/verify-migration.mjs --report MIGRATION-CHECK.md` → **623/623 passed** after the refinement pass (576/576 before it), with Netlify's documented routing emulated on `dist/`.
 
 | Requirement | Result |
 |---|---|
@@ -161,7 +164,7 @@ Build: `CONTEXT=production npm run build` → 33 prerendered routes, sitemap (33
 | Visible H1 | Exactly one on every page. Services: "Wraptors Tri-City · <Service> <headline>". Areas: service + city. **Homepage H1 is the slogan "Crafted with purpose. Built for legacy."**, as on Hamilton (the title carries the keywords): CLIENT APPROVAL REQUIRED to change it, as it's visible design |
 | Canonicals and `og:url` | Self-referencing absolute `https://www.wraptorstricity.com/<route>/` on all 33 |
 | Trailing slashes | Every route is 200 at its slash URL; each slash-less form takes one 301 to it (65 checks). All 35 distinct internal links resolve directly with a 200 |
-| Breadcrumbs | BreadcrumbList on About, Book, Franchise, FAQs, Gallery, Locations, Videos, Press, Services hub, Learn hub, categories and guides: 48 items, all absolute trailing-slash URLs that resolve. **Service and area pages have no breadcrumbs** (same as Hamilton; adding visible ones is a design change): P3, approval |
+| Breadcrumbs | BreadcrumbList on every page except the homepage. **Service and area pages now have them (2026-10-30, §10).** The verifier checks every trail ends on its page's canonical and uses absolute trailing-slash URLs that resolve |
 | LocalBusiness | `AutomotiveBusiness` on every page: name, phone `+16479909727`, street `745 Bridge St W #8`, Waterloo, ON, **N2V 2G6**, CA, geo, `hasMap`, areaServed. It matches the visible footer, Visit Us and `/book/`. No hours, rating or price range |
 | Other schema | Article + FAQPage + BreadcrumbList on the 4 guides; FAQPage on `/faqs/` (answers in the static HTML); ItemList on `/services/`; Service on area pages |
 | Sitemap | Generated from the route list at build time: 33 URLs, production domain, trailing slash, no redirects, no noindex pages |
@@ -187,3 +190,37 @@ Run `node scripts/verify-migration.mjs --base https://deploy-preview-<n>--<site>
 ## 9. Prioritised remaining work
 
 See `LAUNCH-CHECKLIST.md` for owners and status.
+
+## 10. Refinement pass (2026-10-30): COMPLETED, VERIFIED LOCALLY
+
+**Tri-City vs Hamilton.** Measured as the share of 8-word sequences in the page text (navigation and footer excluded, city names masked) that don't appear on the same Hamilton page. "Before" is the same build with the new blocks removed:
+
+| Page | Before | After | What was added |
+|---|---|---|---|
+| Homepage | 15% unique | 20% | Under "Service Areas": Tri-City works from one studio at 745 Bridge St W #8 and serves drivers from Waterloo, Kitchener, Cambridge and the townships |
+| Vehicle Wraps | 3% | 20% | "Wrapped In Waterloo.": the one studio; commercial layouts for vehicles that work the 401, Conestoga Parkway and Highway 8 |
+| PPF | 2% | 18% | "Built For Highway Kilometres.": where chips come from on local highways and winter roads; front-end coverage for commuters, lower panels for gravel township roads |
+| Ceramic Coating | 2% | 16% | "Easier Through Salt Season.": what a coating does and doesn't do against road salt, sap and pollen; decontamination for cars arriving straight from winter |
+| Window Tint | 4% | 24% | "Summer Sun, Winter Glare.": heat in open lots, glare off snow, and Ontario's Highway Traffic Act rules reviewed per window (no percentages stated) |
+| Detailing | 3% | 21% | "After The Snow, Before The Next.": spring and fall detailing around salt season |
+
+- **Copy:** in `src/data/serviceLocal.js` (rendered by `ServiceLocal`, just before the quote form, with links to the three area pages). The homepage line is `SERVICE_AREAS_INTRO` in `src/data/geoLocations.js`.
+- **Kept as it was:** the technical explanations.
+- **Not claimed:** no prices, durations, warranties, statistics, second studio, pickup or mobile service.
+- **Status:** CLIENT APPROVAL REQUIRED (new visible copy).
+
+**Blog redirects.** Each post was re-read; see §6. "5 things you might not know about vehicle wraps" now goes to `/services/wraps/`; the other two stay on `#commercial-wraps`.
+
+**Location statistics.** The "16 Locations" counter is removed, per-country counts are derived from the listing, and the listing is unchanged (§5.2).
+
+**Breadcrumbs.** A new `Breadcrumbs` component renders the visible trail and its BreadcrumbList from the same items.
+- **Service pages:** "Home / Services / <service>" is the first line of the existing hero text group, above the "Wraptors Tri-City · <service>" eyebrow. It's small, low-contrast type with a soft shadow for light photos, so the hero layout is otherwise unchanged.
+- **Area pages:** "Home / Locations / <area>" replaces the "All Service Areas" back link, in the same place and type style.
+- **Checks:** the verifier requires a BreadcrumbList on every service and area page, and checks every trail ends on the page's canonical with final-form URLs.
+
+**Also changed (all three sites, on request):** the Global Locations section's red accents became white or off-white. The commits are local in each repo.
+
+**Verification:**
+- `CONTEXT=production npm run build` and `node scripts/verify-migration.mjs` passed 623/623.
+- ESLint is clean.
+- Browser at 1440 / 834 / 390 (`vite preview` + Playwright): 5 local sections, service heroes with trails including a light-photo hero, an area hero, the homepage Service Areas line and the single-stat row all rendered with no console errors and no horizontal overflow.

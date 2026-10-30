@@ -61,7 +61,7 @@ const LEGACY = [
   ['/category/custom-vinyl-wrap/', '/learn/category/vehicle-wraps/'],
   ['/category/uncategorized/', 404],
   ['/what-you-need-to-know-before-designing-a-vehicle-wrap/', '/services/wraps/#commercial-wraps'],
-  ['/5-things-you-might-not-know-about-vehicle-wraps/', '/services/wraps/#commercial-wraps'],
+  ['/5-things-you-might-not-know-about-vehicle-wraps/', '/services/wraps/'],
   ['/4-surprising-ways-custom-vinyl-wraps-can-boost-brand-awareness/', '/services/wraps/#commercial-wraps'],
   // Slash-less copies the old site served with a 200
   ['/contact-wraptors', '/book/'],
@@ -281,6 +281,15 @@ for (const route of routes) {
     html.includes(`href="tel:${LOCATION.contact.phone}"`) && html.includes(`href="mailto:${LOCATION.contact.email}"`)
       && (!LOCATION.contact.phoneIntl || html.includes(LOCATION.contact.phoneIntl))
       && (!LOCATION.address.mapsUrl || (html.includes(`href="${LOCATION.address.mapsUrl}"`) && biz.includes(LOCATION.address.mapsUrl))));
+  // Breadcrumbs: service and area pages must have them; wherever a trail
+  // exists it ends on this page's canonical, with final-form URLs only.
+  const crumbs = blocks.flatMap((b) => [].concat(b)).filter((b) => b['@type'] === 'BreadcrumbList');
+  if (/^\/(services|areas)\/[^/]+\/$/.test(route)) check('Structured data', `${route} has a BreadcrumbList`, crumbs.length === 1, `${crumbs.length} found`);
+  for (const c of crumbs) {
+    const urls = c.itemListElement.map((i) => i.item);
+    check('Structured data', `${route} breadcrumb ends on its canonical and uses final URLs`,
+      urls.at(-1) === url && urls.every((u) => u.startsWith(`${SITE_URL}/`) && u.endsWith('/')), urls.join(' > '));
+  }
   if (route === '/about/') check('Content', '/about/ H1 keeps the old page heading "About Wraptors"', /^About Wraptors/i.test(headings[0] || ''), headings.join(' | '));
   if (route.startsWith('/learn/') && !route.startsWith('/learn/category/') && route !== '/learn/') {
     check('Structured data', `${route} has Article + FAQPage + BreadcrumbList`, ['Article', 'FAQPage', 'BreadcrumbList'].every((x) => t.has(x)), [...t].join(', '));

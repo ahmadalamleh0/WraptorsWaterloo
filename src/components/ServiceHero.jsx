@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+import Breadcrumbs from './Breadcrumbs';
 import styles from './ServiceHero.module.css';
 
 // Shared hero for every service page — identical structure, positioning,
@@ -19,11 +21,24 @@ export default function ServiceHero({
   // hero (e.g. when the shot's main subject sits higher in frame and the
   // usual position covers it) — same content, just anchored lower.
   lowerContent = false,
+  // Last step of the Home / Services / <service> trail. Defaults to the
+  // service part of the eyebrow ("Wraptors Tri-City · Window Tint").
+  breadcrumbName,
 }) {
+  const { pathname } = useLocation();
+  const crumbName = breadcrumbName || String(eyebrow).split(' · ').pop();
   return (
     <section className={styles.hero}>
       <div className={styles.media}>{media}</div>
       <div className={`${styles.heroOverlay} ${lowerContent ? styles.heroOverlayLower : ''}`}>
+        <Breadcrumbs
+          className={styles.crumbs}
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Services', path: '/services' },
+            { name: crumbName, path: pathname },
+          ]}
+        />
         {/* The eyebrow sits inside the H1 so the page heading carries the
             service + city ("Wraptors Tri-City · Window Tint") as well as
             the cinematic line. .heading is display: contents — the layout

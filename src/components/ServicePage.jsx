@@ -10,6 +10,7 @@ import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
 import QuoteSection from './QuoteSection';
+import ServiceLocal from './ServiceLocal';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { pageUrl } from '../lib/siteConfig';
 import { LOCATION } from '../config/location.js';
@@ -279,6 +280,8 @@ export default function ServicePage({
           </section>
         )}
 
+        {/* ── Waterloo Region note — src/data/serviceLocal.js ── */}
+        <ServiceLocal service={serviceId} />
         <QuoteSection
           id="cta"
           initialService={serviceId}

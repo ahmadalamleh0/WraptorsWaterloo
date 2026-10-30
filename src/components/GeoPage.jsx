@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FaqAccordion from './FaqAccordion';
+import Breadcrumbs from './Breadcrumbs';
 import styles from './GeoPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
@@ -39,12 +40,16 @@ export default function GeoPage({ location }) {
         {/* ── Hero ── */}
         <section className={styles.hero}>
           <div className={styles.heroInner}>
-            <Link to="/#service-areas" className={styles.backBtn}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M19 12H5M12 5l-7 7 7 7" />
-              </svg>
-              All Service Areas
-            </Link>
+            {/* Breadcrumb in the place (and type style) of the old "All
+                Service Areas" back link; /locations/ lists every area. */}
+            <Breadcrumbs
+              className={styles.crumbs}
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Locations', path: '/locations' },
+                { name: location.locationName, path: `/areas/${location.slug}` },
+              ]}
+            />
             <span className={styles.eyebrow}>{location.eyebrow}</span>
             <h1 className={styles.headline}>{location.h1}</h1>
             {location.heroCopy.map((paragraph, i) => (

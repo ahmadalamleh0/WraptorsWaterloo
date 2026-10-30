@@ -407,6 +407,7 @@ export default function StarlightPage() {
       {/* ── HERO — shared ServiceHero, same family as every service page ── */}
       <ServiceHero
         eyebrow={`${LOCATION.brandName} · Starlight`}
+        breadcrumbName="Starlight & Galaxy Ceilings"
         headline="Night, Built In."
         supportingLine="Starlight Headliners · Galaxy Ceilings · Custom Patterns"
         media={<StarfieldBg />}

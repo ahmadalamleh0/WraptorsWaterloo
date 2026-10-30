@@ -59,6 +59,20 @@
   display: contents;
 }
 
+/* Breadcrumb trail — first line of the text group, above the eyebrow.
+   Brighter than the trail's default and lifted with a soft shadow, since
+   it sits over photos (some of them light) rather than a black band. */
+.crumbs {
+  margin-bottom: 22px;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+.heroOverlay .crumbs a { color: rgba(255, 255, 255, 0.78); }
+.heroOverlay .crumbs a:hover,
+.heroOverlay .crumbs a:focus-visible { color: #fff; }
+.heroOverlay .crumbs [aria-current] { color: #fff; }
+.heroOverlayLower .crumbs { margin-bottom: 16px; }
+
 .eyebrow {
   display: block;
   font-family: var(--font-ui);
