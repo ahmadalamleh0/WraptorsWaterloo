@@ -181,7 +181,7 @@ function GlobeLines({ markers, interaction }) {
         <path
           ref={pathRef}
           fill="none"
-          stroke="rgba(214,38,0,0.58)"
+          stroke="rgba(255,255,255,0.28)"
           strokeWidth="0.9"
           strokeDasharray="5 4"
           d=""
@@ -251,20 +251,20 @@ const STATS = [
 
 /* ── TacticalGlobe configuration ─────────────────────────── */
 const GLOBE_MARKERS = [
-  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',   latitude: 43.589,  longitude: -79.644,  color: '#cc2200' },
-  { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#cc2200' },
-  { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#cc2200' },
-  { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#cc2200' },
-  { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#cc2200' },
-  { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#cc2200' },
-  { label: 'Miami · FL',           description: 'Florida, USA',             latitude: 25.821,  longitude: -80.356,  color: '#cc2200' },
-  { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#cc2200' },
-  { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#cc2200' },
+  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',   latitude: 43.589,  longitude: -79.644,  color: '#d4d8dd' },
+  { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#d4d8dd' },
+  { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#d4d8dd' },
+  { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#d4d8dd' },
+  { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#d4d8dd' },
+  { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#d4d8dd' },
+  { label: 'Miami · FL',           description: 'Florida, USA',             latitude: 25.821,  longitude: -80.356,  color: '#d4d8dd' },
+  { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#d4d8dd' },
+  { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#d4d8dd' },
   // Appended (not inserted earlier in the array) so LINE_PAIRS below —
   // which hardcodes marker indices — doesn't need renumbering for these.
-  { label: 'Dubai · UAE',          description: 'United Arab Emirates',     latitude: 25.2048, longitude: 55.2708, color: '#cc2200' },
-  { label: 'Scottsdale · AZ',      description: 'Arizona, USA',             latitude: 33.494,  longitude: -111.926, color: '#cc2200' },
-  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137, color: '#cc2200' },
+  { label: 'Dubai · UAE',          description: 'United Arab Emirates',     latitude: 25.2048, longitude: 55.2708, color: '#d4d8dd' },
+  { label: 'Scottsdale · AZ',      description: 'Arizona, USA',             latitude: 33.494,  longitude: -111.926, color: '#d4d8dd' },
+  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137, color: '#d4d8dd' },
 ];
 
 const GLOBE_MAP_STYLE = {
@@ -304,7 +304,7 @@ const GLOBE_INTERACTION = {
   rotateZ:         -50,
   enableDrag:      !IS_MOBILE,
   dragSensitivity: IS_MOBILE ? 0 : 0.4,
-  glowColor:       '#d40000',
+  glowColor:       '#c9ced4',
   glowIntensity:   IS_MOBILE ? 0.20 : 0.55,
   showStars:       !IS_MOBILE,
   showLabels:      !IS_MOBILE,
