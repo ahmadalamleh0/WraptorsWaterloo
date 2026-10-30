@@ -21,7 +21,7 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 | # | Item | Current state | Needed | Status |
 |---|---|---|---|---|
 | 6 | **New visible copy** | 3 area pages, 4 Learn guides, gallery model names and finish tags (sign-off table below); **the Waterloo Region sections on Wraps, PPF, Ceramic, Tint and Detailing and the homepage one-studio line** (`src/data/serviceLocal.js`, `SERVICE_AREAS_INTRO`; audit §10) | Client review | CLIENT APPROVAL REQUIRED |
-| 7 | **Network total** | The unconfirmed "16 Locations" counter was removed (15 studios are listed); only "4 Countries" shows, with per-country counts derived from the listing | Only if the client wants a total shown: the confirmed number and the full list | CLIENT APPROVAL REQUIRED (optional) |
+| 7 | **Network total** | "16 Locations · 4 Countries" is shown again at the client's request (2026-10-30), but the section lists **15** locations (UAE 1, Canada 9, USA 4, South Africa 1). Per-country counts and "Countries" are derived from the listing; no location was added. The globe has markers for 12 of the 15 (none for Wraptors East, Waterloo, Kingston) | The client confirms the total (name the 16th location, or show 15) | CLIENT APPROVAL REQUIRED |
 | 8 | **Hero video** | Stand-in Wraptors car-meet footage (Toronto) | Tri-City footage | CLIENT APPROVAL REQUIRED |
 | 9 | **Google reviews** | Section hidden. The old homepage's 7 reviews include one for "Wraptors Toronto", so they aren't reused | The client supplies Tri-City reviews, rating and count from the Tri-City Google listing | NOT STARTED |
 | 10 | **6 FAQ answers** | Held back; their old `/ufaq/` URLs land on `/faqs/` | Approve or rewrite each; then point its rule at the new anchor | CLIENT APPROVAL REQUIRED |
@@ -48,7 +48,7 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 | Unverified `priceRange: "$$$"` removed from the schema | VERIFIED LOCALLY |
 | Visible breadcrumbs + BreadcrumbList on all 11 service pages (in the hero text group) and the 3 area pages (replacing the back link) | VERIFIED LOCALLY (623/623; browser at 1440/834/390) |
 | Old blog posts reviewed one by one; "5 things you might not know about vehicle wraps" → `/services/wraps/` (the other two stay on the commercial section) | VERIFIED LOCALLY |
-| Global Locations accents red → white/off-white (also on Hamilton and Dubai, on request) | VERIFIED LOCALLY |
+| Global Locations, final treatment (all three sites, on request): deep-red globe pins and subtle red connection lines; headings, city names, bullets, HQ badge, active highlight, borders and stats in white/off-white; both stats in the two-column layout | VERIFIED LOCALLY |
 
 ## Forms setup
 

@@ -181,7 +181,7 @@ function GlobeLines({ markers, interaction }) {
         <path
           ref={pathRef}
           fill="none"
-          stroke="rgba(255,255,255,0.28)"
+          stroke="rgba(179,38,30,0.42)"
           strokeWidth="0.9"
           strokeDasharray="5 4"
           d=""
@@ -240,29 +240,31 @@ const REGIONS = [
 
 const instagramUrl = (handle) => `https://instagram.com/${handle}`;
 
-// Counts are derived from the listing above, never typed in. A network
-// total ("16 locations") is left out until the client confirms one: the
-// old figure didn't match the studios listed here (LAUNCH-CHECKLIST.md).
+// "Countries" is derived from the listing above. "16 Locations" is the
+// brand's stated network total; the listing has 15 entries, so the
+// number is awaiting client confirmation (see the project checklist).
+// Don't add a location to make them match.
 const STATS = [
+  { to: 16,             suffix: '', label: 'Locations' },
   { to: REGIONS.length, suffix: '', label: 'Countries' },
 ];
 
 /* ── TacticalGlobe configuration ─────────────────────────── */
 const GLOBE_MARKERS = [
-  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',   latitude: 43.589,  longitude: -79.644,  color: '#d4d8dd' },
-  { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#d4d8dd' },
-  { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#d4d8dd' },
-  { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#d4d8dd' },
-  { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#d4d8dd' },
-  { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#d4d8dd' },
-  { label: 'Miami · FL',           description: 'Florida, USA',             latitude: 25.821,  longitude: -80.356,  color: '#d4d8dd' },
-  { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#d4d8dd' },
-  { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#d4d8dd' },
+  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',   latitude: 43.589,  longitude: -79.644,  color: '#b3261e' },
+  { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#b3261e' },
+  { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#b3261e' },
+  { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#b3261e' },
+  { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#b3261e' },
+  { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#b3261e' },
+  { label: 'Miami · FL',           description: 'Florida, USA',             latitude: 25.821,  longitude: -80.356,  color: '#b3261e' },
+  { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#b3261e' },
+  { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#b3261e' },
   // Appended (not inserted earlier in the array) so LINE_PAIRS below —
   // which hardcodes marker indices — doesn't need renumbering for these.
-  { label: 'Dubai · UAE',          description: 'United Arab Emirates',     latitude: 25.2048, longitude: 55.2708, color: '#d4d8dd' },
-  { label: 'Scottsdale · AZ',      description: 'Arizona, USA',             latitude: 33.494,  longitude: -111.926, color: '#d4d8dd' },
-  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137, color: '#d4d8dd' },
+  { label: 'Dubai · UAE',          description: 'United Arab Emirates',     latitude: 25.2048, longitude: 55.2708, color: '#b3261e' },
+  { label: 'Scottsdale · AZ',      description: 'Arizona, USA',             latitude: 33.494,  longitude: -111.926, color: '#b3261e' },
+  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137, color: '#b3261e' },
 ];
 
 const GLOBE_MAP_STYLE = {
@@ -381,7 +383,7 @@ export default function GlobalLocations() {
 
         {/* ── Stats ── */}
         <div
-          className={`${styles.statsRow} ${STATS.length === 1 ? styles.statsRowSingle : ''} ${revealed ? styles.in : ''}`}
+          className={`${styles.statsRow} ${revealed ? styles.in : ''}`}
           style={{ transitionDelay: revealed ? '0.34s' : '0s' }}
         >
           {STATS.map(s => (

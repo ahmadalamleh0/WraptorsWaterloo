@@ -11,7 +11,7 @@
 **Refinement pass (2026-10-30, §10):**
 - Waterloo Region sections on the core service pages, plus a one-studio line on the homepage.
 - Each old blog post reviewed; one retargeted.
-- The unconfirmed "16 Locations" total removed.
+- The "16 Locations" total: removed, then restored at the client's request; the 16-vs-15 discrepancy stays open for confirmation.
 - Breadcrumbs on the service and area pages.
 - `LAUNCH-CHECKLIST.md`: blockers and approvals. `TRICITY-DISCOVERY.md`: business details and what was copied from Hamilton.
 
@@ -93,7 +93,7 @@ Search terms the old site used, all kept in the new titles and H1s: vehicle wrap
 | Claim | Where on the old site | New site |
 |---|---|---|
 | "Rated number one car boutique", "best car wrap company" | Home (H1s), About | Not published |
-| "Biggest wrap shop with **16** locations" (home) vs "over **13** locations" (About, Services) | Home, About, Services | Not published. The inherited "Wraptors worldwide" section showed a "16 Locations" counter while listing 15 studios. **Removed on 2026-10-30**: no network total is shown until the client confirms one. The stats row now shows only "4 Countries", and the per-country counts are computed from the listing (1 / 9 / 4 / 1). The listing itself is unchanged |
+| "Biggest wrap shop with **16** locations" (home) vs "over **13** locations" (About, Services) | Home, About, Services | Not published in copy. The inherited "Wraptors worldwide" section shows "16 Locations · 4 Countries" while listing **15** studios. It was removed on 2026-10-30, then **restored the same day at the client's request**. **CLIENT APPROVAL REQUIRED:** the client should name the 16th location or approve showing 15; no location was added. Per-country counts and "Countries" are computed from the listing (1 / 9 / 4 / 1) |
 | "World's largest and most experienced vehicle wrap shop" | Home, About | Not published. The inherited homepage brand strip says "Built with the world's most iconic names" (car brands, not a claim about Wraptors): CLIENT APPROVAL REQUIRED, low |
 | Warranty: "full warranty of **3 years**" (FAQ) vs "our **5 year** warranty" (Services) vs "Wraptors **Lifetime** Guarantee Warranty, including fading" (Tint) | FAQs, Services, Tint | **Not published.** The FAQ answer is held in `FAQS_PENDING_APPROVAL` |
 | "9000+ vehicles wrapped / 9000+ happy clients / 10+ years" | Home | Not published |
@@ -211,7 +211,7 @@ See `LAUNCH-CHECKLIST.md` for owners and status.
 
 **Blog redirects.** Each post was re-read; see §6. "5 things you might not know about vehicle wraps" now goes to `/services/wraps/`; the other two stay on `#commercial-wraps`.
 
-**Location statistics.** The "16 Locations" counter is removed, per-country counts are derived from the listing, and the listing is unchanged (§5.2).
+**Location statistics.** The "16 Locations" counter was removed in this pass, then restored at the client's request; the discrepancy is recorded in §5.2. Per-country counts are derived from the listing, which is unchanged.
 
 **Breadcrumbs.** A new `Breadcrumbs` component renders the visible trail and its BreadcrumbList from the same items.
 - **Service pages:** "Home / Services / <service>" is the first line of the existing hero text group, above the "Wraptors Tri-City · <service>" eyebrow. It's small, low-contrast type with a soft shadow for light photos, so the hero layout is otherwise unchanged.
