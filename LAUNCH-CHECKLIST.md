@@ -27,5 +27,31 @@ The values go in Netlify's environment variables only, and need a rebuild to tak
 
 ## Business details to verify
 
-- Opening hours aren't published anywhere, so none are shown.
+- Opening hours aren't published on the live site; a window decal suggests Mon–Sat 10 am–6 pm (see below). None are shown.
 - The Facebook, YouTube and TikTok links are the wider brand's accounts, as linked from the live site.
+
+## Adaptation for Waterloo (2026-10-30): needs sign-off
+
+| Item | What was done | Status |
+|---|---|---|
+| **Gallery** | All 30 photos in `tricity projects/`, grouped into 7 builds and shown first in both rows (inventory below), followed by 9 wider-brand builds. Originals untouched; 1080px web copies in `src/assets/projects/` | CLIENT APPROVAL REQUIRED (model names and finish tags) |
+| **Area pages** | `/areas/waterloo/` (the studio), `/areas/kitchener/`, `/areas/cambridge/`: new copy, no township pages, no claim of a second location, pickup or mobile service | CLIENT APPROVAL REQUIRED (new visible copy) |
+| **Learn** | 4 new guides that don't repeat Hamilton's: leased cars, matte/satin PPF, coating aftercare, the tint appointment. No prices, cure times, warranties or tint percentages | CLIENT APPROVAL REQUIRED (new visible copy) |
+| **Opening hours** | The studio's window decal in two gallery photos reads "Monday – Saturday 10 am – 6 pm". **Not published** (a photo isn't confirmation) | CLIENT APPROVAL REQUIRED |
+| **Custom Builds & Body Kits** | Page kept: the live Tri-City homepage lists "full brabus, mansory body kit installations" | CLIENT APPROVAL REQUIRED (still offered?) |
+| **6 FAQ answers** | Held back (`FAQS_PENDING_APPROVAL` in `src/data/faqs.js`): warranty, wrap time, boats/buildings, in-house designers, onsite printing, apprentices | CLIENT APPROVAL REQUIRED |
+| **Unpublished homepage claims** | "Rated number one", "biggest wrap shop with 16 locations", "9000+ vehicles wrapped / happy clients", "10+ years" | Not published (unverified) |
+
+### Gallery inventory
+
+| Build (card name) | Photos | Cover | Finish tag (as seen in the photos) |
+|---|---|---|---|
+| Chevrolet Corvette C7 | 5 (incl. interior) | Outside the studio | Black & red marble finish |
+| Mercedes-AMG E 63 S | 6 | Outside the studio | Matte blue finish |
+| Audi RS Q8 | 4 | Outside the studio | Matte grey finish |
+| Classic Lincoln | 2 | Rear three-quarter | Gloss white finish (model not legible in the photos) |
+| McLaren 720S | 5 (incl. interior) | Doors up outside the studio | Orange & black finish |
+| Nissan Skyline R34 | 4 (incl. interior) | Outside the studio | Deep purple finish |
+| Tesla Model Y | 4 | Outside the studio | Satin grey finish |
+
+Tags describe the visible finish only, not whether it's a wrap, PPF or paint.
