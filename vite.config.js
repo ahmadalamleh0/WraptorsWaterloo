@@ -146,11 +146,12 @@ const locationHtmlPlugin = {
         ...localBusinessSchema(),
         image: ogImageUrl,
         url: `${SITE_URL}/`,
-        priceRange: '$$$',
+        // No priceRange: Tri-City hasn't confirmed one (an unverified price
+        // signal in structured data is still a published claim).
         description: LOCATION.seo.businessDescription,
       }
-      // Function replacers, so a "$" in a value (e.g. priceRange "$$$")
-      // is never read as a replacement pattern.
+      // Function replacers, so a "$" in a value is never read as a
+      // replacement pattern.
       return html
         .replaceAll('__SEO_TITLE__', () => escapeAttr(LOCATION.seo.title))
         .replaceAll('__SEO_DESCRIPTION__', () => escapeAttr(LOCATION.seo.description))

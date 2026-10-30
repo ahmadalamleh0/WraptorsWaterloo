@@ -31,9 +31,83 @@ const EXPECT_NOINDEX = args.includes('--expect-noindex');
 const REPORT = args.includes('--report') ? args[args.indexOf('--report') + 1] : null;
 
 // Old URL -> where it must end up: a final path with a 200, or 404.
-// Empty until Tri-City's redirect mapping is approved (phase 8); add one
-// row per old wraptorstricity.com URL, e.g. ['/about-wraptors/', '/about/'].
-const LEGACY = [];
+// One row per URL in SEO-URL-MAPPING.csv (Tri-City's own sitemaps, crawl
+// and WordPress REST API, 2026-10-30).
+const LEGACY = [
+  ['/', '/'],
+  ['/about-wraptors/', '/about/'],
+  ['/franchises/', '/franchise/'],
+  ['/contact-wraptors/', '/book/'],
+  ['/articles/', '/articles/'],
+  ['/blog/', '/learn/'],
+  ['/services/', '/services/'],
+  ['/locations/', '/locations/'],
+  ['/gallery/', '/gallery/'],
+  ['/videos/', '/videos/'],
+  ['/faqs/', '/faqs/'],
+  ['/footer/', 404],
+  ['/services/vehicle-wrapping/', '/services/wraps/'],
+  ['/services/paint-protection/', '/services/ppf/'],
+  ['/services/window-tinting/', '/services/tint/'],
+  ['/services/auto-detailing/', '/services/detailing/'],
+  ['/services/custom-interior/', '/services/custom-interiors/'],
+  ['/services/starlight-headliner/', '/services/starlight/'],
+  ['/services/galaxy-ceilings/', '/services/starlight/'],
+  ['/services/racing-stripes/', '/services/stripes-decals/'],
+  ['/services/decals/', '/services/stripes-decals/'],
+  ['/services/caliper-painting/', '/services/caliper-painting/'],
+  ['/services/wheel-painting/', '/services/wheel-painting/'],
+  ['/category/vehicle-wrap/', '/learn/category/vehicle-wraps/'],
+  ['/category/custom-vinyl-wrap/', '/learn/category/vehicle-wraps/'],
+  ['/category/uncategorized/', 404],
+  ['/what-you-need-to-know-before-designing-a-vehicle-wrap/', '/services/wraps/#commercial-wraps'],
+  ['/5-things-you-might-not-know-about-vehicle-wraps/', '/services/wraps/#commercial-wraps'],
+  ['/4-surprising-ways-custom-vinyl-wraps-can-boost-brand-awareness/', '/services/wraps/#commercial-wraps'],
+  // Slash-less copies the old site served with a 200
+  ['/contact-wraptors', '/book/'],
+  ['/services/vehicle-wrapping', '/services/wraps/'],
+  ['/services/galaxy-ceilings', '/services/starlight/'],
+  ['/services/caliper-painting', '/services/caliper-painting/'],
+  ['/services/racing-stripes', '/services/stripes-decals/'],
+  ['/blog', '/learn/'],
+  ['/services/decals', '/services/stripes-decals/'],
+  ['/about-wraptors', '/about/'],
+  ['/services/wheel-painting', '/services/wheel-painting/'],
+  ['/locations', '/locations/'],
+  ['/faqs', '/faqs/'],
+  ['/franchises', '/franchise/'],
+  ['/what-you-need-to-know-before-designing-a-vehicle-wrap', '/services/wraps/#commercial-wraps'],
+  // Individual FAQ pages (noindex on the old site)
+  ['/ufaq/what-is-a-vehicle-wrap/', '/faqs/#what-is-a-vehicle-wrap'],
+  ['/ufaq/whats-the-difference-between-a-%c2%bd-%c2%bc-and-full-wrap/', '/faqs/#whats-the-difference-between-a-half-quarter-and-full-wrap'],
+  ['/ufaq/will-the-car-wrap-damage-my-paint/', '/faqs/#will-the-car-wrap-damage-my-paint'],
+  ['/ufaq/can-a-car-wrap-be-removed/', '/faqs/#can-a-car-wrap-be-removed'],
+  ['/ufaq/will-you-wrap-a-leased-vehicle/', '/faqs/#will-you-wrap-a-leased-vehicle'],
+  ['/ufaq/how-do-i-care-for-my-car-wrap/', '/faqs/#how-do-i-care-for-my-car-wrap'],
+  ['/ufaq/are-car-wraps-applied-to-windows/', '/faqs/#are-car-wraps-applied-to-windows'],
+  ['/ufaq/if-the-company-information-on-my-vehicle-wrap-changes-can-it-be-replaced/', '/faqs/#if-the-company-information-on-my-vehicle-wrap-changes-can-it-be-replaced'],
+  ['/ufaq/will-you-pay-me-to-drive-my-car-with-someone-elses-advertising/', '/faqs/#will-you-pay-me-to-drive-my-car-with-someone-elses-advertising'],
+  ['/ufaq/is-there-a-guarantee-on-the-vehicle-wrap/', '/faqs/'],
+  ['/ufaq/how-long-does-it-take-to-wrap-a-car/', '/faqs/'],
+  ['/ufaq/do-you-wrap-anything-other-than-vehicles/', '/faqs/'],
+  ['/ufaq/how-is-a-vehicle-wrap-designed/', '/faqs/'],
+  ['/ufaq/how-are-car-wraps-printed/', '/faqs/'],
+  ['/ufaq/how-do-you-wrap-a-vehicle/', '/faqs/'],
+  ['/ufaq/what-is-a-vehicle-wrap', '/faqs/#what-is-a-vehicle-wrap'],
+  ['/ufaq/', '/faqs/'],
+  // WordPress defaults and slugs the old install redirected itself
+  ['/author/wtconline/', '/'],
+  ['/home/', '/'],
+  ['/contact/', '/book/'],
+  ['/faq/', '/faqs/'],
+  ['/about/', '/about/'],
+  ['/feed/', 404],
+  ['/comments/feed/', 404],
+  ['/page/2/', 404],
+  ['/home/financing-bg/', 404],
+  ['/services/starlight-headliner/service-gallery-pic35/', 404],
+  ['/wp-content/uploads/2023/06/financing-bg.jpg', 404],
+];
 
 // ── Netlify emulation over dist/ ─────────────────────────────────────────
 const strip = (p) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
@@ -197,6 +271,9 @@ for (const route of routes) {
   const t = types(blocks);
   check('Structured data', `${route} JSON-LD parses and includes AutomotiveBusiness`, !blocks.some((b) => b.invalid) && t.has('AutomotiveBusiness'), [...t].join(', '));
   const biz = JSON.stringify(blocks);
+  // No rating or price signal until Tri-City confirms one (LAUNCH-CHECKLIST.md).
+  check('Structured data', `${route} has no unverified AggregateRating, Review or priceRange`,
+    !t.has('AggregateRating') && !t.has('Review') && !biz.includes('"priceRange"'), [...t].join(', '));
   check('NAP', `${route} schema and visible footer carry the same name, address and phone`,
     biz.includes(LOCATION.contact.phone) && (!LOCATION.address.postalCode || biz.includes(LOCATION.address.postalCode)) && biz.includes(LOCATION.brandName)
       && html.includes(LOCATION.contact.phoneDisplay) && html.includes(LOCATION.address.street));

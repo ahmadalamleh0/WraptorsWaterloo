@@ -1,22 +1,79 @@
-# ── Legacy wraptorstricity.com URLs (WordPress site this will replace) ──
-# NOT MAPPED YET. The old-URL → new-URL rules are phase 8 of
-# MIGRATION-DOCS/MIGRATION-PLAYBOOK.md and need Tri-City's own inventory
-# (TRICITY-DISCOVERY.md) and approval. No rules were copied from another
-# location's site, even though the old WordPress URLs look alike.
+# ── Legacy wraptorstricity.com URLs (WordPress site this replaces) ──
+# Source: SEO-MIGRATION-AUDIT.md / SEO-URL-MAPPING.csv — Tri-City's own
+# sitemaps, a crawl of its internal links and its WordPress REST API
+# (pages, posts, categories, users, media and the hidden "ufaq" FAQ type),
+# checked 2026-10-30. Every target was checked against this build.
 #
-# Conventions (Netlify), for when the rules are added:
+# Conventions (Netlify):
 # - Every target is the final trailing-slash URL. Pages are prerendered to
 #   <route>/index.html, which Netlify serves at /<route>/ and 301s
 #   /<route> to, so a slash-less target would add a second hop.
 # - Netlify strips the trailing slash before matching, so each rule also
-#   covers the slash-less copies the old site served.
-# - Static files win over these rules. Old URLs that are real pages on the
-#   new site need no rule.
+#   covers the slash-less copies the old site served (e.g. /services/decals).
+# - Static files win over these rules. Old URLs that are real pages again
+#   need no rule: /, /services/, /services/caliper-painting/,
+#   /services/wheel-painting/, /faqs/, /gallery/, /locations/, /videos/,
+#   /articles/ (and /about/, which the old site redirected itself).
+# - Specific rules come before splats (Netlify uses the first match).
 # - Domain variants (bare domain, http) are handled by setting
 #   www.wraptorstricity.com as the primary domain in Netlify.
+
+# Pages
+/about-wraptors/        /about/                     301
+/franchises/            /franchise/                 301
+/contact-wraptors/      /book/                      301
+/blog/                  /learn/                     301
+
+# Services
+/services/vehicle-wrapping/     /services/wraps/            301
+/services/paint-protection/     /services/ppf/              301
+/services/window-tinting/       /services/tint/             301
+/services/auto-detailing/       /services/detailing/        301
+/services/custom-interior/      /services/custom-interiors/ 301
+/services/starlight-headliner/  /services/starlight/        301
+/services/galaxy-ceilings/      /services/starlight/        301
+/services/racing-stripes/       /services/stripes-decals/   301
+/services/decals/               /services/stripes-decals/   301
+
+# /blog/ held the wrap articles, so it goes to /learn/. (/articles/, the
+# old press page, is a real page again: In The Press.)
+# Blog categories → the matching Learn category. The three old posts were
+# written for businesses (logo placement, fleet changes, brand awareness),
+# so they go to the Wraps page's commercial & fleet section rather than a
+# listing of consumer guides.
+/category/vehicle-wrap/         /learn/category/vehicle-wraps/   301
+/category/custom-vinyl-wrap/    /learn/category/vehicle-wraps/   301
+/what-you-need-to-know-before-designing-a-vehicle-wrap/        /services/wraps/#commercial-wraps   301
+/5-things-you-might-not-know-about-vehicle-wraps/              /services/wraps/#commercial-wraps   301
+/4-surprising-ways-custom-vinyl-wraps-can-boost-brand-awareness/  /services/wraps/#commercial-wraps  301
+
+# Individual FAQ pages (/ufaq/<slug>/, noindex on the old site) → the same
+# answer on /faqs/. The six questions whose answers await approval
+# (FAQS_PENDING_APPROVAL in src/data/faqs.js) land on the page itself, as
+# do the old /ufaq/ archive and anything else under /ufaq/.
+/ufaq/what-is-a-vehicle-wrap/              /faqs/#what-is-a-vehicle-wrap              301
+/ufaq/whats-the-difference-between-a-%c2%bd-%c2%bc-and-full-wrap/  /faqs/#whats-the-difference-between-a-half-quarter-and-full-wrap  301
+/ufaq/will-the-car-wrap-damage-my-paint/   /faqs/#will-the-car-wrap-damage-my-paint   301
+/ufaq/can-a-car-wrap-be-removed/           /faqs/#can-a-car-wrap-be-removed           301
+/ufaq/will-you-wrap-a-leased-vehicle/      /faqs/#will-you-wrap-a-leased-vehicle      301
+/ufaq/how-do-i-care-for-my-car-wrap/       /faqs/#how-do-i-care-for-my-car-wrap       301
+/ufaq/are-car-wraps-applied-to-windows/    /faqs/#are-car-wraps-applied-to-windows    301
+/ufaq/if-the-company-information-on-my-vehicle-wrap-changes-can-it-be-replaced/  /faqs/#if-the-company-information-on-my-vehicle-wrap-changes-can-it-be-replaced  301
+/ufaq/will-you-pay-me-to-drive-my-car-with-someone-elses-advertising/  /faqs/#will-you-pay-me-to-drive-my-car-with-someone-elses-advertising  301
+/ufaq/                                     /faqs/                                     301
+/ufaq/*                                    /faqs/                                     301
+
+# Paths the old WordPress install already redirected on its own (kept so
+# old links still land where they did)
+/author/wtconline/      /           301
+/home/                  /           301
+/contact/               /book/      301
+/faq/                   /faqs/      301
 
 # Every real route the app defines is prerendered to a real static file by
 # scripts/prerender.mjs, and static files always take priority over this
 # file on Netlify — so this catch-all only fires for a genuinely invalid
-# path, and it returns a real 404 rather than the homepage.
+# path (including /footer/, /category/uncategorized/, /feed/, /page/2/,
+# media attachment pages and /wp-content/uploads/*, which have no
+# equivalent), and it returns a real 404 rather than the homepage.
 /*  /404.html  404

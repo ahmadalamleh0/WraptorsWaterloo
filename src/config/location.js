@@ -40,24 +40,22 @@ export const LOCATION = {
   },
 
   address: {
-    // Supplied 2026-10-29 without a postal code. TODO(tricity): the live
-    // site shows N2V 2G6, Google's listing differs and OpenStreetMap has
-    // N2V 2A2 — confirm before adding it here (null = left out of the
-    // visible address and the structured data).
-    display: '745 Bridge St W, Unit 8, Waterloo, ON, Canada',
-    mapsQuery: '745 Bridge St W, Unit 8, Waterloo, ON, Canada',
+    // Confirmed by the client 2026-10-30 (matches the live site's contact
+    // page): 745 Bridge St W #8, Waterloo, ON N2V 2G6, Canada.
+    display: '745 Bridge St W #8, Waterloo, ON N2V 2G6, Canada',
+    mapsQuery: '745 Bridge St W #8, Waterloo, ON N2V 2G6, Canada',
     // Google Maps link from the live site's contact page; it opens the
     // "Wraptors Tricity" listing. TODO(tricity): confirm with the client.
     mapsUrl: 'https://goo.gl/maps/mFJGin4Qw8N3w4m97',
-    street: '745 Bridge St W, Unit 8',
+    street: '745 Bridge St W #8',
     locality: 'Waterloo',
     region: 'ON',
-    postalCode: null,
+    postalCode: 'N2V 2G6',
     country: 'CA',
     // The map embed pins by coordinates. From the Google listing that the
     // live site's Maps link and map embed both use (checked 2026-10-29);
     // OpenStreetMap's match for 745 Bridge St W is about 16 m away.
-    // TODO(tricity): confirm the pin marks Unit 8.
+    // TODO(tricity): confirm the pin marks #8.
     coords: '43.511926,-80.5237892',
   },
 
@@ -123,8 +121,7 @@ export const LOCATION = {
 
 // Fields still needing a confirmed Tri-City value — printed as a build warning.
 export const UNCONFIRMED = [
-  'address.postalCode (live site N2V 2G6; Google listing differs; OpenStreetMap N2V 2A2)',
-  "address.coords + mapsUrl (from the live site's Google listing; confirm the pin marks Unit 8)",
+  "address.coords + mapsUrl (from the live site's Google listing; confirm the pin marks #8)",
   'media.heroVideo* (stand-in car-meet footage, not Tri-City)',
   'media.mapImage (no Waterloo still yet)',
   'legal.privacy / legal.terms (no policies yet)',

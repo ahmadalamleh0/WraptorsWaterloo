@@ -19,11 +19,12 @@ Usage (standard library only; run with -I so nothing in the cwd is imported):
 Outputs in <out_dir>: old_crawl.csv, old_pages.json (headings + text per
 page, for content comparison), old_inlinks.json.
 """
-import csv, html, json, re, sys, time, urllib.error, urllib.parse, urllib.request
+import csv, html, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
 from html.parser import HTMLParser
 
 HOST, SEEDS, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 MAX = int(sys.argv[4]) if len(sys.argv) > 4 else 400
+os.makedirs(OUT, exist_ok=True)
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36'
 
 

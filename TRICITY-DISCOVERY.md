@@ -10,7 +10,7 @@ Phases 1–2 of `MIGRATION-DOCS/MIGRATION-PLAYBOOK.md` for www.wraptorstricity.c
 | Item | Finding | Status |
 |---|---|---|
 | Host | WordPress (PHP 7.4.33) behind Hostinger's CDN (`server: hcdn`) | COMPLETED |
-| Primary host | `https://www.wraptorstricity.com/` (200). Bare domain and `http://` 301 to it in one hop | COMPLETED |
+| Primary host | `https://www.wraptorstricity.com/` (200). `https://` bare domain and `http://www.` reach it in one hop; `http://` bare domain takes two (rechecked 2026-10-30) | COMPLETED |
 | robots.txt | `Allow: /`, but its `Sitemap:` line points to **www.wraptorsftl.com/sitemap.xml** (another location's site) | Legacy bug, fixed on the new site (own sitemap) |
 | Indexing | All 28 sitemap URLs `index, follow`, self-canonical (Yoast) | COMPLETED |
 | Search Console, Analytics, GBP, DNS | No access | NOT STARTED: traffic-based decisions are unverified |
@@ -29,14 +29,14 @@ The sitemaps list 28 URLs; a crawl that follows internal links (no redirects fol
 
 Raw crawl output (`old_crawl.csv`, `old_pages.json`) was produced with `MIGRATION-DOCS/tools/legacy-crawl.py` and kept outside the repo.
 
-**Redirect mapping: NOT STARTED.** The URL set mirrors the Hamilton WordPress site, but no Hamilton rules were copied. Each Tri-City URL needs its own row and approval (phase 8). `public/_redirects` currently has only the 404 catch-all, and `scripts/verify-migration.mjs` has an empty `LEGACY` list.
+**Redirect mapping: COMPLETED, VERIFIED LOCALLY (2026-10-30).** The inventory was re-crawled from Tri-City's own sitemaps, API and probes; the rules in `public/_redirects` and the 70 `LEGACY` checks in `scripts/verify-migration.mjs` come from that crawl, not from Hamilton's file. Details: `SEO-MIGRATION-AUDIT.md` and `SEO-URL-MAPPING.csv`.
 
 ## 3. Business details published on the live site
 
-| Field | Live site (contact page) | Supplied 2026-10-29 | Used |
+| Field | Live site (contact page) | Supplied by the client | Used |
 |---|---|---|---|
 | Name | Wraptors Tri City | Wraptors Tri-City | Wraptors Tri-City |
-| Address | 745 Bridge St W #8, Waterloo, ON **N2V 2G6** | 745 Bridge St W, Unit 8, Waterloo, ON (no postal code) | Supplied form; **postal code left out** |
+| Address | 745 Bridge St W #8, Waterloo, ON **N2V 2G6** | 2026-10-30: 745 Bridge St W #8, Waterloo, ON N2V 2G6, Canada | Confirmed form, with N2V 2G6 |
 | Phone | 647.990.WRAP (9727) | +1 647-990-9727 | Both (`tel:+16479909727`) |
 | Email | wrap@wraptorstricity.com | same | same |
 | Maps link | goo.gl/maps/mFJGin4Qw8N3w4m97 → Google listing "Wraptors Tricity \| Tint \| Ceramic Coating \| 3m \| Wrap", pin 43.511926, -80.5237892 | — | Link and pin used, flagged |
@@ -45,8 +45,8 @@ Raw crawl output (`old_crawl.csv`, `old_pages.json`) was produced with `MIGRATIO
 | Hours, reviews, prices | Not published | — | none shown |
 
 **CLIENT APPROVAL REQUIRED**
-- **Postal code:** the live site says N2V 2G6, Google's listing differs (per the client), and OpenStreetMap gives N2V 2A2 for 745 Bridge St W. Confirm one; until then it's omitted from the visible address and the JSON-LD.
-- **Map pin:** the Google listing pin and OpenStreetMap's point for no. 745 are about 16 m apart. Confirm the pin marks Unit 8.
+- **Postal code: resolved.** The client confirmed N2V 2G6 on 2026-10-30 (earlier: Google's listing differed and OpenStreetMap gave N2V 2A2).
+- **Map pin:** the Google listing pin and OpenStreetMap's point for no. 745 are about 16 m apart. Confirm the pin marks #8.
 
 ## 4. Content notes
 
