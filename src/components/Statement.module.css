@@ -1,0 +1,91 @@
+/* ══ STATEMENT — editorial white panel between the service tiles and the
+   next section. The section itself is black (continuous with the tiles
+   above); the white comes from .panel, which GSAP wipes in from the top. ══ */
+.section {
+  position: relative;
+  background: #000;
+  min-height: clamp(480px, 72vh, 760px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 120px 48px;
+}
+
+/* Full-bleed white plane. Visible by default (no JS / reduced motion);
+   GSAP clips it to nothing and wipes it open as the section enters. */
+.panel {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  z-index: 0;
+  will-change: clip-path;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Each line rises out of its own mask. A little vertical padding keeps
+   the heavy display face (and its text-stroke) from being clipped. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding: 0.06em 0;
+}
+
+.lineInner {
+  display: block;
+  will-change: transform;
+}
+
+/* ── Context line — subdued setup for the statement below ── */
+.contextLine {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.6vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* ── Red blade separator ── */
+.ruler {
+  width: 52px;
+  height: 1px;
+  background: rgba(180, 0, 0, 0.75);
+  margin: 40px auto;
+  transform-origin: center;
+}
+
+/* ── "YOU SET THE TONE." ── */
+.mainLine {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.5vw, 10rem);
+  font-weight: 700;
+  -webkit-text-stroke: 0.5px currentColor;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #000;
+  line-height: 0.95;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .section      { min-height: 0; padding: 72px 32px 68px; }
+  .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; }
+  .ruler        { margin: 16px auto 22px; }
+  .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); }
+}
+
+@media (max-width: 480px) {
+  .section      { padding: 60px 26px 56px; }
+  .contextLine  { font-size: 6vw; }
+  .mainLine     { font-size: 12.5vw; }
+}

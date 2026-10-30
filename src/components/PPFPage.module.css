@@ -1,0 +1,1160 @@
+/* ══ PAINT PROTECTION FILM PAGE ══ */
+
+/* ── Shared ──────────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 14px;
+}
+
+.sectionHead {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.sectionTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0 0 14px;
+}
+
+.sectionSub {
+  font-size: 0.96rem;
+  color: rgba(255,255,255,0.42);
+  margin: 0 auto;
+  max-width: 500px;
+  line-height: 1.65;
+}
+
+/* ── DESCRIPTION IMAGE ───────────────────────────────────────────────────── */
+.descImgSection {
+  display: block;
+  line-height: 0;
+  background: #040408;
+}
+
+.descImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── HERO — lives in the shared ServiceHero component now. ── */
+
+/* ══ COVERAGE EXPLORER ═══════════════════════════════════════════════════════ */
+.explorerSection {
+  background: #05050c;
+  padding: 96px 0 88px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Eyebrow + title now sit centred above the whole explorer (image
+   included) instead of beside the controls panel. */
+.explorerHead {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  padding: 0 32px;
+}
+.explorerHead .eyebrow { margin: 0 0 14px; }
+
+.explorerLayout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 52px;
+  align-items: start;
+}
+
+.photoViewer {
+  position: sticky;
+  top: 100px;
+}
+
+.photoStage {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+  background: #060609;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 24px 64px rgba(0,0,0,0.70);
+}
+
+/* Mobile-only prepared-image stage — hidden on desktop, shown on mobile */
+.mobilePhotoStage {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+  background: #060609;
+}
+
+.photoSlot {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  z-index: 0;
+}
+.photoSlotOn {
+  opacity: 1;
+  z-index: 1;
+}
+
+.stagePhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.filmHighlight {
+  position: absolute;
+  inset: 0;
+  background: rgba(210, 228, 255, 0.42);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: hlFadeIn 0.45s ease 0.46s forwards;
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,0.75))
+    drop-shadow(0 0 10px rgba(255, 255, 255,0.55))
+    drop-shadow(0 0 28px rgba(255, 255, 255,0.18));
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes hlFadeIn {
+  to { opacity: 1; }
+}
+
+.filmShimmer {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.26) 50%,
+    transparent 100%
+  );
+  transform: skewX(-10deg) translateX(-160%);
+  animation: shimmerSweep 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.90s forwards;
+  pointer-events: none;
+}
+
+@keyframes shimmerSweep {
+  from { transform: skewX(-10deg) translateX(-160%); }
+  to   { transform: skewX(-10deg) translateX(360%); }
+}
+
+.photoDesc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 72px 26px 24px;
+  background: linear-gradient(to top,
+    rgba(2,2,10,0.92) 0%,
+    rgba(2,2,10,0.76) 24%,
+    rgba(2,2,10,0.40) 52%,
+    transparent 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+  animation: descIn 0.40s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.photoDescEye {
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255,0.78);
+  margin-bottom: 6px;
+}
+
+.photoDescTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px;
+  line-height: 1.25;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.70);
+}
+
+.photoDescText {
+  font-size: 0.80rem;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.62;
+  margin: 0;
+  max-width: 420px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
+}
+
+.photoDescMobile { display: none; }
+
+.calloutSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 11;
+  overflow: visible;
+}
+
+.calloutRing {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 0.35;
+  animation: ringPulse 2.4s ease-in-out 0.55s infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { r: 2.4; opacity: 0.55; }
+  50%       { r: 3.2; opacity: 0.20; }
+}
+
+.calloutDot {
+  fill: rgba(255, 255, 255, 0.92);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255,0.70));
+}
+
+.calloutLine {
+  stroke: rgba(255, 255, 255, 0.52);
+  stroke-width: 0.25;
+  fill: none;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: lineDrawIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.46s forwards;
+}
+
+@keyframes lineDrawIn {
+  to { stroke-dashoffset: 0; }
+}
+
+.calloutLabel {
+  position: absolute;
+  z-index: 12;
+  pointer-events: none;
+  max-width: 35%;
+  padding: 10px 14px 12px;
+  background: rgba(3, 3, 12, 0.82);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transform: translateY(-5px);
+  animation: labelIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.82s forwards;
+}
+
+@keyframes labelIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.calloutEye {
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 5px;
+}
+
+.calloutTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+  line-height: 1.28;
+}
+
+.calloutDesc {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.50);
+  line-height: 1.58;
+  margin: 0;
+}
+
+.hotspotLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  animation: hotspotIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes hotspotIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.hotspotRing {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  animation: hotspotPulse 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hotspotPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.45; }
+  60%       { transform: scale(2.0); opacity: 0; }
+}
+
+.hotspotDot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.20),
+    0 0 7px  rgba(255,255,255,0.55),
+    0 0 16px rgba(255, 255, 255, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  pointer-events: none;
+}
+
+.hotspot:hover .hotspotDot,
+.hotspot:focus-visible .hotspotDot {
+  transform: scale(1.5);
+  box-shadow:
+    0 0 0 2px   rgba(255,255,255,0.32),
+    0 0 10px    rgba(255,255,255,0.75),
+    0 0 24px    rgba(200, 28, 28, 0.42);
+}
+
+.hotspotLabel {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  white-space: nowrap;
+  background: rgba(4, 4, 14, 0.88);
+  border: 1px solid rgba(255,255,255,0.11);
+  border-radius: 6px;
+  padding: 4px 9px 5px;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.hotspot:hover .hotspotLabel,
+.hotspot:focus-visible .hotspotLabel {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.ctrlPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 4px;
+}
+
+.ctrlHead { }
+
+.explorerTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+
+.explorerSub {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.zoneGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.zoneBtn {
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.48);
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.18s ease;
+  line-height: 1.3;
+}
+.zoneBtn:hover {
+  border-color: rgba(255, 255, 255,0.32);
+  color: rgba(255,255,255,0.84);
+  background: rgba(255, 255, 255,0.06);
+}
+.zoneBtnOn {
+  border-color: rgba(255, 255, 255,0.62) !important;
+  background: rgba(255, 255, 255,0.12) !important;
+  color: #fff !important;
+  box-shadow: 0 0 14px rgba(255, 255, 255,0.13);
+}
+
+@keyframes descIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.explorerCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255,0.36);
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.10) 0%, rgba(255, 255, 255,0.06) 100%);
+  color: rgba(255,255,255,0.88);
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  align-self: flex-start;
+}
+.explorerCta:hover {
+  border-color: rgba(255, 255, 255,0.68);
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.18) 0%, rgba(255, 255, 255,0.12) 100%);
+  box-shadow: 0 0 28px rgba(255, 255, 255,0.16);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.explorerCtaArrow {
+  font-size: 1rem;
+  transition: transform 0.20s ease;
+}
+.explorerCta:hover .explorerCtaArrow { transform: translateX(4px); }
+
+/* ── BENEFITS ────────────────────────────────────────────────────────────── */
+.benefitsSection {
+  background: #040408;
+  padding: 96px 0 88px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.benefitCard {
+  padding: 30px 24px 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.025);
+  transition: transform 0.30s ease, border-color 0.30s ease, box-shadow 0.30s ease;
+}
+.benefitCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255,0.22);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.38);
+}
+
+.benefitIcon {
+  width: 36px;
+  height: 36px;
+  color: rgba(255, 255, 255,0.75);
+  margin-bottom: 18px;
+}
+.benefitIcon svg { width: 100%; height: 100%; }
+
+.benefitTitle {
+  font-family: 'Ethnocentric', serif;
+  font-size: 0.80rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+.benefitDesc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.40);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── COMPARISON ──────────────────────────────────────────────────────────── */
+.compSection {
+  background: #05050c;
+  padding: 96px 0 88px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.compGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.compPanel {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.compBad  { border-color: rgba(255,255,255,0.06); }
+.compGood {
+  border-color: rgba(255, 255, 255,0.18);
+  box-shadow: 0 0 40px rgba(255, 255, 255,0.05);
+}
+
+.compVisual {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.compBad  .compVisual { background: linear-gradient(135deg, #0c0c0c 0%, #141414 100%); }
+.compGood .compVisual { background: linear-gradient(135deg, #0c0608 0%, #160a0a 100%); }
+
+.paintSurface {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1c1c1c 0%, #242424 50%, #1a1a1a 100%);
+}
+
+.chip {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.85);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 3px rgba(0,0,0,0.6);
+  width: 5px;
+  height: 5px;
+}
+.chip:nth-child(2n)   { width: 4px; height: 3px; border-radius: 2px; }
+.chip:nth-child(3n)   { width: 7px; height: 5px; border-radius: 3px; transform: rotate(45deg); }
+.chip:nth-child(4n)   { width: 3px; height: 3px; }
+
+.shieldWrap { width: 80px; height: 92px; position: relative; z-index: 2; }
+.shieldWrap svg { width: 100%; height: 100%; }
+
+.compBody { padding: 24px 28px 28px; }
+
+.compTag {
+  display: inline-block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 10px;
+}
+
+.compTitle {
+  font-family: 'Ethnocentric', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 16px;
+  letter-spacing: 0.03em;
+}
+.compGood .compTitle { color: rgba(255,255,255,0.95); }
+
+.compList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.compList li {
+  font-size: 0.80rem;
+  color: rgba(255,255,255,0.42);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+.compList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+}
+.compGood .compList li::before { background: rgba(255, 255, 255,0.65); }
+.compGood .compList li          { color: rgba(255,255,255,0.52); }
+
+/* Aftercare now lives in the shared AftercareSection component/module
+   (src/components/AftercareSection.jsx) — rendered below via
+   <AftercareSection service="ppf" />, not styled here anymore. */
+
+/* ── GALLERY ─────────────────────────────────────────────────────────────── */
+.gallerySection {
+  background: #040408;
+  padding: 96px 0 80px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Wider than the shared .container so the (now caption-free) photos read
+   as bigger, more immersive frames. */
+.gallerySection > .container {
+  max-width: 1320px;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.galleryCard {
+  margin: 0;
+  display: block;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.galleryCard:hover { transform: translateY(-5px); }
+
+.galleryImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45);
+  pointer-events: none;
+  user-select: none;
+  transition: box-shadow 0.42s ease;
+}
+.galleryCard:hover .galleryImg { box-shadow: 0 26px 60px rgba(0,0,0,0.58); }
+
+/* ── CTA ─────────────────────────────────────────────────────────────────── */
+.ctaSection {
+  background: #030306;
+  padding: 96px 0 120px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 260px;
+  background: radial-gradient(ellipse, rgba(255, 255, 255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ctaTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: clamp(1.7rem, 3.8vw, 3.2rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.18;
+  margin: 0 0 18px;
+}
+
+.ctaSub {
+  color: rgba(255,255,255,0.38);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0 0 48px;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255,0.38);
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.11) 0%, rgba(255, 255, 255,0.07) 100%);
+  color: #fff;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.22s ease;
+}
+.ctaBtn:hover {
+  border-color: rgba(255, 255, 255,0.68);
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.19) 0%, rgba(255, 255, 255,0.14) 100%);
+  box-shadow: 0 0 36px rgba(255, 255, 255,0.18);
+  transform: translateY(-2px);
+}
+
+.ctaArrow {
+  font-size: 1.1rem;
+  transition: transform 0.20s ease;
+}
+.ctaBtn:hover .ctaArrow { transform: translateX(4px); }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .explorerLayout  { grid-template-columns: 1fr 340px; gap: 36px; }
+  .benefitsGrid    { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 860px) {
+  .explorerLayout { grid-template-columns: 1fr; }
+  .photoViewer    { position: static; }
+}
+
+@media (max-width: 768px) {
+  .container   { padding: 0 20px; }
+
+  .explorerSection,
+  .layerSection,
+  .benefitsSection,
+  .gallerySection,
+  .ctaSection {
+    padding: 64px 0 52px;
+  }
+
+  .zoneGrid     { grid-template-columns: 1fr 1fr; }
+
+  /* ── Real Installs gallery: bigger caption-free frames ── */
+  .galleryGrid { grid-template-columns: 1fr; gap: 20px; }
+  .galleryCard {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.42);
+  }
+  .galleryImg {
+    aspect-ratio: 5 / 4;
+    height: auto;
+    object-fit: cover;
+    object-position: var(--mobileFocus, center);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* ── What The Film Does: compact 2×2 grid ── */
+  .benefitsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .benefitCard {
+    padding: 18px 14px 16px;
+    border-radius: 14px;
+  }
+  .benefitIcon {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 12px;
+  }
+  .benefitTitle {
+    font-size: 0.72rem;
+    margin-bottom: 8px;
+  }
+  .benefitDesc {
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  /* ── Coverage Explorer: mobile ── */
+  /* Heading has its own padding since the container's is stripped below */
+  .explorerHead { padding: 0 20px; margin-bottom: 32px; }
+  /* Remove container side-padding so the photo goes full-bleed */
+  .explorerSection > .container { padding-left: 0; padding-right: 0; }
+  /* Collapse gap so photo & controls sit flush */
+  .explorerLayout { gap: 0; }
+  /* Swap stages: hide the live overlay system, show the prepared screenshots */
+  .photoStage { display: none; }
+  .mobilePhotoStage { display: block; aspect-ratio: 4/3; border-radius: 0; min-height: 260px; }
+  /* Hide desktop-only decorations */
+  .calloutSvg, .calloutLabel { display: none; }
+  /* Hide all text overlaid on the photo */
+  .photoDesc { display: none !important; }
+  /* Remove tap-dot hotspots — zone buttons below replace them */
+  .hotspotLayer { display: none; }
+  /* Description is desktop-only copy; nothing to show above the buttons on mobile */
+  .ctrlHead { display: none; }
+  .explorerSub { display: none; }
+  /* Buttons sit directly below the image with a small gap */
+  .ctrlPanel { padding: 14px 20px 0; }
+}
+
+@media (max-width: 480px) {
+  .ctaTitle { font-size: clamp(1.5rem, 8vw, 2rem); }
+}
+
+/* ══ LAYER BREAKDOWN ══════════════════════════════════════════════════════════ */
+
+.layerSection {
+  background: #040408;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 96px 0 88px;
+  position: relative;
+  overflow: hidden;
+}
+
+.layerBgGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 640px 200px at 50% 0%,   rgba(255, 255, 255,0.055) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 480px at 50% 50%,  rgba(0,0,38,0.22)   0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.layerHeader {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.lGrid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.lRow {
+  display: grid;
+  grid-template-columns: 220px 52px 1fr;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.52s ease, transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lRowOn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-right: 8px;
+  opacity: 0.20;
+  transition: opacity 0.45s ease;
+}
+.lLabelOn { opacity: 1; }
+
+.lNum {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.50rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255,0.76);
+  text-transform: uppercase;
+}
+.lName {
+  font-family: 'Ethnocentric', serif;
+  font-size: 0.70rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 2px;
+  letter-spacing: 0.04em;
+  line-height: 1.38;
+}
+.lMicrons {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.60rem;
+  color: rgba(255,255,255,0.26);
+  letter-spacing: 0.12em;
+}
+.lBullets {
+  list-style: none;
+  margin: 5px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.lBullets li {
+  font-size: 0.67rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.45;
+  padding-left: 10px;
+  position: relative;
+}
+.lBullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255,0.54);
+}
+
+.lPtr {
+  display: flex;
+  align-items: center;
+  height: 1px;
+  opacity: 0;
+  transition: opacity 0.35s ease 0.22s;
+}
+.lPtrOn { opacity: 1; }
+
+.lDot {
+  display: block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255,0.80);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255, 255, 255,0.58);
+}
+.lLine {
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right,
+    rgba(255, 255, 255,0.46) 0%,
+    rgba(255,255,255,0.14) 100%
+  );
+}
+
+.lPanelWrap {
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.75));
+}
+
+.lFilm {
+  width: 100%;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0% 14%, 100% 0%, 100% 86%, 0% 100%);
+}
+
+.lShine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.07) 26%,
+    transparent            52%,
+    rgba(255,255,255,0.02) 80%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.lTopRim {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.34);
+  z-index: 3;
+}
+.lBtmRim {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.35);
+  z-index: 3;
+}
+
+/* ── Advanced Topcoat — 12μm, glass-clear, very thin ── */
+.f_topcoat {
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    rgba(205,225,255,0.20)  0%,
+    rgba(175,205,255,0.10)  28%,
+    rgba(155,188,255,0.055) 62%,
+    rgba(205,225,255,0.16)  100%
+  );
+}
+.f_topcoat .lShine {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.42) 0%,
+    rgba(255,255,255,0.16) 20%,
+    rgba(255,255,255,0.04) 44%,
+    transparent            65%
+  );
+}
+.f_topcoat .lTopRim { background: rgba(255,255,255,0.68); }
+.f_topcoat .lBtmRim { background: rgba(180,210,255,0.15); }
+
+/* ── TPU Protection Layer — 159μm, densest, main mass ── */
+.f_tpu {
+  height: 82px;
+  background: linear-gradient(
+    to bottom,
+    rgba(30,30,44,0.98)  0%,
+    rgba(16,16,28,1)     18%,
+    rgba(8,8,18,1)       55%,
+    rgba(16,16,28,0.98)  82%,
+    rgba(30,30,44,0.96)  100%
+  );
+}
+.f_tpu .lShine {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.10) 0%,
+    rgba(255,255,255,0.04) 24%,
+    transparent            48%
+  );
+}
+.f_tpu .lTopRim { background: rgba(255,255,255,0.14); }
+.f_tpu .lBtmRim { background: rgba(0,0,0,0.60); }
+
+/* ── Adhesive Layer — 32μm, thin, warm amber undertone ── */
+.f_adhesive {
+  height: 26px;
+  background: linear-gradient(
+    to bottom,
+    rgba(238,222,195,0.22)  0%,
+    rgba(218,198,164,0.14)  35%,
+    rgba(218,198,164,0.11)  65%,
+    rgba(238,222,195,0.20)  100%
+  );
+}
+.f_adhesive .lShine {
+  background: linear-gradient(
+    135deg,
+    rgba(255,248,225,0.26) 0%,
+    rgba(255,248,225,0.09) 28%,
+    transparent            54%
+  );
+}
+.f_adhesive .lTopRim { background: rgba(242,228,200,0.55); }
+.f_adhesive .lBtmRim { background: rgba(200,178,140,0.22); }
+
+/* ── Release Liner — 85μm, flat matte white, base backing ── */
+.f_liner {
+  height: 56px;
+  background: linear-gradient(
+    108deg,
+    #dadada 0%,
+    #cacaca 26%,
+    #e6e6e6 65%,
+    #dadada 100%
+  );
+}
+.f_liner .lShine {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.26) 0%,
+    rgba(255,255,255,0.09) 26%,
+    transparent            55%
+  );
+}
+.f_liner .lTopRim { background: rgba(255,255,255,0.80); }
+.f_liner .lBtmRim { background: rgba(175,175,175,0.36); }
+
+/* ── Mobile — same 3-column composition as desktop (label / connector /
+   film), just narrower proportions and a more compact diagram. ── */
+@media (max-width: 767px) {
+  .layerHeader { margin-bottom: 32px; }
+  .lGrid  { gap: 12px; }
+  .lRow   { grid-template-columns: 40% 20px 1fr; gap: 8px; }
+  .lLabel { padding-right: 0; }
+  .lFilm  { clip-path: polygon(0% 12%, 100% 0%, 100% 88%, 0% 100%); }
+  .f_topcoat  { height: 16px; }
+  .f_tpu      { height: 46px; }
+  .f_adhesive { height: 14px; }
+  .f_liner    { height: 30px; }
+  .lNum        { font-size: 0.46rem; }
+  .lName       { font-size: 0.72rem; line-height: 1.3; }
+  .lMicrons    { font-size: 0.58rem; }
+  .lBullets    { gap: 2px; margin-top: 3px; }
+  .lBullets li { font-size: 0.62rem; line-height: 1.35; padding-left: 8px; }
+  .lDot { width: 4px; height: 4px; }
+}
+
+@media (max-width: 380px) {
+  .lRow   { grid-template-columns: 38% 16px 1fr; gap: 6px; }
+  .lName       { font-size: 0.66rem; }
+  .lBullets li { font-size: 0.56rem; }
+}

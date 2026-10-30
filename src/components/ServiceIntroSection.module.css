@@ -1,0 +1,217 @@
+/* ══ SERVICE INTRO SECTION — reusable post-hero statement block ══
+   Black/white premium, editorial rather than informational. No red
+   eyebrow. Heading is the focal point; everything reveals with a
+   controlled, staggered entrance the first time it scrolls into view. */
+
+.section {
+  position: relative;
+  background: #000;
+  padding: 150px 64px 88px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+/* No fixed bottom margin here — .inner is the section's last element on
+   every page currently in use (none pass options/gallery), so a margin
+   here stacked on top of .section's own bottom padding, doubling the gap
+   before the next section. The gallery grid below supplies its own
+   margin-top instead, so that spacing only appears when there's actually
+   a gallery to separate from. */
+.inner {
+  max-width: 900px;
+  margin: 0;
+}
+
+/* Two-line editorial lockup, in the direction of a coachbuilder nameplate
+   (small wide brand line over a huge outlined model line — Ethnocentric is
+   this site's wide/geometric "technical" display face, already used for
+   the Aftercare heading, standing in for Eurostile/Microgramma). */
+.heading {
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.kicker {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1rem, 1.7vw, 1.3rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 14px;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.visible .kicker { opacity: 1; transform: translateY(0); }
+
+.statement {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(2.6rem, 7.6vw, 5.8rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #fff;
+  display: block;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+.visible .statement { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Outlined/graphic treatment — solid white is the safe fallback for any
+   engine without stroke support; every current browser gets the outline. */
+@supports (-webkit-text-stroke: 1px #fff) {
+  .statement {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #fff;
+  }
+}
+
+.description {
+  font-family: var(--font-ui);
+  font-size: clamp(1.05rem, 1.2vw, 1.15rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 460px;
+  margin: 36px 0 0;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s ease 0.28s,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s;
+}
+.visible .description { opacity: 1; transform: translateY(0); }
+
+/* ── Finish / option markers — animated, not plain text ── */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 34px;
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 0;
+}
+
+.option {
+  position: relative;
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  padding-bottom: 10px;
+  outline: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.3s ease;
+}
+.visible .option { opacity: 1; transform: translateY(0); }
+
+.option::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  transform: scaleX(0.28);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+}
+
+.option:hover,
+.option:focus-visible,
+.optionActive {
+  color: #fff;
+}
+.option:hover::after,
+.option:focus-visible::after,
+.optionActive::after {
+  transform: scaleX(1);
+  background: #fff;
+}
+
+/* ── Responding gallery — subtly linked to the hovered option ── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1180px;
+  margin-top: 64px;
+}
+
+.galleryImgWrap {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 4px;
+  filter: brightness(0.7);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease;
+}
+.visible .galleryImgWrap { opacity: 1; transform: translateY(0); }
+
+.galleryImgActive { filter: brightness(1); }
+
+.galleryImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.galleryImgActive .galleryImg { transform: scale(1.04); }
+
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .section { padding: 100px 20px 48px; }
+  .inner { margin-bottom: 0; }
+  .heading { margin-bottom: 24px; }
+  .kicker { font-size: clamp(0.8rem, 3.6vw, 1rem); letter-spacing: 0.18em; margin-bottom: 10px; }
+  .statement { font-size: clamp(1.5rem, 8vw, 2.2rem); letter-spacing: -0.005em; }
+  .description { font-size: 1.02rem; max-width: none; margin-top: 24px; }
+  .options { margin-top: 32px; gap: 12px 24px; }
+  .option { font-size: 0.68rem; }
+
+  .gallery {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: none;
+    margin-top: 40px;
+  }
+  .gallery::-webkit-scrollbar { display: none; }
+  .galleryImgWrap { flex: 0 0 62vw; scroll-snap-align: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kicker, .statement, .description, .option, .galleryImgWrap {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+}

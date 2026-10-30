@@ -1,0 +1,203 @@
+/* ══ SERVICE PROCESS — reusable premium vertical timeline ══
+   A luminous centred line with steps alternating left/right around it.
+   Black / white / grey only, no red. Same mechanics for every service —
+   only heading, steps and copy change per page. */
+
+.process {
+  background: #000;
+  padding: 120px 0 100px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 88px;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.visible .eyebrow { opacity: 1; transform: translateY(0); }
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease 0.08s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+}
+.visible .heading { opacity: 1; transform: translateY(0); }
+
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.lineFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.75) 100%);
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.7),
+    0 0 26px rgba(255, 255, 255, 0.35);
+  transition: height 0.15s linear;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  min-height: 120px;
+  padding: 36px 0;
+}
+
+.dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0.6;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
+}
+.itemRevealed .dot {
+  background: #fff;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow:
+    0 0 0 5px #000,
+    0 0 14px rgba(255, 255, 255, 0.85),
+    0 0 34px rgba(255, 255, 255, 0.4);
+}
+
+.card {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.itemLeft .card {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+  transform: translate(-22px, 14px);
+}
+.itemRight .card {
+  grid-column: 2;
+  justify-self: start;
+  text-align: left;
+  transform: translate(22px, 14px);
+}
+.itemRevealed .card { opacity: 1; transform: translate(0, 0); }
+
+.num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.34);
+  margin-bottom: 14px;
+  transition: color 0.6s ease;
+}
+.itemRevealed .num { color: rgba(255, 255, 255, 0.85); }
+
+.title {
+  font-family: var(--font-ui);
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 12px;
+  transition: color 0.6s ease;
+}
+.itemRevealed .title { color: #fff; }
+
+/* Body copy uses Inter — a clean, uncondensed face — instead of the
+   site's condensed display/UI fonts, purely for description readability. */
+.desc {
+  font-family: 'Inter', var(--font-ui), sans-serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.46);
+  max-width: 440px;
+  margin: 0;
+  margin-left: auto;
+  transition: color 0.6s ease;
+}
+.itemRight .desc { margin-left: 0; margin-right: auto; }
+.itemRevealed .desc { color: rgba(255, 255, 255, 0.82); }
+
+/* ── Mobile — same timeline concept, narrower blocks rather than
+   collapsing to a stacked list. ── */
+@media (max-width: 640px) {
+  .head { margin-bottom: 56px; }
+
+  .timeline { padding: 0 10px; }
+
+  .item { gap: 8px; min-height: 0; padding: 16px 0; }
+
+  .dot { width: 9px; height: 9px; }
+  .itemRevealed .dot {
+    box-shadow:
+      0 0 0 4px #000,
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 22px rgba(255, 255, 255, 0.35);
+  }
+
+  .num { font-size: 1.375rem; margin-bottom: 4px; }
+  .title { font-size: 1.05rem; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .desc { font-size: 0.92rem; line-height: 1.5; max-width: 190px; }
+
+  .itemLeft .card { transform: translate(-10px, 10px); }
+  .itemRight .card { transform: translate(10px, 10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow, .heading, .card, .dot {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+}

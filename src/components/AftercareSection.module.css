@@ -1,0 +1,213 @@
+/* ══ AFTERCARE — shared across every service page ══
+   Visual direction carried over unchanged from its original PPF-page-only
+   version; only the mobile spacing has been tightened further so it never
+   reads as another full section on a phone. */
+
+.section {
+  background: #05050c;
+  padding: 76px 0 68px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.sectionHead {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: clamp(1.6rem, 3.1vw, 2.5rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.sectionSub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0 auto;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* Desktop: grid inside the normal container */
+.scroll {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.32s ease, box-shadow 0.32s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 22px 52px rgba(0, 0, 0, 0.46);
+}
+
+.imgWrap {
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  position: relative;
+  background: #0a0a12;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover .img { transform: scale(1.05); }
+
+.body {
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+
+.name {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.32;
+  margin: 0;
+}
+
+.desc {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: all 0.20s ease;
+}
+.btn:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btnArrow {
+  font-size: 0.9rem;
+  transition: transform 0.18s ease;
+}
+.btn:hover .btnArrow { transform: translateX(3px); }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .track { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Mobile — substantially more compact than desktop, and a real
+   horizontal carousel rather than three stacked cards: one full card
+   plus a visible peek of the next, so the swipe is obvious. ── */
+@media (max-width: 768px) {
+  .section {
+    /* Noticeably tighter than the desktop padding above, not just a
+       scaled-down version of it. */
+    padding: 34px 0 32px;
+  }
+
+  .container    { padding: 0 20px; }
+  .sectionHead  { margin-bottom: 20px; }
+  .sectionTitle { font-size: clamp(1.25rem, 6vw, 1.7rem); margin-bottom: 8px; }
+  .sectionSub   { font-size: 0.8rem; max-width: 300px; line-height: 1.5; }
+
+  .scroll {
+    padding: 0;
+    max-width: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .scroll::-webkit-scrollbar { display: none; }
+
+  .track {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 0 20px 4px;
+    width: max-content;
+  }
+
+  .card {
+    /* Sized so one card reads as the full card and the next one peeks
+       in at the edge of the viewport, making the swipe obvious. Width
+       trimmed ~18% from the original 78vw/300px so more of the next
+       card peeks in and the section reads lighter overall. */
+    min-width: 64vw;
+    max-width: 248px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  .body { padding: 14px 14px 16px; gap: 6px; }
+  .name { font-size: 0.72rem; }
+  .desc { font-size: 0.72rem; line-height: 1.48; }
+  .btn  { padding: 8px 14px; font-size: 0.62rem; margin-top: 2px; }
+}
+
+@media (max-width: 480px) {
+  .section     { padding: 28px 0 26px; }
+  .sectionHead { margin-bottom: 16px; }
+}

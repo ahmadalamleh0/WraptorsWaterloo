@@ -1,0 +1,222 @@
+/* ══ VISIT US ══ */
+.section {
+  background: #000;
+  padding: 32px 0 0;
+  position: relative;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  padding: 0 24px 40px;
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity   0.9s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.9s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.header.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.title {
+  font-family: var(--font-display, 'Bebas Neue', sans-serif);
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.05;
+}
+
+.address {
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+
+.directions {
+  display: inline-block;
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.directions:hover {
+  color: var(--red-bright, #ff1a1a);
+  border-color: currentColor;
+}
+
+/* ── Map block ── */
+.map {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 42vw, 560px);
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.still {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.6s ease;
+}
+
+.stillImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Default framing; the location config's mapImagePin overrides both
+     inline so the pin stays in frame on narrow screens and the zoom heads
+     straight into it. */
+  object-position: 52% 52%;
+  transform-origin: 52% 52%;
+  transition: transform 1.4s cubic-bezier(0.65, 0, 0.35, 1), filter 1.4s ease;
+  will-change: transform;
+}
+
+.explore {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 16px 26px;
+  background: rgba(40, 40, 40, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, opacity 0.4s ease;
+}
+.explore:hover {
+  background: rgba(60, 60, 60, 0.72);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.explore:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.live {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+/* Our own place card over the live map (stands in for Google's, whose
+   "Open in Maps" link loses the search). */
+.card {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  max-width: min(300px, calc(100% - 24px));
+  padding: 14px 16px;
+  background: rgba(10, 10, 10, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: cardIn 0.5s 0.3s ease both;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.cardName {
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin: 0 0 2px;
+}
+
+.cardAddress {
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 12px;
+  line-height: 1.35;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #000;
+  background: #fff;
+  padding: 9px 14px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cardLink:hover {
+  background: var(--red-bright, #ff1a1a);
+  color: #fff;
+}
+
+/* zooming: dive into the pin, hide the button */
+.map[data-stage='zooming'] .stillImg,
+.map[data-stage='live'] .stillImg {
+  transform: scale(6);
+  filter: blur(2px);
+}
+.map[data-stage='zooming'] .explore,
+.map[data-stage='live'] .explore {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* live: the real map fades in over the zoomed image */
+.map[data-stage='live'] .live { opacity: 1; }
+.map[data-stage='live'] .still { opacity: 0; pointer-events: none; }
+
+/* TrustedBrands drops to 34px top padding at this width — add breathing
+   room below the map so the two sections don't butt together. */
+@media (max-width: 768px) {
+  .section { padding-bottom: 40px; }
+}
+
+@media (max-width: 640px) {
+  .section { padding-top: 16px; }
+  .header { padding-bottom: 32px; }
+  .explore { font-size: 0.74rem; padding: 14px 22px; bottom: 14%; }
+  /* The map is short here — keep the pin clear and show just the button. */
+  .card { padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .cardName, .cardAddress { display: none; }
+  .cardLink { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header { transition: opacity 0.3s ease; transform: none !important; }
+  .stillImg { transition: none; }
+}

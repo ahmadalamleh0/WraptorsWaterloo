@@ -1,0 +1,422 @@
+/* ══ VEHICLE WRAPS — campaign-led service page ══
+   Hero lives in the shared ServiceHero component now — see
+   ServiceHero.jsx / ServiceHero.module.css. ── */
+
+/* ── Full photo break — single cinematic image with a minimal footer
+   overlay burned into the bottom of the image itself. ── */
+.photoBreak {
+  position: relative;
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.photoBreakImg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+.photoBreakOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 46%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+.photoBreakTop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 56px 48px 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.photoBreakTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.05;
+}
+
+/* ── Brand statement — quiet credibility moment. Logo mark sits centred
+   above the copy, the whole block centred as one composition. ── */
+.brandStatement {
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 64px 24px;
+}
+
+.brandInner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+
+.brandLogoWrap {
+  flex-shrink: 0;
+  display: flex;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brandStatementVisible .brandLogoWrap { opacity: 1; transform: translateY(0); }
+
+/* Source file is a wide 1200×630 frame with the coin centred in it —
+   a square box + cover crops away the dead space on either side without
+   touching the coin itself, so the visible mark reads edge-to-edge. */
+.brandMark {
+  /* Monogram shown when the location has no coin emblem — sized like it. */
+  display: block;
+  width: 108px;
+  height: 108px;
+  fill: #fff;
+}
+
+.brandLogo {
+  width: 108px;
+  height: 108px;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 50%;
+  display: block;
+}
+
+.brandDivider {
+  flex-shrink: 0;
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  transition: opacity 1s ease 0.15s;
+}
+.brandStatementVisible .brandDivider { opacity: 1; }
+
+.brandContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.brandHeadline {
+  font-family: var(--font-ui);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+  line-height: 1.18;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+.brandStatementVisible .brandHeadline { opacity: 1; transform: translateY(0); }
+
+/* Manual line break only holds at wider widths — on mobile the natural
+   wrap already reads cleanly, and forcing it produces an awkward
+   third orphan line. */
+@media (max-width: 767px) {
+  .brandBreak { display: none; }
+}
+
+.brandDesc {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.62;
+  margin: 0 auto;
+  max-width: 560px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+.brandStatementVisible .brandDesc { opacity: 1; transform: translateY(0); }
+
+@media (min-width: 768px) {
+  .brandStatement { padding: 84px 64px; }
+
+  .brandInner { gap: 22px; }
+
+  .brandLogo,
+  .brandMark { width: 160px; height: 160px; }
+
+  .brandDivider {
+    width: 48px;
+    margin-bottom: 2px;
+  }
+
+  .brandContent { gap: 18px; }
+
+  .brandHeadline { font-size: clamp(1.9rem, 2.7vw, 2.4rem); line-height: 1.12; }
+  .brandDesc { font-size: 1rem; }
+}
+
+/* ── McLaren spread — one designed editorial sequence, not four random
+   cards. Dominant hero + three supporting shots. Tiny gaps, no cards, no
+   radius — the photography carries it. ── */
+.mcGallery {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "a a"
+    "b c"
+    "d d";
+  background: #000;
+}
+
+.mcTile {
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mcGalleryVisible .mcTile { opacity: 1; transform: translateY(0); }
+.mcGalleryVisible .mcTile1 { transition-delay: 0s; }
+.mcGalleryVisible .mcTile2 { transition-delay: 0.16s; }
+.mcGalleryVisible .mcTile3 { transition-delay: 0.24s; }
+.mcGalleryVisible .mcTile4 { transition-delay: 0.4s; }
+
+.mcTile1 { grid-area: a; aspect-ratio: 4 / 5; }
+.mcTile2 { grid-area: b; aspect-ratio: 1 / 1; }
+.mcTile3 { grid-area: c; aspect-ratio: 1 / 1; }
+.mcTile4 { grid-area: d; aspect-ratio: 4 / 5; }
+
+.mcImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mcTile1 .mcImg { object-position: center 45%; }
+.mcTile2 .mcImg { object-position: center 32%; }
+.mcTile3 .mcImg { object-position: center 28%; }
+.mcTile4 .mcImg { object-position: center 22%; }
+
+.mcOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 100%);
+  pointer-events: none;
+}
+
+.mcFooter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mcFooterEyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 700;
+}
+
+.mcFooterTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+.mcFooterDetail {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+}
+
+/* ── Desktop — asymmetric editorial grid: one dominant image (full
+   height, left) with three supporting images filling the right side. ── */
+@media (min-width: 901px) {
+  .mcGallery {
+    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "a b c"
+      "a d d";
+    height: clamp(560px, 56vw, 760px);
+    padding: 0 40px;
+  }
+  .mcTile1, .mcTile2, .mcTile3, .mcTile4 { aspect-ratio: auto; height: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcTile { transition: opacity 0.3s ease; transform: none !important; }
+}
+
+/* ── G-Wagon pair — simple two-image spread, same visual grammar as the
+   McLaren gallery (tiny gap, no cards, no radius, staggered reveal). ── */
+.wagonSpread {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #000;
+}
+
+.wagonOverlayText {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.4vw, 3.2rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.wagonTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wagonSpreadVisible .wagonTile { opacity: 1; transform: translateY(0); }
+.wagonSpreadVisible .wagonTile:nth-child(2) { transition-delay: 0.16s; }
+
+.wagonImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+@media (min-width: 901px) {
+  .wagonSpread {
+    gap: 8px;
+    padding: 0 40px;
+    height: clamp(480px, 46vw, 640px);
+  }
+  .wagonTile { aspect-ratio: auto; height: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wagonTile { transition: opacity 0.3s ease; transform: none !important; }
+}
+
+/* ── Commercial Wraps spread — same visual grammar as the McLaren/G-Wagon
+   galleries above (tiny gap, no cards, no radius, staggered reveal), sized
+   for six photos instead of four. Two tiles run full width as the
+   occasional "wide" moment; the rest sit in even rows so nothing reads as
+   a long stack of full-width photos. ── */
+.cwGallery {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "a a"
+    "b c"
+    "d e";
+  background: #000;
+}
+
+.cwTile {
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cwGalleryVisible .cwTile { opacity: 1; transform: translateY(0); }
+.cwGalleryVisible .cwTile1 { transition-delay: 0s; }
+.cwGalleryVisible .cwTile2 { transition-delay: 0.1s; }
+.cwGalleryVisible .cwTile3 { transition-delay: 0.16s; }
+.cwGalleryVisible .cwTile4 { transition-delay: 0.22s; }
+.cwGalleryVisible .cwTile5 { transition-delay: 0.28s; }
+
+.cwTile1 { grid-area: a; aspect-ratio: 3 / 2; }
+.cwTile2 { grid-area: b; aspect-ratio: 4 / 5; }
+.cwTile3 { grid-area: c; aspect-ratio: 4 / 5; }
+.cwTile4 { grid-area: d; aspect-ratio: 4 / 5; }
+.cwTile5 { grid-area: e; aspect-ratio: 4 / 5; }
+
+.cwImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cwTile1 .cwImg { object-position: center 35%; }
+.cwTile2 .cwImg { object-position: center 38%; }
+.cwTile3 .cwImg { object-position: center 55%; }
+.cwTile4 .cwImg { object-position: center 42%; }
+.cwTile5 .cwImg { object-position: center 55%; }
+
+@media (min-width: 901px) {
+  .cwGallery {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "a a b"
+      "c d e";
+    height: clamp(560px, 48vw, 720px);
+    padding: 0 40px;
+  }
+  .cwTile1, .cwTile2, .cwTile3, .cwTile4, .cwTile5 {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cwTile { transition: opacity 0.3s ease; transform: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Mobile — visual-first, compact, nothing stacked into another full-
+   screen chapter. Category/finish rows become horizontal scroll strips
+   so images sit beside each other rather than piling straight down.
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .photoBreakImg { aspect-ratio: 4 / 5; object-position: center 30%; }
+  .photoBreakTop { padding: 28px 20px 0; }
+  .photoBreakTitle { font-size: clamp(1.7rem, 8.4vw, 2.4rem); }
+
+}

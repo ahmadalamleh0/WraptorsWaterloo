@@ -1,0 +1,654 @@
+/* ══ QUOTE CONSOLE — multi-step lead capture, monochrome/glass ══ */
+.section {
+  background: #050505;
+  padding: 100px 32px 110px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+/* Embedded on a service page (between Related Insights and the FAQ)
+   rather than standing alone between two big homepage chapters — same
+   panel, noticeably less air around it. */
+.sectionCompact {
+  padding: 64px 32px 72px;
+}
+.sectionCompact .head {
+  margin-bottom: 32px;
+}
+
+.head {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 44px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 16px;
+  line-height: 1.05;
+}
+
+.sub {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Glass panel — layered depth rather than a flat dark box: a soft
+   top-left bloom, a faint base-of-panel glow, an inner highlight edge on
+   top of the blurred backdrop. ── */
+.panel {
+  position: relative;
+  isolation: isolate;
+  max-width: 720px;
+  margin: 0 auto;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015) 55%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  backdrop-filter: blur(30px) saturate(1.3);
+  -webkit-backdrop-filter: blur(30px) saturate(1.3);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 40px rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: -35%;
+  left: -15%;
+  width: 65%;
+  height: 65%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 60% at 50% 110%, rgba(255, 255, 255, 0.06), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Progress ── */
+.progress {
+  position: relative;
+  z-index: 1;
+  padding: 24px 36px 0;
+}
+
+.progressBarTrack {
+  height: 2px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  transition: width 0.4s var(--ease-smooth, ease);
+}
+
+.progressList {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+
+.progressItem {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: 1;
+}
+
+.progressNum {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.24);
+}
+
+.progressLabel {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.24);
+}
+
+.progressItemDone .progressNum,
+.progressItemDone .progressLabel { color: rgba(255, 255, 255, 0.44); }
+
+.progressItemActive .progressNum,
+.progressItemActive .progressLabel { color: #fff; }
+
+/* Lighter than the old "STEP 1 OF 5 · SERVICE" — a small dim number, a
+   slash, a quiet label. Reads, doesn't shout. */
+.progressCompact {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.progressCompactNum {
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.progressCompact > span[aria-hidden] {
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.progressCompactLabel {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* ── Step body ── */
+.body {
+  position: relative;
+  z-index: 1;
+  padding: 2px 36px 0;
+}
+
+.stepInner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #fff;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.stepSub {
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+/* ── Selectable rows — build-option and timing lists (single column) ── */
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Selectable grid — service choice on step 1: two columns, the odd
+   last item centered at card width rather than either stretched full
+   width or left stranded. Generic (:last-child:nth-child(odd)) so it
+   keeps working if a service is added or removed later. ── */
+.optionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+/* Step 1's service groups — the same cards, a touch shorter. */
+.optionGridCompact { gap: 8px; }
+.optionGridCompact .optionRow { min-height: 52px; padding: 13px 16px; }
+
+.optionGrid > *:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: calc(50% - 5px);
+}
+
+/* ── Card — shared by grid and list options. Glassy, with a soft
+   highlight edge and a glowing filled indicator when active rather than
+   a flat "white border on dark box." ── */
+.optionRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 60px;
+  text-align: left;
+  padding: 16px 18px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.optionRow:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+  transform: translateY(-1px);
+}
+
+.optionRowActive {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 12px 28px rgba(255, 255, 255, 0.05);
+}
+.optionRowActive:hover { transform: none; }
+
+.optionLabel {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.66);
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+.optionRowActive .optionLabel { color: #fff; }
+
+.optionCheck {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.26);
+  position: relative;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.optionRowActive .optionCheck {
+  background: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.55);
+}
+.optionRowActive .optionCheck::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: #050505;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Preferred contact method — compact pill row, not full-width rows */
+.optionListInline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pill {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.pill:hover { border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+.pillActive { border-color: #fff; background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+/* ── Fields ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fieldLabel {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.04em;
+}
+
+.optional {
+  color: rgba(255, 255, 255, 0.26);
+  font-weight: 400;
+}
+
+.input, .textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  padding: 13px 15px;
+  border-radius: 6px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+.input::placeholder, .textarea::placeholder { color: rgba(255, 255, 255, 0.22); }
+.input:focus, .textarea:focus { outline: none; border-color: rgba(255, 255, 255, 0.55); }
+.input[type='date'] { color-scheme: dark; }
+.textarea { resize: vertical; }
+
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23ffffff' stroke-opacity='0.45' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 36px;
+}
+select.input option { background: #0a0a0d; color: #fff; }
+
+/* ── Searchable brand combobox ── */
+.combo { position: relative; }
+.comboList {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #0a0a0d;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6);
+}
+.comboOption {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.comboOption:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.comboEmpty {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  padding: 12px 14px;
+  background: #0a0a0d;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+}
+
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.error {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--red-bright, #ff6b6b);
+  margin: 10px 0 0;
+}
+.errorSmall {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--red-bright, #ff6b6b);
+}
+
+/* On service pages (the compact embed) the whole page is strictly
+   black/white/grey — no red anywhere, including validation states. The
+   full-size homepage instance keeps the red above unchanged. */
+.sectionCompact .error,
+.sectionCompact .errorSmall {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Nav — a soft glowing hairline instead of a flat border, so the
+   bottom edge still reads as part of the same glass object. ── */
+.nav {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 36px 28px;
+  margin-top: 16px;
+}
+
+.nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 36px;
+  right: 36px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 12px 4px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+}
+.backBtn:hover { color: #fff; }
+
+.nextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #000;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-left: auto;
+  box-shadow: 0 10px 26px rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.nextBtn:hover { background: rgba(255, 255, 255, 0.88); box-shadow: 0 12px 30px rgba(255, 255, 255, 0.16); }
+.nextBtn:disabled { opacity: 0.55; cursor: default; box-shadow: none; }
+
+/* Shown on the last step while online requests are switched off. */
+.formsOff {
+  position: relative;
+  z-index: 1;
+  margin: 16px 36px 0;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+}
+.formsOff a { color: #fff; }
+@media (max-width: 640px) { .formsOff { margin: 12px 20px 0; } }
+
+/* Submission failed — shown in place of the forms-off note, with the
+   visitor's entries still in the form so "Try Again" just resubmits. */
+.submitError {
+  position: relative;
+  z-index: 1;
+  margin: 16px 36px 0;
+}
+.submitError .error { margin: 0 0 8px; line-height: 1.6; }
+.submitErrorLink {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+.submitErrorLink:hover { text-decoration: underline; }
+@media (max-width: 640px) { .submitError { margin: 12px 20px 0; } }
+
+/* ── Success state ── */
+.success {
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.successEyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 700;
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+}
+
+.successBody {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 420px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.successCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 14px 26px;
+  border-radius: 6px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.successCta:hover { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+
+/* ── Mobile — compact panel, no horizontal overflow ── */
+@media (max-width: 760px) {
+  .section { padding: 72px 20px 84px; }
+  .head    { margin-bottom: 32px; }
+
+  .panel   { border-radius: 16px; }
+
+  .progress          { padding: 20px 20px 0; }
+  .progressList      { display: none; }
+  .progressCompact   { display: flex; }
+  .progressBarTrack  { margin-bottom: 0; }
+
+  .body        { padding: 16px 20px 0; }
+  .stepTitle   { font-size: 1.25rem; }
+  .stepSub     { margin-bottom: 12px; }
+
+  /* Compact single-line cards rather than a 2-column squeeze — the
+     longer service names (Paint Protection Film, Multiple Services)
+     wrap awkwardly at two-up on a 375-430px screen. */
+  .optionGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .optionGrid > *:last-child:nth-child(odd) {
+    grid-column: auto;
+    justify-self: stretch;
+    max-width: none;
+  }
+  .optionRow { min-height: 50px; padding: 13px 16px; border-radius: 12px; }
+  .optionLabel { font-size: 0.84rem; }
+  .optionGridCompact { gap: 6px; }
+  .optionGridCompact .optionRow { min-height: 46px; padding: 11px 16px; }
+
+  .row3, .row2 { grid-template-columns: 1fr; gap: 0; }
+
+  .nav { padding: 18px 20px 22px; margin-top: 12px; }
+  .nav::before { left: 20px; right: 20px; }
+  .nextBtn { padding: 14px 22px; font-size: 0.66rem; }
+
+  .success { padding: 56px 24px; }
+}

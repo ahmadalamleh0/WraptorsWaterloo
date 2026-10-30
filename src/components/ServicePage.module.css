@@ -1,0 +1,580 @@
+/* ══ SERVICE PAGE ══
+   Generic template for services without bespoke interactive content
+   (Ceramic Coating, Window Tint, Commercial Wraps). Hero and intro live in
+   the shared ServiceHero / ServiceIntroSection components now — nothing
+   page-specific left to style here yet. */
+
+/* ── Full-bleed image block — sits between the intro section and process
+   timeline. Negative margin-top pulls it tight against the Refined section
+   so there's no dead black void above it. ── */
+.introImageBlock {
+  position: relative;
+  width: 100%;
+  background: #000;
+  line-height: 0;
+  margin-top: -72px; /* pulls the block up into the intro section's bottom padding */
+  overflow: hidden;
+}
+
+.introImage {
+  display: block;
+  width: 100%;
+  max-height: 82vh;
+  object-fit: cover;
+  object-position: center 30%; /* keep top of image — where the car detail lives */
+  filter: none;
+}
+
+/* ── Gradient overlay — only dark enough to let the text read cleanly ── */
+.introImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.38) 55%,
+    rgba(0, 0, 0, 0.52) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Centered text lockup ── */
+.introImageText {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  /* very subtle text-shadow so letters lift off the image */
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 768px) {
+  .introImageBlock { margin-top: -40px; }
+  .introImage {
+    height: 75vw;
+    min-height: 280px;
+    max-height: 460px;
+    object-position: center 30%;
+  }
+  .introImageText { letter-spacing: 0.16em; }
+}
+
+/* ══ BENEFITS SECTION ══
+   Editorial 2×2 grid. No cards — divider lines carry the structure.
+   Stays in the same black/white premium family as ServiceIntroSection. */
+
+.benefits {
+  background: #000;
+  padding: 80px 32px 88px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.benefitsHeading {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1.02rem, 1.7vw, 1.26rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 44px;
+  text-align: center;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.benefitItem {
+  padding: 20px 32px 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefitItem:nth-child(even) {
+  padding-left: 32px;
+  padding-right: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefitItem:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.benefitHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.benefitNum {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.benefitTitle {
+  font-family: var(--font-ui);
+  font-size: clamp(0.78rem, 0.95vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.benefitDesc {
+  font-family: var(--font-ui);
+  font-size: clamp(0.82rem, 0.9vw, 0.88rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .benefits {
+    padding: 60px 20px 68px;
+  }
+
+  .benefitsHeading {
+    font-size: clamp(0.92rem, 3.8vw, 1.15rem);
+    letter-spacing: 0.16em;
+    margin-bottom: 34px;
+  }
+
+  .benefitItem {
+    padding: 16px 16px 16px 0;
+  }
+
+  .benefitItem:nth-child(even) {
+    padding-left: 16px;
+    padding-right: 0;
+  }
+
+  .benefitHeader {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .benefitNum {
+    font-size: 0.72rem;
+  }
+
+  .benefitTitle {
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+  }
+
+  .benefitDesc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 420px) {
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitItem,
+  .benefitItem:nth-child(even) {
+    padding: 16px 0;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .benefitItem:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ══ MID-SECTION TEXT BREAK ══
+   A simple centered heading + short description on black — used to
+   separate a mixed-car gallery from a single-car featured project below
+   it, without needing the full kicker/statement intro system. */
+.midSection {
+  background: #000;
+  padding: 88px 32px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.midSectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+.midSectionDesc {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+@media (max-width: 768px) {
+  .midSection { padding: 60px 24px; }
+  .midSectionTitle { margin-bottom: 12px; }
+}
+
+/* ══ FEATURED PROJECT ══
+   One single-car showcase: a wide main image with a caption overlay,
+   then a grid of detail shots — paired, side by side, on every
+   breakpoint. Same visual grammar as the galleries below (8px gap, no
+   cards, no radius, staggered reveal). */
+.featuredProject {
+  background: #000;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.featuredMain {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+  max-height: 560px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.featuredProjectVisible .featuredMain { opacity: 1; transform: translateY(0); }
+
+.featuredMainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  display: block;
+}
+
+.featuredOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.2) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+.featuredFooter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.featuredEyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.featuredTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.featuredGridTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.featuredProjectVisible .featuredGridTile { opacity: 1; transform: translateY(0); }
+.featuredProjectVisible .featuredGridTile:nth-child(2) { transition-delay: 0.08s; }
+.featuredProjectVisible .featuredGridTile:nth-child(3) { transition-delay: 0.16s; }
+.featuredProjectVisible .featuredGridTile:nth-child(4) { transition-delay: 0.24s; }
+
+.featuredGridImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.featuredGridTile:hover .featuredGridImg { transform: scale(1.04); }
+
+@media (prefers-reduced-motion: reduce) {
+  .featuredMain, .featuredGridTile {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* min-height (320px) exceeds what a 16:9 ratio gives at phone widths,
+     which was forcing the browser to widen the box past the viewport to
+     satisfy the ratio at that height — causing horizontal overflow. */
+  .featuredMain { min-height: 0; }
+}
+
+/* ══ 3-IMAGE EDITORIAL GALLERY ══
+   Adapts the McLaren gallery system for Ceramic Coating.
+   Photo 1: One large full-width hero image on top
+   Photo 2 + Photo 3: Two side-by-side images underneath
+   Minimalist black/white aesthetic, 8px gap, subtle reveal animation. */
+
+.svcGallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "left right";
+  gap: 8px;
+  background: #000;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.svcTile {
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.svcGalleryVisible .svcTile {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.svcGalleryVisible .svcTile1 { transition-delay: 0s; }
+.svcGalleryVisible .svcTile2 { transition-delay: 0.14s; }
+.svcGalleryVisible .svcTile3 { transition-delay: 0.28s; }
+
+/* Source photos are all portrait (phone shots) — the ratios below stay
+   close to that instead of forcing a wide landscape crop, which was
+   cutting the detail shot down to a sliver and clipping the roof/wheels
+   off the two full-car shots. */
+.svcTile1 {
+  grid-area: hero;
+  aspect-ratio: 4 / 3;
+  min-height: 420px;
+  max-height: 640px;
+}
+
+/* Square-ish by default (desktop): the source is portrait, but at a
+   ~790px column width a full 3/4 crop makes the tile over 1000px tall.
+   1/1 keeps the whole car in frame (tuned via object-position below)
+   without the section turning into a vertical slab. Mobile overrides
+   this back to the fuller portrait crop, where columns are narrow
+   enough that 3/4 stays a sane height. */
+.svcTile2 {
+  grid-area: left;
+  aspect-ratio: 1 / 1;
+}
+
+.svcTile3 {
+  grid-area: right;
+  aspect-ratio: 1 / 1;
+}
+
+.svcImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Tile 1: close-up detail shot — centred on the panel, not the dark glass. */
+.svcTile1 .svcImg { object-position: center 62%; }
+/* Tiles 2/3: full-car shots, cropped to a square on desktop — biased
+   strongly toward the bottom of the source so the crop eats into the
+   ceiling rig above the car rather than the roofline or wheels. */
+.svcTile2 .svcImg { object-position: center 88%; }
+.svcTile3 .svcImg { object-position: center 88%; }
+
+.svcTile:hover .svcImg {
+  transform: scale(1.025);
+}
+
+.svcOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+.svcFooter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.svcFooterEyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+}
+
+.svcFooterTitle {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+@media (max-width: 768px) {
+  .svcGallery {
+    gap: 6px;
+    padding: 6px 0;
+  }
+
+  .svcTile1 {
+    aspect-ratio: 5 / 4;
+    min-height: 260px;
+    max-height: 420px;
+  }
+
+  .svcTile2,
+  .svcTile3 {
+    aspect-ratio: 3 / 4;
+  }
+
+  .svcFooter {
+    padding: 0 18px 16px;
+  }
+
+  .svcFooterEyebrow {
+    font-size: 0.52rem;
+  }
+
+  .svcFooterTitle {
+    font-size: 0.95rem;
+  }
+}
+
+/* ══ SPLIT DUAL BANNER (Identical to WrapsPage Built Different spread) ══
+   Simple two-image spread, same visual grammar as the McLaren gallery
+   (8px gap, no cards, no radius, staggered scroll reveal, centered display overlay). */
+
+.splitBanner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #000;
+}
+
+.splitBannerOverlayText {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.4vw, 3.2rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.splitBannerTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.splitBannerVisible .splitBannerTile {
+  opacity: 1;
+  transform: translateY(0);
+}
+.splitBannerVisible .splitBannerTile:nth-child(2) {
+  transition-delay: 0.16s;
+}
+
+.splitBannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+@media (min-width: 901px) {
+  .splitBanner {
+    gap: 8px;
+    padding: 0 40px;
+    height: clamp(480px, 46vw, 640px);
+  }
+  .splitBannerTile {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splitBannerTile {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+}

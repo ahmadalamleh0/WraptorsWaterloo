@@ -1,0 +1,388 @@
+/* ══ TRANSFORMATION ══ */
+.section {
+  position: relative;
+  background: var(--surface);
+  padding: 140px 64px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Red under-glow — left corner */
+.section::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 50%;
+  height: 80%;
+  background: radial-gradient(ellipse at bottom left, rgba(212,0,0,0.09) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top chrome separator */
+.section::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(196,201,208,0.08) 20%,
+    rgba(212,0,0,0.22) 50%,
+    rgba(196,201,208,0.08) 80%,
+    transparent
+  );
+}
+
+.bgGlow {
+  position: absolute;
+  top: 25%;
+  right: -5%;
+  width: 50%;
+  height: 65%;
+  background: radial-gradient(ellipse at center right, rgba(212,0,0,0.05) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Copy column ── */
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.phrases {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Scroll-reveal base state */
+.phrase {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 92px);
+  line-height: 1.0;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(36px) skewX(-1.5deg);
+  transition:
+    opacity    0.85s var(--ease-smooth),
+    transform  0.85s var(--ease-smooth);
+}
+
+.phraseIn {
+  opacity: 1;
+  transform: translateY(0) skewX(0deg);
+}
+
+/* Phrase color variants */
+.phrase_dim1 { color: rgba(255,255,255,0.16); }
+
+.phrase_dim2 { color: rgba(255,255,255,0.42); }
+
+.phrase_hot {
+  background: linear-gradient(135deg, var(--red) 0%, #ff3333 55%, var(--red-bright) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 24px rgba(212,0,0,0.48));
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.95;
+  color: var(--text-dim);
+  font-weight: 300;
+  max-width: 340px;
+  border-left: 2px solid rgba(212,0,0,0.28);
+  padding-left: 18px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity   0.7s var(--ease-smooth),
+    transform 0.7s var(--ease-smooth);
+}
+
+.bodyIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .phrase, .body { transition: opacity 0.3s ease; transform: none !important; }
+}
+
+/* ── Cinematic wrap frame ── */
+.frame {
+  position: relative;
+  width: 100%;
+  height: clamp(320px, 40vw, 520px);
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%,    rgba(220,215,205,0.048) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 35% at 28% 55%,   rgba(212,0,0,0.06)  0%, transparent 60%),
+    radial-gradient(ellipse 45% 35% at 72% 55%,   rgba(212,0,0,0.06)  0%, transparent 60%),
+    radial-gradient(ellipse 85% 38% at 50% 105%,  rgba(212,0,0,0.11)  0%, transparent 65%),
+    #030303;
+  border: 1px solid rgba(255,255,255,0.048);
+  overflow: hidden;
+}
+
+/* Atmospheric ceiling light */
+.fAtmo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 110% 55% at 50% -10%, rgba(200,195,185,0.038) 0%, transparent 62%);
+  pointer-events: none;
+}
+
+/* Angled studio spotlights */
+.fSpotL {
+  position: absolute;
+  top: 0; left: 0;
+  width: 55%; height: 85%;
+  background: linear-gradient(138deg, rgba(196,201,208,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.fSpotR {
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%; height: 85%;
+  background: linear-gradient(222deg, rgba(196,201,208,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Under-car floor glow */
+.fFloor {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 38%;
+  background: linear-gradient(to top, rgba(212,0,0,0.085) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Car silhouette suggestion — dark central mass */
+.fCar {
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68%;
+  height: 46%;
+  background: radial-gradient(
+    ellipse at 50% 75%,
+    rgba(0,0,0,0.92) 0%,
+    rgba(0,0,0,0.6)  48%,
+    transparent      100%
+  );
+  pointer-events: none;
+}
+
+/* ── Vinyl wrap sweep ── */
+.fVinyl1 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    108deg,
+    transparent          0%,
+    rgba(212,0,0,0.07)   26%,
+    rgba(196,201,208,0.13) 44%,
+    rgba(212,0,0,0.055)  58%,
+    transparent          76%
+  );
+  background-size: 280% 100%;
+  animation: vinylSweep 5s cubic-bezier(0.4,0,0.2,1) infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fVinyl2 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    108deg,
+    transparent            0%,
+    rgba(196,201,208,0.07) 38%,
+    transparent            58%
+  );
+  background-size: 280% 100%;
+  animation: vinylSweep 5s cubic-bezier(0.4,0,0.2,1) 2.5s infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Scan line */
+.fScan {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(212,0,0,0.45) 28%,
+    rgba(212,0,0,0.85) 50%,
+    rgba(212,0,0,0.45) 72%,
+    transparent
+  );
+  box-shadow: 0 0 9px 1px rgba(212,0,0,0.32);
+  animation: scanDown 8s cubic-bezier(0.4,0,0.6,1) infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Corner brackets ── */
+.fc {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.fcTL {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--red);
+  border-left: 2px solid var(--red);
+  box-shadow: -2px -2px 10px rgba(212,0,0,0.32);
+}
+.fcTR {
+  top: -1px; right: -1px;
+  border-top:   1px solid rgba(196,201,208,0.28);
+  border-right: 1px solid rgba(196,201,208,0.28);
+}
+.fcBL {
+  bottom: -1px; left: -1px;
+  border-bottom: 1px solid rgba(196,201,208,0.28);
+  border-left:   1px solid rgba(196,201,208,0.28);
+}
+.fcBR {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--red);
+  border-right:  2px solid var(--red);
+  box-shadow: 2px 2px 10px rgba(212,0,0,0.32);
+}
+
+/* ── HUD detail labels ── */
+.label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-ui);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.65s var(--ease-smooth);
+  z-index: 6;
+  pointer-events: none;
+}
+
+.labelIn { opacity: 1; }
+
+.labelDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(212,0,0,0.65);
+  box-shadow: 0 0 6px rgba(212,0,0,0.5);
+  flex-shrink: 0;
+}
+
+/* Label corner positions */
+.label_tl { top: 18px;    left: 24px; }
+.label_tr { top: 18px;    right: 24px; flex-direction: row-reverse; }
+.label_bl { bottom: 38px; left: 24px; }
+.label_br { bottom: 38px; right: 24px; flex-direction: row-reverse; }
+
+/* Technical readout bar */
+.fReadout {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.16);
+  white-space: nowrap;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.fReadoutDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 5px rgba(212,0,0,0.6);
+  animation: dotPulse 2.2s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+/* Bottom gradient fade to next section */
+.fadeBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--black));
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Keyframes ── */
+@keyframes vinylSweep {
+  0%   { background-position: 230% 0; }
+  100% { background-position: -230% 0; }
+}
+
+@keyframes scanDown {
+  0%   { top: -1px; opacity: 0; }
+  5%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { top: calc(100% + 1px); opacity: 0; }
+}
+
+@keyframes dotPulse {
+  from { opacity: 0.35; }
+  to   { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .section  { padding: 100px 28px; }
+  .inner    { grid-template-columns: 1fr; gap: 52px; }
+  .body     { max-width: 100%; }
+  .phrase   { font-size: clamp(42px, 9vw, 76px); }
+  .label_tl,
+  .label_tr { top: 14px; }
+  .label_bl,
+  .label_br { bottom: 34px; }
+}
+
+@media (max-width: 480px) {
+  .label { font-size: 8px; letter-spacing: 0.14em; }
+  .label_tr,
+  .label_br { display: none; }
+}

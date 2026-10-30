@@ -1,0 +1,34 @@
+/* /faqs/ — the accordion on the same black field as the Learn hub header */
+.faqSection {
+  background: #000;
+  padding: 0 28px 70px;
+}
+
+.faqSection > div {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.moreHead {
+  background: #000;
+  text-align: center;
+  padding: 0 28px 24px;
+}
+
+.moreTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+}
+
+/* /articles/ — press cards on the same black field as the page header */
+.pressSection {
+  background: #000;
+  padding: 0 64px 90px;
+}
+@media (max-width: 900px) { .pressSection { padding: 0 24px 64px; } }
+@media (max-width: 480px) { .pressSection { padding: 0 20px 48px; } }

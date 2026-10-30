@@ -1,0 +1,192 @@
+/* ══ TRUSTED BRANDS ══ */
+.section {
+  background: #000;
+  padding: 96px 0 96px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Atmospheric top glow — reinforces the transition from Masterpieces */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.08) 20%,
+    rgba(255,255,255,0.14) 50%,
+    rgba(255,255,255,0.08) 80%,
+    transparent
+  );
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  padding: 0 24px 60px;
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity   0.9s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.9s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.header.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .header { transition: opacity 0.3s ease; transform: none !important; }
+  .marqueeTrack { animation: none; }
+}
+
+.label {
+  display: block;
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-display, 'Bebas Neue', sans-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.05;
+}
+
+.sub {
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: clamp(0.68rem, 1.05vw, 0.84rem);
+  color: rgba(255, 255, 255, 0.30);
+  letter-spacing: 0.04em;
+  margin: 0 auto;
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+/* ── Marquee outer — clips overflow and fades edges ── */
+.marqueeOuter {
+  overflow: hidden;
+  /* Fade masks left + right so the loop disappears cleanly off-screen */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+}
+
+/* Pause on hover */
+.marqueeOuter:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+/* ── Marquee track ── */
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marqueeScroll 26s linear infinite;
+}
+
+/* ── Individual logo slot ── */
+.logoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.logoItem::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Logo image ── */
+.logo {
+  height: 46px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.50;
+  transition:
+    opacity   0.4s ease,
+    transform 0.4s ease,
+    filter    0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.logoItem:hover .logo {
+  opacity: 1;
+  transform: scale(1.12);
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
+}
+
+/* ── Keyframe: move exactly -50% = two copies → seamless ── */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  /* .section already has position:relative from the base rule above.
+     Top padding cut roughly in half so the section starts much sooner
+     after whatever comes before it — bottom padding left as-is. */
+  .section    { padding: 34px 0 64px; }
+  /* Very restrained warm glow behind the header/marquee so the section
+     reads as an intentional moment instead of dissolving into the
+     surrounding black — not a card, just enough to anchor it. */
+  .section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 65% 75% at 50% 38%, rgba(212, 0, 0, 0.055) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header     {
+    padding: 0 20px 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .label      { color: rgba(255, 255, 255, 0.52); margin-bottom: 10px; }
+  .title      { margin-bottom: 8px; }
+  .sub        { color: rgba(255, 255, 255, 0.58); }
+
+  .marqueeOuter { position: relative; z-index: 1; }
+  .logo       { height: 36px; opacity: 0.85; }
+  .logoItem   { padding: 0 52px; }
+}
+
+@media (max-width: 480px) {
+  .logo     { height: 30px; }
+  .logoItem { padding: 0 40px; }
+}

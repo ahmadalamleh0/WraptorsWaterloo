@@ -1,0 +1,448 @@
+/* ══ NAVBAR — transparent/cinematic ══ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 28px 56px;
+  /* Starts fully transparent over the hero */
+  background: transparent;
+  transition:
+    background    0.55s var(--ease-smooth),
+    padding       0.55s var(--ease-smooth),
+    border-color  0.55s;
+}
+
+/* Frosted glass when page is scrolled */
+.navScrolled {
+  background: rgba(3, 3, 3, 0.88);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  padding: 16px 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.038);
+  box-shadow: 0 2px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* backdrop-filter forces the browser to continuously resample whatever's
+   behind this fixed bar on every compositor frame — measured (via A/B frame
+   timing during scroll) as the single largest contributor to dropped frames
+   while scrolling past the hero on mobile. The background here is already
+   88% opaque, so dropping the blur/saturate and nudging opacity up a touch
+   to compensate reads almost identically while costing near-nothing to
+   composite. Desktop keeps the full frosted-glass effect unchanged. */
+@media (max-width: 768px) {
+  .navScrolled {
+    background: rgba(3, 3, 3, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ── Logo — absolutely centered in the navbar, with a small "Dubai
+   Edition" label stacked above the mark ── */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+/* Secondary to the logo — small, wide-tracked, quiet. Fades in together
+   with the mark rather than appearing on its own. */
+.dubaiEdition {
+  /* 1fr | flag | 1fr: the two word columns stay equal (flag centred) and
+     size themselves to the longer word, whatever the location name. */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+.dubaiEditionVisible { opacity: 1; }
+
+/* Equal-width columns on either side of the flag — "Dubai" and "Edition"
+   are different lengths, so without this the flag (and the whole label)
+   would sit off-centre relative to the logo below it. */
+.dubaiEditionWordLeft { text-align: right; }
+.dubaiEditionWordRight { text-align: left; }
+
+.dubaiFlag {
+  display: block;
+  width: 13px;
+  height: 9px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* SVG logo mark — fades in as the hero logo arrives on scroll */
+.navLogoMark {
+  display: block;
+  width: 40px;
+  height: 40px;
+  fill: #ffffff;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+
+.navLogoVisible {
+  opacity: 1;
+}
+
+@media (max-width: 960px) {
+  .navLogoMark { width: 32px; height: 32px; }
+  .logo { gap: 3px; }
+  .dubaiEdition { font-size: 0.42rem; letter-spacing: 0.22em; gap: 4px; }
+  .dubaiFlag { width: 11px; height: 7px; }
+}
+
+/* ── Nav links ── */
+.links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-left: auto;
+}
+
+.link {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.25s;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--red), var(--red-bright));
+  box-shadow: 0 0 5px rgba(212, 0, 0, 0.6);
+  transition: width 0.38s var(--ease-smooth);
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+/* ── Desktop CTA ── */
+.navCta {
+  margin-left: 12px;
+  font-size: 10px !important;
+  padding: 10px 22px !important;
+  letter-spacing: 0.26em !important;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)) !important;
+  flex-shrink: 0;
+}
+
+/* ── Hero mode: hide all right-side nav items during initial hero reveal ──
+   .navHeroMode is on the <nav> when the user hasn't scrolled yet.
+   Removing the class triggers the CSS transitions below.               */
+
+/* Desktop: hide links + CTA */
+@media (min-width: 1360px) {
+  .links {
+    transition:
+      opacity   0.75s ease,
+      visibility 0.75s ease,
+      transform 0.75s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  .navHeroMode .links {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+  }
+}
+
+/* Desktop + mobile: hide CTA button */
+.navCta {
+  transition:
+    opacity   0.75s ease,
+    visibility 0.75s ease,
+    transform 0.75s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.navHeroMode .navCta {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+/* Mobile: hide burger */
+.burger {
+  transition:
+    opacity   0.75s ease,
+    visibility 0.75s ease,
+    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity   0.25s;
+}
+.navHeroMode .burger {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ── Mobile burger ── */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+}
+
+.burger span {
+  display: block;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  transform-origin: center;
+  transition: transform 0.35s var(--ease-smooth), opacity 0.25s, width 0.35s, background 0.25s;
+}
+
+.burger span:nth-child(1) { width: 22px; }
+.burger span:nth-child(2) { width: 14px; }
+.burger span:nth-child(3) { width: 22px; }
+
+.burger:hover span { background: #fff; }
+.burger:hover span:nth-child(2) { width: 22px; }
+
+.burgerOpen span:nth-child(1) { transform: translateY(6px) rotate(45deg); width: 22px; }
+.burgerOpen span:nth-child(2) { opacity: 0; }
+.burgerOpen span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 22px; }
+
+/* ── Responsive ── */
+
+/* Between 1360 and 1759px the links + CTA only clear the centred logo if
+   their spacing tightens with the viewport; above 1760 the original
+   spacing fits as-is. */
+@media (min-width: 1360px) and (max-width: 1759px) {
+  .nav    { gap: clamp(20px, calc((100vw - 1100px) / 14), 48px); }
+  .links  { gap: clamp(16px, calc((100vw - 1100px) / 15), 40px); }
+  .navCta { margin-left: 0; }
+}
+
+/* Below 1360px the right-hand links and CTA can't share the bar with the
+   centred logo without overlapping it, so the burger menu takes over.
+   The desktop nav list is fully replaced by .mobileMenu below — not
+   reflowed into a partial drawer. */
+@media (max-width: 1359px) {
+  .links     { display: none; }
+  .navCta    { display: none; }
+  .burger    { display: flex; }
+}
+
+@media (max-width: 960px) {
+  .nav        { padding: 22px 28px; }
+  .navScrolled{ padding: 14px 28px; }
+}
+
+/* ══ FULL-SCREEN MOBILE MENU ══
+   One opaque panel, not a drawer sitting over the page. Always in the DOM
+   (so it can transition), but inert and invisible until .mobileMenuOpen —
+   reachable only through the burger, which itself only renders ≤1359px. */
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 1359px) {
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    /* Solid, not translucent — zero page content should show through. */
+    background: #060606;
+    z-index: 10000; /* above the 200/199 nav layers and any floating control (e.g. PresentationAdminControl at 9999) */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-cinema), visibility 0.4s;
+  }
+
+  .mobileMenuOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Top row — logo + close control. The panel covers the real nav bar
+     underneath while open, so this row carries the same job on its own. */
+  .mobileMenuTop {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 24px 0;
+  }
+
+  .mobileMenuLogo { display: flex; align-items: center; }
+  .mobileMenuLogoMark { width: 36px; height: 36px; fill: #fff; display: block; }
+
+  /* Large close control inside a rounded, outlined square. */
+  .mobileMenuClose {
+    position: relative;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
+    padding: 0;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .mobileMenuClose span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.85);
+  }
+  .mobileMenuClose span:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
+  .mobileMenuClose span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+  .mobileMenuClose:hover { border-color: rgba(255, 255, 255, 0.75); }
+  .mobileMenuClose:hover span { background: #fff; }
+
+  /* Body — scrolls only if content genuinely exceeds the viewport;
+     everything above (the top row) stays fixed in place. The list sits
+     at the top, the footer block at the bottom, with flex pushing
+     whatever room is left in between — clean negative space by
+     construction, not a fixed magic-number gap. */
+  .mobileMenuScroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 52px 32px 32px;
+  }
+
+  .mobileMenuList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* No divider rows, no fixed height — generous margin-based spacing so
+     the list reads as one tall, editorial stack rather than a settings
+     menu. Each item starts hidden/offset and eases in on open, staggered
+     per-item via the inline transition-delay set in Navbar.jsx. */
+  .mobileMenuItem {
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.36s var(--ease-cinema), transform 0.36s var(--ease-cinema);
+  }
+  .mobileMenuOpen .mobileMenuItem {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobileMenuLink {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+  }
+
+  /* Big, slanted, editorial type — inactive pages sit in muted dark grey,
+     the current page in bright white via .mobileMenuLinkActive below. */
+  .mobileMenuLinkText {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-style: italic;
+    transform: skewX(-8deg);
+    font-size: clamp(1.7rem, 8vw, 2.4rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.15;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .mobileMenuLink:hover .mobileMenuLinkText { color: rgba(255, 255, 255, 0.6); }
+
+  .mobileMenuLinkActive .mobileMenuLinkText {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
+
+  /* Footer block — socials, then legal links, pinned to the bottom by
+     the scroll container's flex column with the list above taking only
+     what it needs. */
+  .mobileMenuFooter {
+    margin-top: auto;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .mobileMenuSocials {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .mobileMenuSocial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s ease;
+  }
+  .mobileMenuSocial:hover { color: #fff; }
+
+  .mobileMenuLegal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.32);
+  }
+  .mobileMenuLegal a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mobileMenuLegal a:hover { color: rgba(255, 255, 255, 0.6); }
+}

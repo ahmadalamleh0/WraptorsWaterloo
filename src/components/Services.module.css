@@ -1,0 +1,214 @@
+/* ══ SERVICES — image-led service tiles ══ */
+.section {
+  background: #000;
+  padding: 0 0 50px;
+  position: relative;
+}
+
+
+/* ── Service Zone ── */
+.serviceZone {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 48px;
+}
+
+/* Faded back in, dimmer than the original (0.065 -> 0.04) per request —
+   present but not "crazy obvious." */
+.ghostText {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 12vw, 10.5rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1;
+  padding-top: 20px;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Tile — the photo is the card and the whole tile is the link. ── */
+.block {
+  position: relative;
+  z-index: 1;
+  display: block;
+  max-width: 1120px;
+  height: 440px;
+  margin: -72px auto 0;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px rgba(0, 0, 0, 0.55);
+  background: #080808;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 1s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 1s cubic-bezier(0.33, 1, 0.68, 1),
+    border-color 0.3s ease;
+}
+
+.blockVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.block:hover { border-color: rgba(255, 255, 255, 0.34); }
+.block:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .block { transition: opacity 0.3s ease; transform: none !important; }
+  .img, .arrow { transition: none !important; }
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: imgFadeIn 0.45s ease;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.block:hover .img { transform: scale(1.03); }
+
+@keyframes imgFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Readability only where the title sits — the rest of the photo is left
+   untouched. */
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.42) 26%,
+    rgba(0, 0, 0, 0.08) 52%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Four corner brackets — same 18px / 1px marks as before. */
+.corners {
+  position: absolute;
+  inset: 10px;
+  z-index: 3;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)),
+    linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38));
+  background-size:
+    18px 1px, 1px 18px,
+    18px 1px, 1px 18px,
+    18px 1px, 1px 18px,
+    18px 1px, 1px 18px;
+  background-position:
+    0 0,       0 0,
+    100% 0,    100% 0,
+    0 100%,    0 100%,
+    100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Title bottom-left, arrow cue bottom-right. */
+.foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 44px 40px;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.8vw, 5.2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  line-height: 0.9;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.arrow {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.25);
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  color: #fff;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.block:hover .arrow {
+  transform: translateX(4px);
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1160px) {
+  .block { max-width: calc(100% - 80px); }
+}
+
+@media (max-width: 900px) {
+  .section      { padding: 0 0 24px; }
+  .serviceZone  { padding-bottom: 12px; }
+
+  .ghostText {
+    font-size: clamp(3.2rem, 18vw, 8rem);
+    padding-top: 4px;
+    /* Slightly brighter than desktop — same rgba(255,255,255,x) grey, just
+       a touch more contrast so it doesn't disappear on small screens. */
+    color: rgba(255, 255, 255, 0.065);
+  }
+
+  .block {
+    max-width: calc(100% - 40px);
+    height: 360px;
+    margin: -56px auto 0;
+  }
+
+  .foot  { padding: 0 24px 24px; }
+  .name  { font-size: clamp(2.2rem, 7.5vw, 3.4rem); }
+  .arrow { width: 44px; height: 44px; font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .block { max-width: calc(100% - 28px); height: 300px; }
+  .foot  { padding: 0 18px 18px; gap: 14px; }
+  .name  { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .arrow { width: 40px; height: 40px; }
+}

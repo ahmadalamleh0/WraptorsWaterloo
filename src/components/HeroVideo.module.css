@@ -1,0 +1,343 @@
+/* ══ HERO VIDEO ══ */
+.section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Mobile Safari's 100vh is the LARGEST possible viewport (toolbar hidden),
+   taller than what's actually on screen while the toolbar is showing.
+   100svh (smallest guaranteed viewport) fixed the scroll cue rendering
+   below the real fold, but it's a *static* worst-case value — when the
+   toolbar then auto-collapses (e.g. on first scroll) the real visible
+   area grows past that fixed height, leaving the section (and the
+   image/video filling it) shorter than the screen: a black gap at the
+   bottom. 100dvh tracks the *current* viewport live as the toolbar shows
+   or hides, so the section always matches what's actually visible —
+   solving both problems at once. Declared after the plain 100vh above so
+   browsers without dvh support simply keep that fallback. */
+@media (max-width: 768px) {
+  .section { height: 100svh; }
+  .section { height: 100dvh; }
+}
+
+/* ── Permanent background image (both modes) ──────────────────────────
+   Mounted unconditionally on the very first render, opacity:1 always, no
+   fade, no onLoad gating, no conditional mount. In Video Mode this is the
+   frame-matched poster, shown until the <video> above it actually starts
+   playing (or forever, if it doesn't); in Safe Mode it's the only
+   background. Either way this is the one layer that must never be black. */
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  z-index: 0;
+}
+
+/* Dedicated subtle darkening for Safe Mode specifically — a still photo's
+   highlights (chrome, floor lighting) need a touch more help than moving
+   video for text contrast. Always visible, never animated. */
+.heroImageGradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.04) 42%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* Safe Mode only: slow Ken Burns drift so the still photo reads as a
+   deliberate cinematic shot rather than a paused video. */
+.heroImageSafe {
+  transform-origin: center center;
+  animation: heroDrift 25s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroDrift {
+  0%   { transform: scale(1)    translate3d(0, 0, 0); }
+  100% { transform: scale(1.03) translate3d(-1.1%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroImageSafe { animation: none; }
+}
+
+/* Safe Mode mobile: the source photo's dark empty area (wall/lighting) only
+   occupies its top ~30%, which isn't enough headroom for the text block
+   above the car. Starting the drift from a slightly zoomed-in, top-anchored
+   base crops some of the least essential bottom of the frame (already
+   faded to black by .fadeBottom anyway) and pushes the car further down
+   the viewport, opening up more dark space up top for
+   .textOverlaySafeMobile below. */
+@media (max-width: 768px) {
+  .heroImageSafe {
+    transform-origin: top center;
+    animation-name: heroDriftMobile;
+  }
+}
+
+@keyframes heroDriftMobile {
+  0%   { transform: scale(1.3)  translate3d(0, 0, 0); }
+  100% { transform: scale(1.34) translate3d(-1.1%, 0, 0); }
+}
+
+/* hero-video.mp4 is natively portrait (no baked-in rotation, unlike the
+   previous footage), so this is a plain full-bleed cover fill — same
+   treatment as .heroImage — rather than the old swapped-dimensions +
+   rotate(-90deg) hack that landscape-stored-as-portrait footage needed.
+   Sits above the permanent image (z-index:0/1) and starts at opacity:0 via
+   GSAP, only revealed once real playback begins — see HeroVideo.jsx. */
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Top edge fade */
+.fadeTop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 18%;
+  background: linear-gradient(to bottom, #000 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bottom edge fade */
+.fadeBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 28%;
+  background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.82) 28%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Cinematic text overlay ──
+   Anchored near the top rather than vertically centered — centering used
+   to put the headline directly over the car's bodywork in the fallback
+   photo (Safe Mode), so this same top-anchored position is now used for
+   both the video and the image instead of switching between the two. */
+.textOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 17vh 48px 5vh;
+  pointer-events: none;
+  /* Subtle vignette centred on the text block — keeps type legible over any frame */
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 24%,
+    rgba(0, 0, 0, 0.28) 0%,
+    transparent 100%
+  );
+}
+
+/* Wraps the two .mainLine spans below — a plain h1, no styling of its own
+   beyond block display (the global *{margin:0} reset already keeps it from
+   adding any default browser spacing). */
+.mainHeadline {
+  display: block;
+}
+
+/* ── Lower group — ruler, subline and CTA ──
+   Sits low in the hero, above .scrollCue, leaving the vertical middle of
+   the frame clear (hero-video.mp4 has its own "DUBAI" lettering there).
+   Already inside the bottom 28% darkened by .fadeBottom, so it stays
+   legible without its own vignette. bottom is tuned against .scrollCue's
+   own position (28px + its own ~60-64px height) plus a 40-50px gap. */
+.heroLowerGroup {
+  position: absolute;
+  left: 50%;
+  bottom: 148px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 640px;
+  padding: 0 48px;
+  pointer-events: none;
+}
+
+/* ── Main headline — two lines, light & editorial ── */
+.mainLine {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 5.6rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.94);
+  text-align: center;
+  line-height: 1.15;
+  margin: 0 0 0.06em;
+  text-shadow:
+    0 2px 28px rgba(0, 0, 0, 0.65),
+    0 1px 0     rgba(0, 0, 0, 0.75);
+  will-change: transform, opacity;
+}
+
+/* ── Red blade separator ── */
+.ruler {
+  width: 56px;
+  height: 1px;
+  background: rgba(190, 10, 10, 0.80);
+  margin: 30px auto 28px;
+  box-shadow: 0 0 10px rgba(190, 10, 10, 0.30);
+  will-change: transform;
+}
+
+/* ── Subline — small caps, ultra-refined ── */
+.subLine {
+  font-family: var(--font-ui);
+  font-size: clamp(0.55rem, 0.88vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.40em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  text-align: center;
+  line-height: 1.8;
+  margin: 0;
+  will-change: transform, opacity;
+}
+
+/* ── Hero CTA — plain white text link, not a bordered button: no fill, no
+   rectangle, just a thin underline hugging the label and a small diagonal
+   arrow. The <a> itself carries generous padding for a comfortable mobile
+   tap target while staying visually just text; the underline lives on the
+   inner .heroCtaLabel span so it doesn't stretch across that invisible tap
+   area. .textOverlay above is pointer-events:none, so this needs its own
+   pointer-events:auto to stay clickable. ── */
+.heroCta {
+  display: inline-flex;
+  margin-top: 28px;
+  padding: 16px 20px;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.heroCtaLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.heroCta:hover .heroCtaLabel {
+  border-color: #fff;
+  opacity: 0.82;
+}
+
+.heroCtaArrow {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  flex-shrink: 0;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.heroCta:hover .heroCtaArrow { transform: translate(3px, -3px); }
+
+/* ── Scroll indicator — bottom-center, sits inside the .fadeBottom dark
+   zone (28% of viewport height) so it never lands on a bright part of the
+   image/video. Present in both Video and Safe Mode. ── */
+.scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  pointer-events: none;
+}
+
+.scrollCueText {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+.scrollCueLine {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.65), rgba(190, 10, 10, 0.85));
+  animation: scrollCuePulse 2.4s ease-in-out infinite;
+}
+
+.scrollCueChevron {
+  color: rgba(190, 10, 10, 0.9);
+  filter: drop-shadow(0 0 4px rgba(190, 10, 10, 0.35));
+  animation: scrollCueBounce 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollCuePulse {
+  0%, 100% { opacity: 0.45; transform: scaleY(0.82); }
+  50%      { opacity: 1;    transform: scaleY(1); }
+}
+
+@keyframes scrollCueBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCueLine,
+  .scrollCueChevron { animation: none; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .textOverlay { padding: 9vh 28px 4vh; }
+  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); gap: 7px; }
+  .mainLine    {
+    font-size: clamp(2.6rem, 11vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    will-change: auto;
+  }
+  .ruler       { margin: 22px auto 20px; will-change: auto; }
+  .subLine     {
+    font-size: clamp(0.62rem, 3.2vw, 0.85rem);
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.28em;
+    white-space: normal;
+    will-change: auto;
+  }
+  .heroCta        { margin-top: 0; padding: 16px 22px; }
+  .heroCtaLabel   { font-size: 0.82rem; }
+  .heroLowerGroup { bottom: 104px; padding: 0 28px; }
+}
+
+@media (max-width: 480px) {
+  .subLine  { letter-spacing: 0.20em; }
+}

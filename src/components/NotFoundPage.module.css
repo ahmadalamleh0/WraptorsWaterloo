@@ -1,0 +1,76 @@
+.main {
+  min-height: 70vh;
+  min-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 160px 24px 100px;
+  background: #000;
+}
+
+.code {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  color: var(--red);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(212, 0, 0, 0.3);
+  margin-bottom: 8px;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 18px;
+}
+
+.sub {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 440px;
+  line-height: 1.7;
+  margin: 0 0 36px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.primary {
+  background: var(--red, #b40000);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 16px 32px;
+  transition: background 0.25s ease;
+}
+.primary:hover { background: #cc0000; }
+
+.secondary {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 16px 32px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.secondary:hover { color: #fff; border-color: rgba(255, 255, 255, 0.35); }

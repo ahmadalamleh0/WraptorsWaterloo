@@ -1,0 +1,54 @@
+.faqList {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.faqItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 22px 4px;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.faqIcon {
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  color: var(--red);
+  transition: transform 0.25s ease;
+}
+.faqIconMono { color: rgba(255, 255, 255, 0.6); }
+.faqIconOpen { transform: rotate(45deg); }
+
+.faqAnswer {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+  margin: 0 0 22px;
+  padding: 0 4px;
+  max-width: 640px;
+}
+
+/* ── Light variant — white-background FAQ (service pages) ── */
+.faqListLight .faqItem { border-bottom-color: rgba(0, 0, 0, 0.12); }
+.faqListLight .faqQuestion { color: #0a0a0a; }
+.faqListLight .faqIcon,
+.faqListLight .faqIconMono { color: #0a0a0a; }
+.faqListLight .faqAnswer { color: rgba(0, 0, 0, 0.62); }

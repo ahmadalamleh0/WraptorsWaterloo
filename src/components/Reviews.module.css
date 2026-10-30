@@ -1,0 +1,353 @@
+/* ══ REVIEWS ══ */
+.section {
+  position: relative;
+  background: var(--surface);
+  padding: 100px 64px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Top chrome separator */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(196,201,208,0.07) 25%,
+    rgba(212,0,0,0.18) 50%,
+    rgba(196,201,208,0.07) 75%,
+    transparent
+  );
+}
+
+/* ── Background light streaks ── */
+.bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+.streak1, .streak2, .streak3, .streak4 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.streak1 {
+  left: 18%;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(196,201,208,0.055) 35%,
+    rgba(212,0,0,0.08) 60%,
+    transparent 100%
+  );
+  animation: streakFloat 9s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.streak2 {
+  left: 42%;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(212,0,0,0.07) 40%,
+    rgba(212,0,0,0.04) 65%,
+    transparent 100%
+  );
+  animation: streakFloat 12s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.streak3 {
+  left: 67%;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(196,201,208,0.045) 45%,
+    rgba(212,0,0,0.06) 70%,
+    transparent 100%
+  );
+  animation: streakFloat 8s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.streak4 {
+  left: 88%;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(212,0,0,0.05) 50%,
+    transparent 100%
+  );
+  animation: streakFloat 14s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+/* Bottom vignette */
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, rgba(3,3,3,0.5));
+  pointer-events: none;
+}
+
+/* ── Inner ── */
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6.5vw, 86px);
+  line-height: 1.0;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+  color: #fff;
+}
+
+/* ── Stats row ── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.035);
+}
+
+.stat {
+  padding: 36px 28px;
+  background: rgba(3,3,3,0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s;
+}
+
+.stat::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(212,0,0,0.35), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.stat:hover { background: rgba(212,0,0,0.04); }
+.stat:hover::before { transform: scaleX(1); }
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.5vw, 64px);
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(255,255,255,0.18);
+}
+
+.statLabel {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+/* ── Review grid ── */
+.reviewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+/* ── Single review card ── */
+.card {
+  position: relative;
+  padding: 40px 38px 36px;
+  background: rgba(255,255,255,0.022);
+  border: 1px solid rgba(255,255,255,0.055);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    border-color 0.4s,
+    background 0.4s,
+    transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s;
+}
+
+.card:hover {
+  border-color: rgba(212,0,0,0.28);
+  background: rgba(212,0,0,0.03);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,0,0,0.12);
+}
+
+/* Decorative open-quote */
+.card::before {
+  content: '\201C';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  font-family: 'Georgia', serif;
+  font-size: 100px;
+  line-height: 1;
+  color: rgba(212,0,0,0.06);
+  pointer-events: none;
+  z-index: 0;
+  transition: color 0.4s;
+}
+
+.card:hover::before { color: rgba(212,0,0,0.1); }
+
+/* Red bottom accent bar */
+.cardAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--red-dim), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.card:hover .cardAccent { transform: scaleX(1); }
+
+/* Stars */
+.stars {
+  display: flex;
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.star {
+  color: var(--red);
+  font-size: 13px;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(212,0,0,0.4);
+}
+
+/* Review text */
+.reviewText {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(234,234,234,0.75);
+  font-weight: 300;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+/* Reviewer */
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(212,0,0,0.1);
+  border: 1px solid rgba(212,0,0,0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--red);
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(212,0,0,0.1);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.card:hover .avatar {
+  box-shadow: 0 0 20px rgba(212,0,0,0.22);
+  border-color: rgba(212,0,0,0.5);
+}
+
+.reviewerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviewerName {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.reviewerMeta {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+/* ── Animations ── */
+@keyframes streakFloat {
+  0%, 100% { opacity: 0.3; transform: translateY(-20px); }
+  50%       { opacity: 1;   transform: translateY(20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak1, .streak2, .streak3, .streak4 { animation: none; opacity: 0.5; }
+}
+
+/* ── Responsive ──
+   Mobile keeps all four stats in one dense row instead of a 2x2 grid —
+   the 1px grid gap against .statsRow's background still reads as thin
+   dividers between cells, same technique as desktop, just four columns
+   instead of two. */
+@media (max-width: 960px) {
+  .section    { padding: 64px 20px; }
+  .inner      { gap: 26px; }
+  .statsRow   { grid-template-columns: repeat(4, 1fr); }
+  .stat       { padding: 16px 6px; gap: 6px; }
+  .statValue  { font-size: clamp(17px, 5.6vw, 23px); letter-spacing: 0; }
+  .statLabel  { font-size: 7px; letter-spacing: 0.08em; line-height: 1.35; }
+  .reviewGrid { grid-template-columns: 1fr; }
+  .streak1, .streak2, .streak3 { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 28px 24px; }
+}

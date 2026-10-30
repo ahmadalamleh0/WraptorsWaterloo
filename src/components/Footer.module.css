@@ -1,0 +1,386 @@
+/* ══ FOOTER ══ */
+.footer {
+  position: relative;
+  width: 100%;
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ── Full-bleed background image ── */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Pull down so the boat (portrait mid-point) sits in the upper-centre of the landscape crop */
+  object-position: center 55%;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Dark overlay — lets the boat breathe at top, deep black at bottom ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.06)  0%,   /* boat area — nearly transparent */
+      rgba(0, 0, 0, 0.08)  42%,  /* still clear through the action shot */
+      rgba(0, 0, 0, 0.20)  62%,  /* gentle transition starts */
+      rgba(0, 0, 0, 0.80)  76%,  /* deep dark for text legibility */
+      rgba(0, 0, 0, 0.97)  88%,
+      #000                  100%
+    );
+  pointer-events: none;
+}
+
+/* ── Readability scrim — separate from .overlay's artistic sky/water
+   vignette above. Sits only behind the bottom portion where .content
+   actually lives (the footer is bottom-aligned via justify-content), so
+   the boat/water stay visible higher up. Background only — .content and
+   everything inside it keep full opacity. ── */
+.contentScrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.38) 35%,
+    rgba(0, 0, 0, 0.58) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── All footer content ── */
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 0 64px 48px;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Solid variant — service pages. No photo/overlay; the logo carries
+   the section instead, so it gets real size and breathing room. Brand
+   block centred on its own row, Navigation/Contact as a compact two-column
+   row beneath it — on every breakpoint down to mobile. ── */
+.footerSolid {
+  min-height: 0;
+  justify-content: flex-start;
+}
+.footerSolid .content {
+  padding-top: 64px;
+}
+.footerSolid .grid {
+  /* Navigation · Services · Contact side by side under the centred brand */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding-bottom: 32px;
+}
+.footerSolid .brand {
+  grid-column: 1 / -1;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.footerSolid .col { text-align: left; }
+.footerSolid .colHeading {
+  color: #fff;
+}
+.footerSolid .colLink {
+  color: rgba(255, 255, 255, 0.68);
+}
+.footerSolid .brandSub {
+  color: rgba(255, 255, 255, 0.62);
+}
+.footerSolid .socialLink {
+  color: rgba(255, 255, 255, 0.62);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.footerSolid .sep { margin-bottom: 20px; }
+
+/* ── Three-column grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+}
+
+/* ── Brand column ── */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo {
+  width: 56px;
+  height: auto;
+  fill: #fff;
+  opacity: 0.92;
+}
+
+.logoSolid {
+  width: 92px;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+  letter-spacing: 0.08em;
+  color: #fff;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.brandSub {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.8;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ── Nav / Contact columns ── */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.colHeading {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.colLink {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.10em;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 0;
+  transition: color 0.25s ease;
+}
+
+.colLink:hover { color: rgba(255, 255, 255, 0.75); }
+
+/* ── Contact rows ── */
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 7px 0;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.contactRow:hover { color: rgba(255, 255, 255, 0.75); }
+
+/* Second line under a contact row (the dialable phone number). */
+.contactSub {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.06em;
+}
+
+.contactIcon {
+  flex-shrink: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Separator ── */
+.sep {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(212, 0, 0, 0.18) 50%,
+    rgba(255, 255, 255, 0.08) 80%,
+    transparent
+  );
+  margin-bottom: 28px;
+}
+
+/* ── Bottom bar — copyright left, legal right ── */
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 4px;
+}
+
+.copy {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.22);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ── Social icons — circular bordered buttons in brand column ── */
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    color       0.3s var(--ease-smooth),
+    border-color 0.3s var(--ease-smooth),
+    background  0.3s var(--ease-smooth),
+    transform   0.3s var(--ease-smooth);
+}
+
+.socialLink:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+/* ── Legal links ── */
+.legal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legalLink {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.22);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.legalLink:hover { color: rgba(255, 255, 255, 0.55); }
+
+.legalDot {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+}
+
+/* ── Powered-by credit — dedicated full-width section below the footer,
+   deliberately bold and bright rather than a quiet aside. ── */
+.poweredSection {
+  width: 100%;
+  background: #000;
+  padding: 64px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.poweredLabel {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.poweredBrand {
+  font-family: 'Ethnocentric', var(--font-display);
+  font-size: clamp(1.7rem, 4.6vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.poweredBrand:hover {
+  color: var(--red-bright, #ff1a1a);
+}
+
+@media (max-width: 640px) {
+  .poweredSection { padding: 44px 20px; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .footer    { min-height: 70vh; }
+  .content   { padding: 0 40px 40px; }
+  .grid      { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .brand     { grid-column: 1 / -1; }
+
+  .footerSolid .content { padding-top: 56px; }
+  .footerSolid .grid { gap: 24px; padding-bottom: 24px; }
+  .logoSolid { width: 76px; }
+}
+
+@media (max-width: 640px) {
+  .footer  { min-height: 90vw; }
+  .content { padding: 0 24px 32px; }
+  .grid    { grid-template-columns: 1fr; gap: 32px; }
+  .bar     { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  .footerSolid .content { padding-top: 44px; }
+  .footerSolid .grid { grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 20px; grid-auto-flow: dense; }
+
+  /* Services spans the full width with its links in two columns, so long
+     names don't wrap; Navigation and Contact share the row above it. */
+  .colServices { grid-column: 1 / -1; }
+  .colServices nav { columns: 2; column-gap: 20px; }
+  .colServices nav > a { break-inside: avoid; }
+  .footerSolid .brand { grid-column: 1 / -1; margin-bottom: 4px; }
+  .logoSolid { width: 64px; }
+}

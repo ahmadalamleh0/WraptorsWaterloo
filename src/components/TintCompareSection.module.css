@@ -1,0 +1,137 @@
+/* ══ COMPARE TINT OPTIONS — interactive VLT preview ══
+   Black / white / grey, no red. Single image swapped directly between five
+   real photos (no masks, no synthetic overlays) — every photo shares the
+   same crop/pose, so the swap never shifts or stretches the frame. */
+
+.section {
+  background: #000;
+  padding: 64px 0 52px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 28px;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+
+.sub {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.48);
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Image ──
+   Full-bleed to the viewport edge on mobile (section/layout carry no side
+   padding), with a tight cinematic crop so the car fills the frame instead
+   of sitting in a sea of sky/grass. Fixed aspect-ratio so the box itself
+   never resizes when the photo underneath is swapped. */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  background: #050505;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── Five-option row, directly under the image ── */
+.optionRow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  padding: 0 20px;
+}
+
+.optionBtn {
+  appearance: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 8px 4px;
+  border-radius: 10px;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.optionBtn:hover { border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.optionBtnActive {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
+.optionBtnActive:hover { background: rgba(255, 255, 255, 0.92); color: #000; }
+
+.note {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin: 2px 20px 0;
+}
+
+/* ── Desktop — same stacked layout, just wider breathing room ── */
+@media (min-width: 901px) {
+  .section { padding: 110px 64px; }
+
+  .head { padding: 0; }
+
+  .imageWrap { aspect-ratio: 16 / 9; }
+
+  .optionRow { padding: 0; max-width: 620px; margin: 0 auto; }
+
+  .optionBtn { min-height: 54px; font-size: 0.92rem; }
+
+  .note { padding: 0; }
+}

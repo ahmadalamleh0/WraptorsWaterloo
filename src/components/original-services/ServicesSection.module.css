@@ -1,0 +1,227 @@
+/* ── Restoration note ──
+   Verbatim copy of ServicesSection.module.css from the Wraptors Dubai
+   coming-soon landing page (Wraptors landing page, commit 5a7a22e). The
+   only addition is the scoped block below: it re-creates the original
+   page's :root variables and inherited body text settings on this
+   section only, so the copy renders as it did there without touching
+   this site's own --black / --font-display / --font-ui values. ── */
+.section {
+  --black: #050505;
+  --white: #f5f3ef;
+  --silver: #d7d9dd;
+  --silver-soft: rgba(215, 217, 221, 0.45);
+  --hairline: rgba(255, 255, 255, 0.1);
+  --font-display: 'Neuropol X', 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --space-lg: 40px;
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-weight: 400;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
+}
+
+/* Site additions: the landing page's global link reset (cards are
+   links here) and a small arrow after each card name — the only new
+   element; everything below the scoped block is the original CSS. */
+.section a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardArrow {
+  display: inline-block;
+  margin-left: 0.45em;
+  opacity: 0.7;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+@media (hover: hover) {
+  .card:hover .cardArrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+.section {
+  position: relative;
+  padding: clamp(56px, 9vh, 88px) 20px clamp(64px, 10vh, 100px);
+  background: var(--black);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* ── Big "COMING SOON" backdrop text ── */
+.bigText {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 13vw, 8.5rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 0.92;
+  color: rgba(245, 243, 239, 0.07);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+  margin: 0 0 clamp(10px, 2vw, 20px);
+  user-select: none;
+}
+
+.kicker {
+  position: relative;
+  margin: 0 0 var(--space-lg);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+/* ── Grid ──
+   Desktop: a fixed editorial layout tuned for these 7 services —
+   row 1: wide + standard + standard, row 2: standard + standard + wide,
+   row 3: one full-width featured card. Mobile (below) collapses to a stack. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows:
+    clamp(240px, 25vw, 320px)
+    clamp(240px, 25vw, 320px)
+    clamp(280px, 30vw, 380px);
+  gap: clamp(16px, 2.5vw, 28px);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.standard { grid-column: span 1; }
+.wide     { grid-column: span 2; }
+.featured { grid-column: span 4; }
+
+.card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  background: #000;
+  box-shadow: 0 14px 36px -18px rgba(0, 0, 0, 0.7);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.cardImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.95) brightness(0.92);
+  transition: transform 0.6s ease, filter 0.4s ease;
+  will-change: transform;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 28%,
+    rgba(0, 0, 0, 0.48) 58%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+/* Flex container anchored to the card bottom — desc sits above name,
+   both stay at fixed positions (no translateY jank). */
+.cardContent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(24px, 3.5vw, 36px) 18px 16px;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* Card titles: Rajdhani (the site's own semi-condensed sans) in place of
+   the landing page's serif display fallback. */
+.cardName {
+  margin: 0;
+  font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--white);
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Description — always in DOM for SEO; in layout flow so positions
+   never shift, just colour+transform animate in on hover. */
+.cardDesc {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  line-height: 1.55;
+  text-align: center;
+  color: rgba(255, 255, 255, 0);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 1);
+  transform: translateY(6px);
+  transition: color 0.38s ease, transform 0.38s ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--silver-soft);
+    box-shadow: 0 24px 50px -16px rgba(255, 255, 255, 0.18);
+  }
+
+  .card:hover .cardImage {
+    transform: scale(1.06);
+    filter: saturate(1.05) brightness(0.8);
+  }
+
+  .card:hover .cardDesc {
+    color: rgba(255, 255, 255, 0.88);
+    transform: translateY(0);
+  }
+}
+
+/* Mobile: description softly visible since there is no hover */
+@media (hover: none) {
+  .cardDesc {
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 0.65rem;
+    transform: none;
+  }
+}
+
+/* ── Mobile: simple full-width stack, one card after another ── */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    gap: 16px;
+  }
+
+  .standard,
+  .wide,
+  .featured {
+    grid-column: span 1;
+  }
+
+  .card {
+    aspect-ratio: 4 / 3.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid { gap: 14px; }
+}

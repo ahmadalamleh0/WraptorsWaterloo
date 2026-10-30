@@ -1,0 +1,147 @@
+/* ══ WINDOW TINT PAGE ══ */
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── 1. Centered introduction ───────────────────────────────────────────── */
+.introCentered {
+  background: #000;
+  padding: 96px 0 72px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+
+.introTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 18px;
+}
+
+.introSub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.48);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+/* ── 2. Two-photo showcase — narrow gap, overlay text ─────────────────────
+   Same visual grammar used elsewhere on the site for photo-pair spreads:
+   tiny gap, no cards, no radius, staggered reveal, centred overlay line. ── */
+.showcase {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #000;
+}
+
+.showcaseTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.showcaseVisible .showcaseTile { opacity: 1; transform: translateY(0); }
+.showcaseVisible .showcaseTile:nth-child(2) { transition-delay: 0.16s; }
+
+.showcaseImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  display: block;
+}
+
+.showcaseOverlayText {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 4vw, 3rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: center;
+}
+
+@media (min-width: 901px) {
+  .showcase {
+    gap: 8px;
+    padding: 0 40px;
+    height: clamp(480px, 46vw, 640px);
+  }
+  .showcaseTile { aspect-ratio: auto; height: 100%; }
+}
+
+/* ── 4. Matching-car photo pair — side by side always, no overlay ────────── */
+.carPair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #000;
+}
+
+.carPairTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.carPairVisible .carPairTile { opacity: 1; transform: translateY(0); }
+.carPairVisible .carPairTile:nth-child(2) { transition-delay: 0.16s; }
+
+.carPairImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+@media (min-width: 901px) {
+  .carPair {
+    gap: 8px;
+    padding: 0 40px;
+    height: clamp(420px, 40vw, 560px);
+  }
+  .carPairTile { aspect-ratio: auto; height: 100%; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .introCentered { padding: 64px 0 48px; }
+  .introTitle { margin-bottom: 14px; }
+  .showcaseOverlayText { font-size: clamp(1.2rem, 6.5vw, 1.8rem); bottom: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcaseTile, .carPairTile {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+}

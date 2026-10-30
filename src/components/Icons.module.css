@@ -1,0 +1,229 @@
+/* ══ ICONS — Rolls-Royce Editorial ══ */
+.section {
+  background: #050505;
+  padding: 120px 80px 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Edge blends ── */
+.fadeTop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #000 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+.fadeBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to top, #000 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Section header ── */
+.header {
+  text-align: center;
+  margin-bottom: 88px;
+  position: relative;
+  z-index: 3;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: 'MonolineSignature', 'Cinzel', Georgia, serif;
+  font-size: clamp(5rem, 13vw, 15rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #fff;
+  line-height: 0.9;
+  margin: 0 0 50px;
+  text-shadow:
+    0 2px 48px rgba(0, 0, 0, 0.55),
+    0 4px 96px rgba(0, 0, 0, 0.30);
+}
+
+/* ── Red rule ── */
+.rule {
+  width: 56px;
+  height: 1px;
+  background: rgba(180, 0, 0, 0.72);
+  box-shadow: 0 0 8px rgba(180, 0, 0, 0.20);
+  margin: 0 auto 34px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rule.visible { transform: scaleX(1); }
+
+/* ── Subline ── */
+.sub {
+  font-family: var(--font-ui);
+  font-size: clamp(0.62rem, 0.9vw, 0.80rem);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.26);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ── Shared reveal ── */
+.animUp {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity   1.0s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.0s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animUp.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animUp, .card { transition: opacity 0.3s ease; transform: none !important; }
+}
+
+/* ── Card grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+/* ── Individual card ── */
+.card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  /* reveal state */
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity      1.0s cubic-bezier(0.22, 1, 0.36, 1),
+    transform    0.80s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.55s ease,
+    box-shadow   0.65s ease;
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: none;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 48px 90px rgba(0, 0, 0, 0.92),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  transform: translateY(-10px);
+}
+
+/* ── Image ── */
+.imageWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.90s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: fadeIn 0.60s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.card:hover .img { transform: scale(1.05); }
+
+/* ── Bottom gradient ── */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 32%,
+    rgba(0, 0, 0, 0.38) 62%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Footer ── */
+.cardFooter {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: 0 36px 42px;
+}
+
+.cardRule {
+  width: 32px;
+  height: 1px;
+  background: rgba(180, 0, 0, 0.78);
+  margin-bottom: 18px;
+  transition: width 0.50s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover .cardRule { width: 54px; }
+
+.cardLabel {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.60rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 600;
+  transition: color 0.35s ease;
+}
+.card:hover .cardLabel { color: rgba(255, 255, 255, 0.95); }
+
+/* ── Mobile ──
+   Two cards side by side instead of stacked — keeps both visually
+   substantial (4:5 editorial ratio) while cutting the section's vertical
+   footprint roughly in half versus the old single-column stack. */
+@media (max-width: 900px) {
+  .section    { padding: 80px 28px 100px; }
+  .header     { margin-bottom: 56px; }
+  /* Editorial, less accented on mobile — same size/spacing, just white
+     instead of red so the section reads calmer. */
+  .eyebrow    { color: #fff; }
+  .title      { font-size: clamp(4rem, 18vw, 9rem); margin-bottom: 38px; }
+  .grid       { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 640px; }
+  .card       { aspect-ratio: 4 / 5; }
+  .card:hover { transform: none; }
+  .cardFooter { padding: 0 16px 18px; }
+  .cardRule   { margin-bottom: 12px; }
+  .cardLabel  { font-size: 0.54rem; letter-spacing: 0.2em; }
+}
+
+@media (max-width: 480px) {
+  .section    { padding: 64px 20px 80px; }
+  .grid       { gap: 8px; }
+  .cardFooter { padding: 0 14px 16px; }
+}

@@ -1,0 +1,139 @@
+/* ══ SERVICES INTRO ══ */
+/* This is a short, one-time statement, not its own full-screen chapter —
+   no min-height/100vh/100svh here. Height comes entirely from content +
+   .section's own padding-block, so the section is exactly as tall as it
+   needs to be and nothing more. */
+.section {
+  position: relative;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-block: clamp(72px, 10vw, 140px);
+}
+
+/* ── Content block — centered both axes. Vertical spacing lives on
+   .section (padding-block) now, so this only needs horizontal padding. ── */
+.content {
+  width: 100%;
+  max-width: 900px;
+  padding-inline: 32px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0 0 28px;
+}
+
+/* ── Line — a full row of the heading ("THE WRAPTORS" or "STANDARD") ── */
+.line {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+/* ── Word mask — the overflow:hidden clip each word rises out of.
+   padding-bottom keeps descenders (g, y, p...) from being clipped by the
+   mask; vertical-align:bottom keeps the masked word sitting on the same
+   baseline as its neighbors instead of shifting the line's height. ── */
+.wordMask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+
+.wordInner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ── "THE WRAPTORS" — qualifier line, light & muted ── */
+.lineSmall {
+  font-size: clamp(1.6rem, 3.6vw, 4.4rem);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.40);
+  margin-bottom: 0.08em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* ── "STANDARD" — dominant word, full presence ── */
+.lineLarge {
+  font-size: clamp(4.4rem, 11.5vw, 13.5rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow:
+    0 2px 40px rgba(0, 0, 0, 0.5),
+    0 1px 0    rgba(0, 0, 0, 0.8);
+}
+
+/* ── Red blade separator ── */
+.rule {
+  width: 56px;
+  height: 1px;
+  background: rgba(180, 0, 0, 0.70);
+  box-shadow: 0 0 8px rgba(180, 0, 0, 0.22);
+  margin: 0 auto 20px;
+  will-change: transform;
+}
+
+/* ── Subline — premium descriptor, centered block ── */
+.subline {
+  font-family: var(--font-ui);
+  font-size: clamp(0.72rem, 1.1vw, 0.92rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 auto;
+  will-change: transform, opacity;
+}
+
+/* ── Edge fades — fixed pixel heights, not percentages: .section is now
+   auto-height (sized by content + padding-block), and a percentage height
+   on an absolutely-positioned child can't resolve against an auto-height
+   ancestor, which would collapse these to nothing. ── */
+.fadeTop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.78) 35%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.fadeBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 44px;
+  background: linear-gradient(to top, #000 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Mobile — exact compact spacing requested: no min-height, just
+   breathing room via padding-block. ── */
+@media (max-width: 768px) {
+  .section  { padding-block: clamp(72px, 18vw, 120px); }
+  .content  { padding-inline: 24px; }
+  .lineSmall { font-size: clamp(1.3rem, 6.2vw, 2.8rem); letter-spacing: 0.14em; }
+  .lineLarge { font-size: clamp(3.2rem, 15vw, 6rem); }
+  .subline   { font-size: clamp(0.65rem, 3vw, 0.84rem); max-width: none; letter-spacing: 0.09em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordInner { will-change: auto; }
+}

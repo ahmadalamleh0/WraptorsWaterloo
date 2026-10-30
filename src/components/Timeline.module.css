@@ -1,0 +1,279 @@
+/* ══ TIMELINE — Empire Story ══ */
+.section {
+  background: var(--black-rich);
+  padding: 140px 64px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Ambient red under-glow */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 70% at 50% 50%, rgba(212,0,0,0.055) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 10% 80%, rgba(212,0,0,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Top separator */
+.section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(196,201,208,0.07) 25%,
+    rgba(212,0,0,0.18) 50%,
+    rgba(196,201,208,0.07) 75%,
+    transparent
+  );
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.5vw, 68px);
+  line-height: 1.06;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+  color: #fff;
+}
+
+/* ── Timeline container ── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animated spine */
+.spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(212,0,0,0.6) 8%,
+    rgba(212,0,0,0.35) 50%,
+    rgba(212,0,0,0.6) 92%,
+    transparent
+  );
+  /* Animated glow that travels down */
+  overflow: visible;
+}
+
+.spine::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(212,0,0,0.9), transparent);
+  filter: blur(2px);
+  animation: spineTravel 5s ease-in-out infinite;
+}
+
+/* ── Timeline item ── */
+.item {
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
+  align-items: start;
+  padding: 24px 0;
+}
+
+/* Grid areas */
+.itemLeft  { grid-template-areas: "card node ."; }
+.itemRight { grid-template-areas: ". node card"; }
+
+.itemLeft .card  { grid-area: card; margin-right: 38px; }
+.itemLeft .node  { grid-area: node; }
+.itemRight .card { grid-area: card; margin-left: 38px; }
+.itemRight .node { grid-area: node; }
+
+/* ── Spine node ── */
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding-top: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.nodeDot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid rgba(212,0,0,0.3);
+  box-shadow:
+    0 0 8px rgba(212,0,0,0.6),
+    0 0 20px rgba(212,0,0,0.25);
+  flex-shrink: 0;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.item:hover .nodeDot {
+  box-shadow: 0 0 14px rgba(212,0,0,0.9), 0 0 30px rgba(212,0,0,0.4);
+  transform: scale(1.2);
+}
+
+.nodeDotNext {
+  background: transparent;
+  border: 1px solid rgba(212,0,0,0.7);
+  animation: nextDotPulse 1.8s ease-in-out infinite;
+}
+
+.nodeYear {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: rgba(212,0,0,0.8);
+  white-space: nowrap;
+}
+
+/* ── Card ── */
+.card {
+  background: rgba(255,255,255,0.022);
+  border: 1px solid rgba(255,255,255,0.055);
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  transition:
+    border-color 0.35s,
+    transform 0.35s var(--ease-smooth),
+    box-shadow 0.35s;
+}
+
+.card:hover {
+  border-color: rgba(212,0,0,0.32);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,0,0,0.1);
+}
+
+/* Left edge glow on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, transparent, rgba(212,0,0,0.6), transparent);
+  transition: height 0.45s var(--ease-smooth);
+}
+
+.card:hover::after { height: 100%; }
+
+.cardMedia { flex-shrink: 0; }
+
+.cardBody {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  background: linear-gradient(to bottom, rgba(6,6,6,0.97), rgba(3,3,3,0.99));
+  backdrop-filter: blur(16px);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.card:hover .cardTitle { color: var(--chrome-bright); }
+
+.cardTitleNext { color: var(--red) !important; }
+
+.cardCopy {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+/* "Next era" pulsing overlay */
+.nextPulse {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(212,0,0,0.08) 0%, transparent 65%);
+  animation: nextFade 2.2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* ── Animations ── */
+@keyframes spineTravel {
+  0%   { top: -60px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: calc(100% + 60px); opacity: 0; }
+}
+
+@keyframes nextDotPulse {
+  from { box-shadow: 0 0 5px rgba(212,0,0,0.3); transform: scale(0.9); }
+  to   { box-shadow: 0 0 16px rgba(212,0,0,0.8); transform: scale(1.1); }
+}
+
+@keyframes nextFade {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .section { padding: 100px 24px; }
+  .spine { left: 18px; }
+
+  .item {
+    grid-template-columns: 36px 1fr;
+    grid-template-areas: "node card" !important;
+    padding: 18px 0;
+  }
+
+  .itemLeft .card,
+  .itemRight .card {
+    grid-area: card;
+    margin: 0 0 0 18px;
+  }
+
+  .itemLeft .node,
+  .itemRight .node {
+    grid-area: node;
+    padding-top: 20px;
+    align-items: center;
+  }
+}

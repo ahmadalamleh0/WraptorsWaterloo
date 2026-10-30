@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="2.5">
+  <!-- Outer Frame -->
+  <rect x="15" y="10" width="70" height="60" rx="3" fill="currentColor" fill-opacity="0.08" />
+  <!-- Inner Divider -->
+  <line x1="15" y1="40" x2="85" y2="40" stroke-width="3" />
+  <!-- "GT" Text -->
+  <text x="50" y="32" font-family="'Impact', 'Bebas Neue', 'Arial Narrow', sans-serif" font-size="22" font-weight="bold" fill="currentColor" text-anchor="middle" letter-spacing="1">GT</text>
+  <!-- "R" in Red -->
+  <text x="50" y="64" font-family="'Impact', 'Bebas Neue', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#d40000" text-anchor="middle">R</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Central Circle with 'B' -->
+  <circle cx="80" cy="40" r="16" fill="currentColor" fill-opacity="0.08" />
+  <text x="80" y="49" font-family="'Inter', 'Arial', sans-serif" font-weight="900" font-size="25" text-anchor="middle" fill="currentColor">B</text>
+  <!-- Left Wing -->
+  <path d="M64 40 C35 30 15 35 5 45 C20 45 45 42 64 40" />
+  <path d="M64 44 C40 40 25 43 15 50 C30 50 48 46 64 44" />
+  <path d="M64 48 C48 46 35 48 25 55 C40 54 52 50 64 48" />
+  <!-- Right Wing -->
+  <path d="M96 40 C125 30 145 35 155 45 C140 45 115 42 96 40" />
+  <path d="M96 44 C120 40 135 43 145 50 C130 50 112 46 96 44" />
+  <path d="M96 48 C112 46 125 48 135 55 C120 54 108 50 96 48" />
+</svg>

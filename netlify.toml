@@ -1,0 +1,19 @@
+# Netlify build settings for www.wraptorstricity.com.
+#
+# Indexing: vite.config.js adds <meta name="robots" content="noindex,
+# nofollow"> to every page unless Netlify's CONTEXT is "production", so
+# deploy previews and branch deploys stay out of search results and only
+# the production-branch build is indexable. Never publish a locally built
+# dist/ to production (e.g. `netlify deploy --prod`): a local build has no
+# CONTEXT and is therefore noindex.
+#
+# Redirects live in public/_redirects and response headers in
+# public/_headers; both are copied into dist/ by Vite.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 needs Node ^20.19 or >=22.12.
+  NODE_VERSION = "22"

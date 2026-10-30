@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>__SEO_TITLE__</title>
+    <meta name="description" content="__SEO_DESCRIPTION__" />
+    <link rel="canonical" href="__SITE_URL__/" />
+
+    <!-- Open Graph / social sharing (Instagram, Facebook, WhatsApp, iMessage).
+         Meta's crawler (used by Instagram/Facebook) does not execute
+         JavaScript, so these tags must be static in the HTML the server
+         returns — a React component injecting them after load would be
+         invisible to it. og:image is an absolute HTTPS URL to a dedicated,
+         unhashed 1200x630 JPEG in public/ so its path never changes between
+         builds and needs no auth/redirects/JS to load. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:site_name" content="WRAPTORS" />
+    <meta property="og:title" content="__SEO_TITLE__" />
+    <meta property="og:description" content="__SEO_DESCRIPTION__" />
+    <meta property="og:image" content="__OG_IMAGE_URL__" />
+    <meta property="og:image:secure_url" content="__OG_IMAGE_URL__" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Wraptors — premium vehicle wrap detail on a red Lamborghini" />
+
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="__SEO_TITLE__" />
+    <meta name="twitter:description" content="__SEO_DESCRIPTION__" />
+    <meta name="twitter:image" content="__OG_IMAGE_URL__" />
+
+    <!-- Structured data — lets Google show Wraptors as a local business
+         (address, phone, map pin) in search results. Static in the HTML
+         for the same reason the Open Graph tags above are. The __TOKENS__
+         in this head are filled from src/config/location.js at build time
+         (locationHtmlPlugin in vite.config.js). -->
+    <script type="application/ld+json">__LOCAL_BUSINESS_JSON_LD__</script>
+
+    <!-- Fonts are self-hosted (src/index.css) — no external font requests. -->
+    <link rel="preload" href="/src/assets/fonts/google/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/google/rajdhani-600.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Safe Mode's hero background — mobile defaults to Safe Mode, and this
+         needs to already be decoded by the time the logo intro clears so
+         there's no black gap before it's revealed (see HeroVideo.jsx). The
+         `media` attribute means desktop browsers skip this fetch entirely. -->
+    <link rel="preload" href="/src/assets/hero-safe-mode.jpg" as="image" fetchpriority="high" media="(max-width: 768px)" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

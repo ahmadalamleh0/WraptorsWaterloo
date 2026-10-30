@@ -1,0 +1,292 @@
+/* ══ CLIENT REVIEWS — white section, black cards (deliberate contrast
+   break from the rest of the dark site, matching the reference layout) ══ */
+.section {
+  position: relative;
+  background: #f5f3ef;
+  padding: 72px 48px;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── Reveal ── */
+.animUp {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animUp.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animUp { transition: opacity 0.3s ease; transform: none !important; }
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #111;
+  line-height: 1.0;
+  margin: 0;
+}
+
+/* ── Google-style summary bar — dark card floating on the white section ── */
+.summaryBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.summaryLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.summaryGoogleG { flex-shrink: 0; }
+
+.summaryText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.summarySource {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.summaryRatingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summaryScore {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.summaryCount {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+
+.writeReviewButton {
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(212, 0, 0, 0.6);
+  border-radius: 8px;
+  padding: 9px 16px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.writeReviewButton:hover {
+  background: rgba(212, 0, 0, 0.14);
+  border-color: var(--red-bright);
+  transform: translateY(-1px);
+}
+
+/* ── Stars ── */
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.summaryRatingRow .stars { margin-bottom: 0; }
+
+.starFilled { fill: #f5b400; }
+.starEmpty  { fill: rgba(255, 255, 255, 0.15); }
+
+/* ── Review cards — desktop grid, black cards on the white section ── */
+/* Desktop: four cards per row with any remainder centred beneath (seven
+   reviews read as a balanced 4 + 3 rather than 5 + 2 orphans). Below
+   1200px the track becomes the swipeable row further down. */
+.track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.card {
+  flex: 0 0 calc((100% - 36px) / 4);
+  display: flex;
+  flex-direction: column;
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviewerName {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardGoogleG { flex-shrink: 0; opacity: 0.85; }
+
+.reviewText {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.5;
+  margin: 0 0 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reviewTextExpanded {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.readMore {
+  align-self: flex-start;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--red-bright);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.readMore:hover { text-decoration: underline; }
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.reviewTag {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Below desktop — one swipeable row instead of stacking cards ── */
+@media (max-width: 1199px) {
+  .section { padding: 64px 32px; }
+
+  .track {
+    display: flex;
+    flex-wrap: nowrap;          /* undo the desktop 4 + 3 wrap */
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 32px;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin: 0 -32px;
+    padding: 2px 32px 6px;
+  }
+  .track::-webkit-scrollbar { display: none; }
+
+  .card {
+    flex: 0 0 calc((100% - 24px) / 3);
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 900px) {
+  .card { flex-basis: calc((100% - 12px) / 2); }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .section { padding: 52px 20px; }
+
+  .track {
+    scroll-padding-left: 20px;
+    margin: 0 -20px;
+    padding: 2px 20px 6px;
+  }
+  .card {
+    flex-basis: 84%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .summaryBar { gap: 12px; padding: 12px 14px; }
+  .writeReviewButton { padding: 8px 12px; font-size: 0.66rem; letter-spacing: 0.1em; }
+  .summaryRatingRow { gap: 6px; }
+  .summaryCount { font-size: 0.7rem; }
+}

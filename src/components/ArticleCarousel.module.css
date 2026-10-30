@@ -1,0 +1,110 @@
+/* ══ ARTICLE CAROUSEL — horizontal image-card strip ══
+   Monochrome (service pages are strictly black/white/grey, no red).
+   Native scroll-snap: desktop arrows call scrollBy, mobile gets free
+   touch-swipe from overflow-x:auto — no autoplay, no JS scroll-state. */
+
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 2px;
+}
+.track::-webkit-scrollbar { display: none; }
+
+.card {
+  flex: 0 0 78vw;
+  max-width: 340px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-3px);
+}
+
+.cardImageWrap {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.card:hover .cardImage { transform: scale(1.04); }
+
+.cardBody {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.38;
+  margin: 0;
+  flex: 1;
+}
+
+.cardLink {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
+}
+.card:hover .cardLink { color: #fff; }
+
+/* ── Arrows — desktop only; mobile relies on touch-swipe ── */
+.arrow {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
+}
+.arrow:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 769px) {
+  .arrow { display: flex; }
+  .card { flex-basis: calc(33.333% - 11px); max-width: none; }
+}

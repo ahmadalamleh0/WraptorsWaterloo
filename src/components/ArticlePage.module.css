@@ -1,0 +1,381 @@
+/* ══ ARTICLE PAGE — editorial, readability-first ══ */
+
+.notFound {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #fff;
+  font-family: var(--font-ui);
+  padding: 140px 20px 80px;
+}
+.notFound a { color: var(--red-bright, #ff3b3b); }
+
+/* ── Breadcrumbs ── */
+.breadcrumbs {
+  background: #000;
+  padding: 130px 64px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.35);
+}
+.breadcrumbs a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.breadcrumbs a:hover { color: #fff; }
+.breadcrumbCurrent {
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Hero ── */
+.hero {
+  background: #000;
+  padding: 28px 64px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.heroInner { max-width: 780px; }
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #fff;
+  line-height: 1.08;
+  margin: 0 0 22px;
+}
+
+.excerpt {
+  font-family: var(--font-ui);
+  font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.75;
+  margin: 0 0 20px;
+  max-width: 680px;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.02em;
+}
+
+.heroImageWrap {
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Body layout — TOC sidebar + readable-width article column ── */
+.body {
+  background: #050505;
+  padding: 56px 64px 90px;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 720px);
+  gap: 64px;
+  justify-content: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.toc {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tocLabel {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tocList a {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+.tocList a:hover { color: #fff; }
+
+/* ── Article body ── */
+.articleBody {
+  min-width: 0;
+}
+
+.section {
+  margin-bottom: 44px;
+  scroll-margin-top: 100px;
+}
+
+.sectionHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #fff;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.paragraph {
+  font-family: var(--font-ui);
+  font-size: 0.96rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.9;
+  margin: 0 0 16px;
+  max-width: 68ch;
+}
+
+/* Supporting photo between sections — kept short (wide aspect ratio, a
+   height cap) so the page doesn't grow unnecessarily long. */
+.sectionImageWrap {
+  aspect-ratio: 16 / 9;
+  max-height: 380px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: 8px 0 28px;
+}
+
+.sectionImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.geoMention {
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  padding: 16px 20px;
+  border-left: 2px solid rgba(212, 0, 0, 0.4);
+  margin: 32px 0 44px;
+}
+.geoMention a {
+  color: var(--red-bright, #ff3b3b);
+  text-decoration: none;
+}
+.geoMention a:hover { text-decoration: underline; }
+
+/* ── Related articles ── */
+.relatedSection {
+  background: #000;
+  padding: 60px 64px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.relatedLabel {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.relatedGrid {
+  max-width: 900px;
+  margin: 0 auto 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.relatedCard {
+  background: #0a0a0a;
+  padding: 26px 22px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  transition: background 0.25s ease;
+}
+.relatedCard:hover { background: #101010; }
+
+.relatedCardTitle {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: #fff;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.relatedCardLink {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red-bright, #ff3b3b);
+}
+
+.viewAllLink {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.viewAllLink:hover { color: #fff; }
+
+/* ── CTA ── */
+.ctaSection {
+  background: #050505;
+  padding: 90px 64px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.eyebrowSmall {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 10px 0 32px;
+}
+
+.ctaActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red, #b40000);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 16px 32px;
+  transition: background 0.25s ease;
+}
+.ctaPrimary:hover { background: #cc0000; }
+
+.ctaSecondary {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 16px 32px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.ctaSecondary:hover { color: #fff; border-color: rgba(255, 255, 255, 0.35); }
+
+/* ── Mobile — readability-first, TOC collapses above the body ── */
+@media (max-width: 900px) {
+  .breadcrumbs      { padding: 110px 24px 0; }
+  .hero             { padding: 24px 24px 0; gap: 28px; }
+  .body             { grid-template-columns: 1fr; padding: 40px 24px 64px; gap: 32px; }
+  .toc              { position: static; }
+  .relatedSection   { padding: 48px 24px 64px; }
+  .ctaSection       { padding: 64px 24px; }
+  .heroImageWrap    { aspect-ratio: 16 / 10; }
+  .sectionImageWrap { aspect-ratio: 4 / 3; max-height: 280px; margin: 4px 0 22px; }
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs      { padding: 100px 18px 0; }
+  .hero             { padding: 20px 18px 0; }
+  .body             { padding: 32px 18px 56px; }
+  .relatedSection   { padding: 40px 18px 56px; }
+  .ctaSection       { padding: 56px 18px; }
+  .ctaActions       { flex-direction: column; width: 100%; }
+  .ctaPrimary, .ctaSecondary { width: 100%; justify-content: center; }
+  .breadcrumbCurrent { max-width: 180px; }
+}

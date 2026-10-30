@@ -1,0 +1,285 @@
+/* ══ HERO ══ */
+.hero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  background: #000;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 40;
+}
+
+/* Hairline at section bottom — white, barely there */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.06) 30%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.06) 70%,
+    transparent
+  );
+  z-index: 10;
+}
+
+/* ── Lockup: the full-screen centered container ── */
+.lockup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* ── Logo row: EST. | logo | 2016 ── */
+.logoRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Side labels ── */
+.sideText {
+  width: clamp(48px, 7vw, 88px);
+  text-align: center;
+  font-family: 'Jarvane', var(--font-ui), serif;
+  font-size: clamp(0.44rem, 0.72vw, 0.58rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  line-height: 1;
+  /* Engraved: dark shadow below gives depth against black */
+  text-shadow: 0 1px 0 rgba(0,0,0,0.80);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Column pairing the Dubai Edition label with the logo below it, so the
+   label centers on the logo's own width rather than the full EST/2016 row ── */
+.logoCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.4vw, 14px);
+}
+
+/* ── "Dubai [flag] Edition" — same shape as the service-page navbar's
+   label, scaled up for the hero. Equal-width word columns either side of
+   the flag keep it centered regardless of "Dubai" vs "Edition" length. ── */
+.dubaiEdition {
+  /* 1fr | flag | 1fr: the two word columns stay equal (flag centred) and
+     size themselves to the longer word, whatever the location name. */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: clamp(6px, 0.9vw, 10px);
+  font-family: var(--font-ui);
+  font-size: clamp(0.6rem, 1vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+  will-change: opacity, clip-path;
+}
+
+.dubaiEditionWordLeft  { text-align: right; }
+.dubaiEditionWordRight { text-align: left; }
+
+.dubaiFlag {
+  display: block;
+  width: clamp(16px, 2vw, 24px);
+  height: clamp(11px, 1.4vw, 16px);
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* ── Logo wrapper ── */
+.logoWrap {
+  position: relative;
+  width: clamp(200px, 27vw, 390px);
+}
+
+/* ── Clip container for SVG ──
+   The blade is a sibling of this div, so it is not clipped by clipPath. */
+.logoClip {
+  position: relative;
+  width: 100%;
+  will-change: clip-path;
+}
+
+/* ── SVG logo ── */
+.badgeImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  fill: #ffffff;
+  will-change: filter;
+}
+
+/* ── Engraving blade ──
+   A 2px white line that travels top-to-bottom of the logo,
+   revealing it as if being carved into the screen. */
+.engraveBlade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  /* Tight white halo: the light off a fresh cut */
+  box-shadow:
+    0 0 4px 1px  rgba(255,255,255,0.18),
+    0 0 1px 0    rgba(255,255,255,0.90);
+  pointer-events: none;
+  z-index: 2;
+  will-change: top, opacity;
+}
+
+/* ── WRAPTORS DUBAI ──
+   Engraved letterform: dark shadow pressed below, faint catch-light above.
+   Reads as letters cut into a dark surface, not laid on top of it. */
+.topText {
+  margin: 14px 0 0;
+  font-family: 'Jarvane', 'Cinzel', 'Trajan Pro', Georgia, serif;
+  font-size: clamp(0.95rem, 2.1vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.96);
+  text-align: center;
+  line-height: 1;
+  text-shadow:
+    0 -1px 0    rgba(255,255,255,0.28),
+    0  1px 0    rgba(0,0,0,0.95),
+    0  2px 5px  rgba(0,0,0,0.85),
+    0  5px 14px rgba(0,0,0,0.55);
+  -webkit-text-stroke: 0.4px rgba(255,255,255,0.14);
+  -webkit-font-smoothing: antialiased;
+  will-change: opacity, clip-path;
+}
+
+/* ── Hairline rule between name and motto ── */
+.brandRule {
+  display: block;
+  width: clamp(48px, 11vw, 100px);
+  height: 1px;
+  margin: 10px auto 9px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.10) 20%,
+    rgba(255,255,255,0.24) 50%,
+    rgba(255,255,255,0.10) 80%,
+    transparent
+  );
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* ── LOYALTY OVER ROYALTY ── */
+.bottomText {
+  margin: 0;
+  font-family: 'Jarvane', var(--font-ui), serif;
+  font-size: clamp(0.54rem, 0.96vw, 0.76rem);
+  font-weight: 700;
+  letter-spacing: 0.58em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow:
+    0 -1px 0    rgba(255,255,255,0.18),
+    0  1px 0    rgba(0,0,0,0.95),
+    0  2px 5px  rgba(0,0,0,0.75);
+  -webkit-text-stroke: 0.3px rgba(255,255,255,0.10);
+  -webkit-font-smoothing: antialiased;
+  will-change: opacity, clip-path;
+}
+
+/* ── Scroll indicator ── */
+.scrollCue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  pointer-events: none;
+}
+
+.scrollText {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 7px;
+  letter-spacing: 0.55em;
+  color: rgba(255,255,255,0.18);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.scrollBar {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.20), transparent);
+}
+
+.scrollDot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  /* Smaller/more compact than the old 46vw-up-to-230px sizing — reads as
+     premium restraint on a phone screen instead of dominating it. */
+  .logoWrap   { width: clamp(120px, 34vw, 180px); }
+  .logoCol    { gap: 6px; }
+  .dubaiEdition { font-size: clamp(0.44rem, 2.4vw, 0.58rem); letter-spacing: 0.22em; gap: 5px; }
+  .dubaiFlag  { width: clamp(13px, 3.2vw, 16px); height: clamp(9px, 2.2vw, 11px); }
+  .sideText   { width: clamp(36px, 10vw, 56px); font-size: clamp(0.38rem, 2vw, 0.5rem); }
+  .topText    { font-size: clamp(1rem, 6.2vw, 1.65rem); letter-spacing: 0.14em; margin-top: 10px; }
+  .brandRule  { width: clamp(36px, 8vw, 72px); margin: 8px auto 8px; }
+  .bottomText { font-size: clamp(0.62rem, 2.4vw, 0.76rem); letter-spacing: 0.36em; }
+  .scrollCue  { bottom: 24px; }
+}
+
+@media (max-width: 480px) {
+  /* Was 60vw — grew past the 768px tier's own cap on wider small phones.
+     A clamp keeps it consistently smaller than that tier instead. */
+  .logoWrap   { width: clamp(100px, 30vw, 150px); }
+  .topText    { font-size: 7.8vw; letter-spacing: 0.11em; }
+  .brandRule  { width: clamp(28px, 7vw, 56px); margin: 7px auto 7px; }
+  .bottomText { font-size: clamp(0.60rem, 2.6vw, 0.70rem); letter-spacing: 0.28em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engraveBlade  { display: none; }
+  .scrollDot     { animation: none; }
+}

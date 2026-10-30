@@ -1,0 +1,221 @@
+/* ══ STARFIELD BACKGROUND ══
+   Pure CSS — no canvas, no JS, no particles.
+   Two image layers + glow + shooting stars + noise grain. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── ① Base layer ─────────────────────────────────────────────────────────
+   Very slow scale-and-drift. The image is oversized (inset: -6%) so no
+   edge is ever revealed at the max drift distance (~1.8%). */
+.layer1 {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-position: center;
+  background-image: var(--jpeg); /* JPEG — every browser */
+  opacity: 0.95;
+  filter: brightness(1.75) contrast(1.25) saturate(1.1);
+  will-change: transform, opacity;
+  animation: drift1 3.7s ease-in-out infinite alternate;
+}
+
+@supports (background-image: image-set(url('') type('image/avif'))) {
+  .layer1 { background-image: var(--avif); }
+}
+
+@keyframes drift1 {
+  from { transform: scale(1.00) translate(0,       0);      opacity: 0.80; }
+  to   { transform: scale(1.06) translate(-2.4%, -1.4%);   opacity: 0.96; }
+}
+
+/* ── ② Second layer ───────────────────────────────────────────────────────
+   Slightly different crop anchor and a much longer cycle (41 s) so the
+   two layers drift completely out of phase. The opacity oscillates between
+   0.16 – 0.42, making individual stars appear to brighten and fade
+   independently from layer 1. This IS the "twinkle." */
+.layer2 {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-position: center 24%;
+  background-image: var(--jpeg); /* JPEG — every browser */
+  filter: brightness(1.9) contrast(1.3);
+  will-change: transform, opacity;
+  animation: drift2 5.8s ease-in-out infinite alternate;
+}
+
+@supports (background-image: image-set(url('') type('image/avif'))) {
+  .layer2 { background-image: var(--avif); }
+}
+
+@keyframes drift2 {
+  0%   { transform: scale(1.05) translate(1.4%, 0.8%);  opacity: 0.32; }
+  28%  {                                                  opacity: 0.68; }
+  55%  {                                                  opacity: 0.40; }
+  78%  {                                                  opacity: 0.72; }
+  100% { transform: scale(0.96) translate(-1.4%, -0.8%); opacity: 0.36; }
+}
+
+/* ── ③ Glow ───────────────────────────────────────────────────────────────
+   Three soft radial blobs in slightly different positions — creates the
+   impression of a moonlit glow behind the star field. Pulses gently. */
+.glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 62% 50% at 50% 34%, rgba(130, 165, 255, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 85% 55% at 14% 68%, rgba(75,  65,  200, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 44% at 84% 18%, rgba(108, 145, 240, 0.09) 0%, transparent 62%);
+  will-change: opacity;
+  animation: glowBreath 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowBreath {
+  from { opacity: 0.55; }
+  to   { opacity: 1.00; }
+}
+
+/* ── ④ Shooting stars ─────────────────────────────────────────────────────
+   Three elements with staggered delays to simulate occasional meteor.
+   Each one starts off-screen left, travels to off-screen right via
+   translateX. The rotation is baked into the static transform-origin so
+   the star stays rotated the whole time — only translateX animates. */
+.shootingStars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.ss1, .ss2, .ss3 {
+  position: absolute;
+  height: 1px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent              0%,
+    rgba(195, 220, 255, 0.60) 40%,
+    rgba(255, 255, 255, 0.92) 58%,
+    transparent              100%
+  );
+  opacity: 0;
+}
+
+/* Star 1 — upper third, 13 s cycle, fires at 0 s */
+.ss1 {
+  width: 170px;
+  top: 18%;
+  left: -200px;
+  transform: rotate(-37deg);
+  animation: shoot1 2.7s ease-in-out 0.2s infinite;
+}
+
+/* Star 2 — mid screen, 10 s cycle, fires 6 s in */
+.ss2 {
+  width: 120px;
+  top: 38%;
+  left: -160px;
+  transform: rotate(-33deg);
+  animation: shoot2 2.35s ease-in-out 1.25s infinite;
+}
+
+/* Star 3 — upper quarter, 17 s cycle, fires 11 s in */
+.ss3 {
+  width: 145px;
+  top: 26%;
+  left: -190px;
+  transform: rotate(-41deg);
+  animation: shoot3 3.7s ease-in-out 2.2s infinite;
+}
+
+/* Each @keyframes keeps the rotation from the static transform and only
+   adds translateX on top. opacity fades in quickly and out slowly. */
+
+@keyframes shoot1 {
+  0%, 76%  { opacity: 0;    transform: rotate(-37deg) translateX(0px);     }
+  78%      { opacity: 0.90; }
+  92%      { opacity: 0;    transform: rotate(-37deg) translateX(2400px);  }
+  100%     { opacity: 0;    transform: rotate(-37deg) translateX(2400px);  }
+}
+
+@keyframes shoot2 {
+  0%, 74%  { opacity: 0;    transform: rotate(-33deg) translateX(0px);     }
+  76%      { opacity: 0.72; }
+  90%      { opacity: 0;    transform: rotate(-33deg) translateX(2400px);  }
+  100%     { opacity: 0;    transform: rotate(-33deg) translateX(2400px);  }
+}
+
+@keyframes shoot3 {
+  0%, 78%  { opacity: 0;    transform: rotate(-41deg) translateX(0px);     }
+  80%      { opacity: 0.82; }
+  93%      { opacity: 0;    transform: rotate(-41deg) translateX(2400px);  }
+  100%     { opacity: 0;    transform: rotate(-41deg) translateX(2400px);  }
+}
+
+/* ── ⑤ Dark vignette — text readability without killing the star field ───── */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(2,2,8,0.48)  0%,
+      rgba(2,2,8,0.08) 38%,
+      rgba(2,2,8,0.04) 55%,
+      rgba(2,2,8,0.58) 100%
+    ),
+    linear-gradient(to right,
+      rgba(2,2,8,0.36)  0%,
+      transparent       55%
+    );
+}
+
+/* ── Noise grain ─────────────────────────────────────────────────────────
+   SVG feTurbulence rendered as a background-image tile. At 2.5% opacity
+   it adds depth/texture without drawing attention to itself. Static —
+   no animation, zero JS cost. */
+.noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+/* ── Mobile — brighter and faster ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .layer1 {
+    opacity: 1;
+    animation-duration: 2.2s;
+  }
+  .layer2 {
+    animation-duration: 3.2s;
+  }
+  @keyframes drift1 {
+    from { transform: scale(1.00) translate(0, 0);           opacity: 0.92; }
+    to   { transform: scale(1.06) translate(-2.4%, -1.4%);  opacity: 1.00; }
+  }
+  @keyframes drift2 {
+    0%   { transform: scale(1.05) translate(1.4%, 0.8%);   opacity: 0.50; }
+    28%  {                                                   opacity: 0.88; }
+    55%  {                                                   opacity: 0.58; }
+    78%  {                                                   opacity: 0.92; }
+    100% { transform: scale(0.96) translate(-1.4%, -0.8%); opacity: 0.52; }
+  }
+  .glow {
+    animation-duration: 1.4s;
+    opacity: 1;
+  }
+}
+
+/* ── Accessibility ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .layer1 { animation: none; opacity: 0.88; }
+  .layer2 { animation: none; opacity: 0.28; }
+  .glow   { animation: none; }
+  .ss1, .ss2, .ss3 { display: none; }
+}

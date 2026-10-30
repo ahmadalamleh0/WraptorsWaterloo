@@ -1,0 +1,524 @@
+/* ═══════════════════════════════════════════════════════════════════
+   VehicleSelector — ported verbatim from the original site's
+   assets/css/styles_v2.css (CONFIGURATOR + CONFIGURATOR MODAL rules).
+   No values changed. Page-composition-only rules (z-index depth-plane
+   stacking, adjacent-sibling section transitions) were intentionally
+   left out since they depend on sibling sections in the original page.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.configurator {
+  position: relative;
+  padding: 7rem 2rem 9rem;
+  background: linear-gradient(to bottom, #0d0d0d 0%, #060606 8%, #050505 55%, #080808 100%);
+  overflow: hidden;
+}
+
+/* Subtle glowing separator — bridges craft-stories visually */
+.configurator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(138, 43, 226, 0.22),
+    rgba(220, 200, 255, 0.09),
+    rgba(138, 43, 226, 0.22),
+    transparent
+  );
+}
+
+.configurator__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Section header */
+.configurator__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.configurator__eyebrow {
+  display: inline-block;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(180, 130, 220, 0.7);
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+
+.configurator__title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+  opacity: 0;
+}
+
+.configurator__sub {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.06em;
+  opacity: 0;
+}
+
+/* Glassmorphism panel */
+.configurator__panel {
+  background: rgba(255, 255, 255, 0.022);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 22px;
+  padding: 2.25rem 2rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 90px rgba(138, 43, 226, 0.04),
+    0 28px 80px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+}
+
+/* Brand grid — 6 compact columns (12 brands = 2 rows) */
+.configurator__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.9rem;
+}
+
+/* Compact brand card */
+.config-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.2rem 1rem;
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color 0.4s ease,
+    box-shadow   0.4s ease,
+    transform    0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background   0.35s ease;
+  will-change: transform;
+  --mx: 50%;
+  --my: 50%;
+  opacity: 0;
+}
+
+/* Spotlight radial on hover */
+.config-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.065),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.config-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(138, 43, 226, 0.28);
+  box-shadow:
+    0 0 28px rgba(138, 43, 226, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.32);
+  transform: translateY(-3px);
+}
+
+.config-card:hover::before { opacity: 1; }
+.config-card:active { transform: translateY(-1px) scale(0.98); }
+
+/* Logo container */
+.config-card__logo {
+  width: 96px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.config-card__logo svg {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: visible;
+}
+
+/* Real SVG file logos — white monochrome via CSS filter */
+.config-card__logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+  display: block;
+}
+
+.config-card:hover .config-card__logo img { opacity: 1; }
+
+/* Brand name — hidden, logo only */
+.config-card__name { display: none; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CONFIGURATOR MODAL
+   ═══════════════════════════════════════════════════════════════════ */
+
+.cfg-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.38s ease;
+}
+
+.cfg-modal.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.cfg-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.cfg-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 93vw);
+  background: rgba(8, 8, 10, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem 2rem 1.6rem;
+  box-shadow:
+    0 0 0 1px rgba(138, 43, 226, 0.1),
+    0 40px 90px rgba(0, 0, 0, 0.65);
+  transform: translateY(22px) scale(0.98);
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cfg-modal.open .cfg-modal__panel {
+  transform: translateY(0) scale(1);
+}
+
+/* Close button */
+.cfg-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.55);
+  transition: background 0.2s, color 0.2s;
+}
+
+.cfg-modal__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* Brand bar */
+.cfg-modal__brand-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.5rem;
+}
+
+.cfg-modal__brand-logo {
+  width: 50px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cfg-modal__brand-logo svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Ensure real SVG file logos render white in the modal header too */
+.cfg-modal__brand-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  display: block;
+}
+
+.cfg-modal__brand-name {
+  display: block;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.cfg-modal__brand-tagline {
+  display: block;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(180, 130, 220, 0.62);
+  margin-top: 0.15rem;
+}
+
+/* Step indicator row */
+.cfg-steps {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 1.75rem;
+}
+
+.cfg-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.cfg-step.active { opacity: 1; }
+.cfg-step.done   { opacity: 0.65; }
+
+.cfg-step__num {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: rgba(180, 130, 220, 0.9);
+  letter-spacing: 0.08em;
+}
+
+.cfg-step__label {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cfg-step__connector {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 0.5rem 0.55rem;
+}
+
+/* Step content */
+.cfg-content {
+  min-height: 130px;
+  margin-bottom: 1.5rem;
+}
+
+.cfg-step-label {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(180, 130, 220, 0.62);
+  margin-bottom: 0.8rem;
+}
+
+/* Option list */
+.cfg-options { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.cfg-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.22s, border-color 0.22s;
+  text-align: left;
+  width: 100%;
+}
+
+.cfg-option:hover {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(138, 43, 226, 0.22);
+}
+
+.cfg-option.selected {
+  background: rgba(138, 43, 226, 0.08);
+  border-color: rgba(138, 43, 226, 0.48);
+}
+
+.cfg-option__label {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: 0.02em;
+}
+
+.cfg-option.selected .cfg-option__label { color: #fff; }
+
+.cfg-option__check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.22s, border-color 0.22s;
+}
+
+.cfg-option.selected .cfg-option__check {
+  background: rgba(138, 43, 226, 0.85);
+  border-color: rgba(138, 43, 226, 1);
+}
+
+/* Review summary */
+.cfg-review { display: flex; flex-direction: column; gap: 0; }
+
+.cfg-review__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cfg-review__key {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.cfg-review__val {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cfg-review__note {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.28);
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+/* Modal action row */
+.cfg-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cfg-btn {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.6rem;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cfg-btn--back {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.cfg-btn--back:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cfg-btn--next {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.92), rgba(100, 18, 185, 0.92));
+  border: 1px solid rgba(138, 43, 226, 0.5);
+  color: #fff;
+  box-shadow: 0 4px 22px rgba(138, 43, 226, 0.22);
+}
+
+.cfg-btn--next:hover:not(.cfg-btn--disabled) {
+  background: linear-gradient(135deg, rgba(162, 64, 255, 0.96), rgba(120, 28, 210, 0.96));
+  box-shadow: 0 6px 32px rgba(138, 43, 226, 0.38);
+  transform: translateY(-1px);
+}
+
+.cfg-btn--disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .configurator__grid { grid-template-columns: repeat(6, 1fr); gap: 0.75rem; }
+}
+
+@media (max-width: 900px) {
+  .configurator__grid  { grid-template-columns: repeat(4, 1fr); }
+  .configurator__panel { padding: 1.75rem 1.25rem; }
+  .configurator        { padding: 5rem 1.5rem 7rem; }
+}
+
+@media (max-width: 600px) {
+  .configurator__grid { grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
+}
+
+@media (max-width: 420px) {
+  .configurator__grid { grid-template-columns: repeat(2, 1fr); }
+  .cfg-modal__panel   { padding: 1.5rem 1.25rem 1.25rem; }
+}

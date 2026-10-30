@@ -1,0 +1,524 @@
+/* ═══════════════════════════════════════════════════════════
+   WRAPTORS — GLOBAL DESIGN SYSTEM v2
+   Dark luxury automotive. Cinema-grade. No compromises.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Self-hosted (originally Google Fonts — latin subset only, this site is
+   English-only). Downloaded once from fonts.gstatic.com; no runtime request
+   to any Google domain happens anymore, so these work fully offline. */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('./assets/fonts/google/bebas-neue-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cinzel is shipped by Google as a single variable file; both weights below
+   sample the same file at different points on its weight axis. */
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/google/cinzel-variable.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/google/cinzel-variable.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter is also a single variable file covering 300–600. */
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Rajdhani ships as separate static files per weight. */
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jarvane';
+  src: url('./assets/fonts/Jarvane.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('./assets/fonts/Ethnocentric-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BrittanySignature';
+  src: url('./assets/fonts/BrittanySignatureScript.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MonolineSignature';
+  src: url('./assets/fonts/MonolineSignature.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ── Red system ── */
+  --red:           #d40000;
+  --red-bright:    #ff1a1a;
+  --red-neon:      #ff0000;
+  --red-dim:       #6b0000;
+  --red-deep:      #3a0000;
+  --red-glow:      rgba(212, 0, 0, 0.22);
+  --red-glow-soft: rgba(212, 0, 0, 0.07);
+
+  /* ── Chrome system ── */
+  --chrome:        #c4c9d0;
+  --chrome-bright: #e8eaec;
+  --chrome-dim:    #5a6070;
+  --chrome-glow:   rgba(196, 201, 208, 0.12);
+
+  /* ── Black palette (layered depth) ── */
+  --black:         #030303;
+  --black-rich:    #060606;
+  --surface:       #0a0a0a;
+  --surface2:      #0f0f0f;
+  --surface3:      #141414;
+
+  /* ── Glass ── */
+  --glass:         rgba(255, 255, 255, 0.028);
+  --glass-mid:     rgba(255, 255, 255, 0.055);
+  --glass-border:  rgba(255, 255, 255, 0.065);
+  --glass-border2: rgba(255, 255, 255, 0.1);
+
+  /* ── Text ── */
+  --text:          #eaeaea;
+  --text-mid:      #aaa;
+  --text-dim:      #5a5a5a;
+
+  /* ── Fonts ── */
+  --font-display: 'Bebas Neue', 'Impact', sans-serif;
+  --font-ui:      'Rajdhani', 'Arial Narrow', sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  /* ── Motion ── */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinema: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Document base ── */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.65;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Noise grain overlay — gives the luxury tactile texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.038;
+  pointer-events: none;
+  z-index: 9000;
+  mix-blend-mode: overlay;
+  animation: grainShift 0.4s steps(2) infinite;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  border: none;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--red-dim); }
+
+/* ── Selection ── */
+::selection {
+  background: rgba(212, 0, 0, 0.35);
+  color: #fff;
+}
+
+/* ════════════════════════════════════════
+   BUTTONS
+   ════════════════════════════════════════ */
+
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 40px;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition:
+    background 0.35s,
+    box-shadow 0.35s,
+    transform 0.35s var(--ease-smooth);
+  isolation: isolate;
+}
+
+/* Shimmer sweep on hover */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255,255,255,0.22) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  transition: left 0.55s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.btn-primary:hover::before { left: 150%; }
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 0 24px rgba(255, 255, 255, 0.18),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+
+.btn-ghost {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 39px;
+  background: transparent;
+  color: var(--chrome);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(196, 201, 208, 0.22);
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition:
+    border-color 0.35s,
+    background 0.35s,
+    color 0.35s,
+    box-shadow 0.35s,
+    transform 0.35s var(--ease-smooth);
+  isolation: isolate;
+}
+
+.btn-ghost::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(200,205,212,0.1) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  transition: left 0.55s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.btn-ghost:hover::before { left: 150%; }
+
+.btn-ghost:hover {
+  border-color: rgba(196, 201, 208, 0.55);
+  background: rgba(196, 201, 208, 0.06);
+  color: #fff;
+  box-shadow:
+    0 0 16px rgba(196, 201, 208, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: translateY(-3px);
+}
+
+/* ════════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+   ════════════════════════════════════════ */
+
+.section-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+/* Chrome gradient text */
+.chrome-text {
+  background: linear-gradient(
+    135deg,
+    var(--chrome-bright) 0%,
+    var(--chrome) 30%,
+    #d1d5db 55%,
+    var(--chrome-dim) 80%,
+    var(--chrome) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ════════════════════════════════════════
+   MEDIA PLACEHOLDER
+   ════════════════════════════════════════ */
+
+.media-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  /* Dark grid base */
+  background:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(160deg, #080808 0%, #0c0c0c 50%, #060606 100%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Scanlines overlay */
+.media-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Centered red radial */
+.media-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(212,0,0,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Corner brackets */
+.media-placeholder .mp-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 4;
+}
+
+.media-placeholder .mp-tl { top: 10px;  left: 10px;  border-top: 1px solid rgba(212,0,0,0.5); border-left: 1px solid rgba(212,0,0,0.5); }
+.media-placeholder .mp-tr { top: 10px;  right: 10px; border-top: 1px solid rgba(196,201,208,0.25); border-right: 1px solid rgba(196,201,208,0.25); }
+.media-placeholder .mp-bl { bottom: 10px; left: 10px;  border-bottom: 1px solid rgba(196,201,208,0.25); border-left: 1px solid rgba(196,201,208,0.25); }
+.media-placeholder .mp-br { bottom: 10px; right: 10px; border-bottom: 1px solid rgba(212,0,0,0.5); border-right: 1px solid rgba(212,0,0,0.5); }
+
+.media-placeholder__play {
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(212,0,0,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(212,0,0,0.15), inset 0 0 20px rgba(212,0,0,0.05);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.media-placeholder:hover .media-placeholder__play {
+  box-shadow: 0 0 30px rgba(212,0,0,0.3), inset 0 0 30px rgba(212,0,0,0.1);
+  border-color: rgba(212,0,0,0.7);
+}
+
+.media-placeholder__play::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 14px;
+  border-color: transparent transparent transparent rgba(212,0,0,0.65);
+  margin-left: 4px;
+}
+
+.media-placeholder__label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: rgba(255,255,255,0.14);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 28px;
+  line-height: 1.6;
+}
+
+/* ════════════════════════════════════════
+   SHARED SECTION CHROME SEPARATOR
+   ════════════════════════════════════════ */
+.chrome-sep {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(196,201,208,0.1) 20%,
+    rgba(212,0,0,0.25) 50%,
+    rgba(196,201,208,0.1) 80%,
+    transparent
+  );
+}
+
+/* ════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════ */
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-1%, 1%); }
+  50%  { transform: translate(1%, -1%); }
+  75%  { transform: translate(-1%, -1%); }
+  100% { transform: translate(1%, 1%); }
+}

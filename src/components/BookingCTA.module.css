@@ -1,0 +1,130 @@
+/* ══ BOOKING CTA — compact conversion strip, not a content chapter ══ */
+.section {
+  background: #050505;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--red, #d40000);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.copy {
+  max-width: 560px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.08;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lineA {
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.lineB {
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+
+.sub {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 15px 26px;
+  white-space: nowrap;
+  transition: background 0.25s ease;
+}
+.primary:hover { background: rgba(255, 255, 255, 0.85); }
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 15px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  white-space: nowrap;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.secondary:hover { color: #fff; border-color: rgba(255, 255, 255, 0.35); }
+
+/* ── Mobile — stacked, height capped roughly 300-400px ── */
+@media (max-width: 860px) {
+  /* Editorial accent instead of a red hit — same strip, same thickness
+     and placement, just white so it reads calmer next to the red CTA. */
+  .section::before { background: #fff; }
+
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 24px;
+    gap: 20px;
+  }
+  .copy { max-width: none; }
+  .actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .primary, .secondary { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .inner { padding: 28px 20px; gap: 16px; }
+  .lineB { font-size: 1.35rem; }
+  .lineA { font-size: 0.95rem; }
+}

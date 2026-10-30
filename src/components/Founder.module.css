@@ -1,0 +1,225 @@
+/* ══ FOUNDER / CULTURE ══ */
+.section {
+  background: var(--surface);
+  padding: 140px 64px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Right-side ambient glow */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 55%;
+  height: 130%;
+  background: radial-gradient(ellipse 70% 60% at 75% 50%, rgba(212,0,0,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Top separator */
+.section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(196,201,208,0.07) 25%,
+    rgba(212,0,0,0.18) 50%,
+    rgba(196,201,208,0.07) 75%,
+    transparent
+  );
+}
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 88px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Media column ── */
+.mediaCol {
+  position: relative;
+}
+
+/* Outer glow border */
+.mediaCol::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    135deg,
+    rgba(212,0,0,0.3) 0%,
+    transparent 40%,
+    rgba(196,201,208,0.1) 80%,
+    transparent 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Red corner frame (TL) */
+.frameT {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 52px;
+  height: 52px;
+  border-top: 2px solid var(--red);
+  border-left: 2px solid var(--red);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: -4px -4px 16px rgba(212,0,0,0.2);
+}
+
+/* Chrome corner frame (BR) */
+.frameB {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 52px;
+  height: 52px;
+  border-bottom: 1px solid rgba(196,201,208,0.3);
+  border-right: 1px solid rgba(196,201,208,0.3);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Floating stat badge */
+.badge {
+  position: absolute;
+  bottom: 36px;
+  left: -24px;
+  background: rgba(3,3,3,0.96);
+  border: 1px solid rgba(212,0,0,0.38);
+  border-left: 2px solid var(--red);
+  padding: 18px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.7),
+    -4px 0 20px rgba(212,0,0,0.15);
+  z-index: 3;
+}
+
+.badgeVal {
+  font-family: var(--font-display);
+  font-size: 42px;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 20px rgba(212,0,0,0.4);
+}
+
+.badgeVal sup {
+  font-size: 22px;
+  vertical-align: super;
+}
+
+.badgeLabel {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Copy column ── */
+.copyCol {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.2vw, 64px);
+  line-height: 1.06;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+  color: #fff;
+}
+
+/* Animated red underline on title */
+.titleUnderline {
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(to right, var(--red), transparent);
+  margin-top: 8px;
+  animation: underlineExpand 3s ease-in-out infinite alternate;
+}
+
+.body {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-dim);
+  font-weight: 300;
+  max-width: 460px;
+}
+
+/* ── Quote callout ── */
+.quote {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.quoteBar {
+  width: 2px;
+  min-height: 52px;
+  background: linear-gradient(to bottom, var(--red), rgba(212,0,0,0.2));
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.quoteText {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  font-style: italic;
+  background: linear-gradient(135deg, var(--chrome-bright) 0%, var(--chrome) 60%, var(--chrome-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta {
+  align-self: flex-start;
+}
+
+/* ── Animations ── */
+@keyframes underlineExpand {
+  from { width: 40px; opacity: 0.7; }
+  to   { width: 80px; opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .section { padding: 100px 28px; }
+  .inner { grid-template-columns: 1fr; gap: 56px; }
+  .badge { left: 16px; bottom: 16px; }
+  .cta { align-self: stretch; justify-content: center; }
+  .body { max-width: 100%; }
+}

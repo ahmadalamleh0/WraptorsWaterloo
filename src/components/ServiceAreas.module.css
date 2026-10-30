@@ -1,0 +1,90 @@
+/* ══ SERVICE AREAS — compact pill row below reviews ══ */
+.section {
+  background: #000;
+  padding: 64px 28px 76px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 28px;
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.pill {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 9px 20px;
+  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
+}
+
+.pill:hover {
+  color: #fff;
+  border-color: rgba(212, 0, 0, 0.55);
+  background: rgba(212, 0, 0, 0.08);
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 6px 4px;
+  transition: color 0.22s ease;
+}
+
+.viewAll:hover { color: var(--red-bright, #ff3b3b); }
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .section { padding: 48px 20px 60px; }
+  .pill    { font-size: 0.68rem; padding: 8px 16px; }
+  /* Editorial, less accented on mobile — same size/spacing, just white
+     instead of red so the section reads calmer. */
+  .eyebrow { color: #fff; }
+}

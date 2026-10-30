@@ -1,0 +1,168 @@
+/* Self-hosted 'Exo 2' — required by VehicleSelector/styles.css (see its
+   README: "this folder does not bundle a font loader, so add it to your
+   host project"). Downloaded once from fonts.gstatic.com, same pattern as
+   the rest of the site's fonts (src/index.css), so this stays offline-safe
+   and makes no runtime request to any Google domain. Kept in this wrapper
+   file (outside VehicleSelector/) so the extracted folder remains untouched
+   and the whole feature stays removable as one unit. */
+@font-face {
+  font-family: 'Exo 2';
+  src: url('../../assets/fonts/google/exo2-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Brand-accent + polish overrides — kept out of VehicleSelector/styles.css
+   so the extracted component stays byte-for-byte untouched. Every rule
+   here only overrides a color/shadow/opacity value that VehicleSelector's
+   own stylesheet already sets; nothing here changes layout, spacing, sizes,
+   typography, animations, or interactions. #configurator (the component's
+   own root id) gives these enough specificity to win over styles.css
+   regardless of CSS injection order, without touching that file.
+   Purple → red mapping (same hue swap everywhere, alpha left untouched):
+     rgb(138, 43, 226) accent        → rgb(212, 0, 0)   (--red)
+     rgb(100, 18, 185) accent-dim    → rgb(107, 0, 0)   (--red-dim)
+     rgb(162, 64, 255) accent-bright → rgb(255, 26, 26) (--red-bright)
+     rgb(120, 28, 210) accent-hover  → rgb(212, 0, 0)   (--red)
+     rgb(180, 130, 220) label text   → rgb(224, 60, 60) (muted warm red, kept
+       legible at small label sizes instead of the darker brand red)
+     rgb(220, 200, 255) hairline hi  → rgb(255, 190, 190)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Separator line above the section — same gradient shape, red hue. */
+#configurator::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 0, 0, 0.22),
+    rgba(255, 190, 190, 0.09),
+    rgba(212, 0, 0, 0.22),
+    transparent
+  );
+}
+
+/* Eyebrow — brand red instead of purple, and a touch brighter/more visible. */
+#configurator .configurator__eyebrow {
+  color: rgba(224, 60, 60, 0.82);
+}
+
+/* Section heading — bigger, more dominant, word-mask reveal (same technique
+   as ServicesIntro's "THE WRAPTORS STANDARD"). The title no longer runs
+   the WAAPI fade/slide from useEntranceReveal.ts (it's excluded from that
+   selector now), so opacity is forced back to 1 here — visibility of each
+   word comes entirely from the mask + yPercent transform below, exactly
+   like ServicesIntro's heading never being opacity:0 in CSS either. */
+#configurator .configurator__title {
+  opacity: 1;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+  #configurator .configurator__title {
+    font-size: clamp(2.4rem, 9vw, 3.6rem);
+  }
+}
+
+/* Word mask — outer overflow:hidden clip each word rises out of, matching
+   ServicesIntro.module.css's .wordMask/.wordInner exactly. */
+#configurator .cfgWordMask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+
+#configurator .cfgWordInner {
+  display: inline-block;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #configurator .cfgWordInner {
+    will-change: auto;
+  }
+}
+
+/* Supporting sentence — slightly more visible against the dark background. */
+#configurator .configurator__sub {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Panel ambient glow behind the grid — same soft shadow, red hue, nudged
+   just slightly stronger while staying subtle. */
+#configurator .configurator__panel {
+  box-shadow:
+    0 0 100px rgba(212, 0, 0, 0.07),
+    0 28px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* Logo cards — slightly more contrast at rest, plus a hairline red-tinted
+   depth ring so they don't read as flat even before hover. */
+#configurator .config-card {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(212, 0, 0, 0.05);
+}
+
+#configurator .config-card:hover {
+  border-color: rgba(212, 0, 0, 0.32);
+  box-shadow:
+    0 0 28px rgba(212, 0, 0, 0.12),
+    0 8px 32px rgba(0, 0, 0, 0.32);
+}
+
+/* Manufacturer logos — slightly brighter at rest so they stand out more
+   against the darker cards; hover still reaches full brightness as before. */
+#configurator .config-card__logo img {
+  opacity: 0.88;
+}
+
+/* Modal accents — brand tagline, step indicator, option states, buttons,
+   panel edge glow. Same values, red hue. */
+#configurator .cfg-modal__brand-tagline {
+  color: rgba(224, 60, 60, 0.62);
+}
+
+#configurator .cfg-step__num {
+  color: rgba(224, 60, 60, 0.9);
+}
+
+#configurator .cfg-step-label {
+  color: rgba(224, 60, 60, 0.62);
+}
+
+#configurator .cfg-option:hover {
+  border-color: rgba(212, 0, 0, 0.22);
+}
+
+#configurator .cfg-option.selected {
+  background: rgba(212, 0, 0, 0.08);
+  border-color: rgba(212, 0, 0, 0.48);
+}
+
+#configurator .cfg-option.selected .cfg-option__check {
+  background: rgba(212, 0, 0, 0.85);
+  border-color: rgba(212, 0, 0, 1);
+}
+
+#configurator .cfg-modal__panel {
+  box-shadow:
+    0 0 0 1px rgba(212, 0, 0, 0.1),
+    0 40px 90px rgba(0, 0, 0, 0.65);
+}
+
+#configurator .cfg-btn--next {
+  background: linear-gradient(135deg, rgba(212, 0, 0, 0.92), rgba(107, 0, 0, 0.92));
+  border: 1px solid rgba(255, 26, 26, 0.5);
+  box-shadow: 0 4px 22px rgba(212, 0, 0, 0.22);
+}
+
+#configurator .cfg-btn--next:hover:not(.cfg-btn--disabled) {
+  background: linear-gradient(135deg, rgba(255, 26, 26, 0.96), rgba(212, 0, 0, 0.96));
+  box-shadow: 0 6px 32px rgba(255, 26, 26, 0.38);
+}
