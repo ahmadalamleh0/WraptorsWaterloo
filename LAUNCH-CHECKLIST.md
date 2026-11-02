@@ -2,7 +2,9 @@
 
 Status labels follow `MIGRATION-DOCS/MIGRATION-CHECKLIST.md`. Findings behind each item: `TRICITY-DISCOVERY.md`.
 
-## Prioritised remaining work (2026-10-30)
+## Prioritised remaining work (updated 2026-11-02)
+
+Final local technical pass: `TRICITY-FINAL-TECHNICAL-REPORT.md` (verify 657/657, lint clean, 99 browser page loads clean, 33/33 mocked form checks).
 
 SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed; no item below is `VERIFIED ON HOSTING`.
 
@@ -11,7 +13,7 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 | # | Item | Current state | Needed | Status |
 |---|---|---|---|---|
 | 1 | **Search Console baseline** | No access to Search Console, Analytics or backlink data; traffic decisions are unverified | Phase 3 exports (pages, queries, image search, indexing, links) for the www and domain properties, joined into `SEO-URL-MAPPING.csv`; any URL with traffic or links that isn't mapped gets a rule | NOT STARTED |
-| 2 | **Netlify deploy preview** | No site | Staging per `MIGRATION-DOCS/NETLIFY-STAGING-PLAN.md`, **only when approved**; then `verify-migration.mjs --base <preview> --expect-noindex` and the checks in audit §8 (real 301s and 404s, percent-encoded FAQ URL, case variants) | NOT STARTED |
+| 2 | **Netlify deploy preview** | No site. Local checks are complete; ready for isolated staging once approved | Staging per `MIGRATION-DOCS/NETLIFY-STAGING-PLAN.md`, **only when approved**; then `verify-migration.mjs --base <preview> --expect-noindex` and the checks in audit §8 (real 301s and 404s, percent-encoded FAQ URL, case variants) | NOT STARTED |
 | 3 | **Web3Forms keys** | Quote, Booking and Franchise forms are disabled (phone/email shown instead) | A Tri-City key (shop inbox wrap@wraptorstricity.com) and a franchise key in Netlify; never reuse Hamilton's or Dubai's. Test delivery on the preview | NOT STARTED |
 | 4 | **Map pin and Maps link** | From the live site's Google listing (43.511926, -80.5237892); about 16 m from OpenStreetMap's point for no. 745 | Confirm the pin marks #8 (the address itself is confirmed) | CLIENT APPROVAL REQUIRED |
 | 5 | **Launch sign-off** | — | Written GO from the client; backups of the WordPress site; DNS records recorded; rollback owner (playbook phase 12) | NOT STARTED |
@@ -33,7 +35,7 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 | # | Item | Status |
 |---|---|---|
 | 13 | Per-location `TRUST_COPY` for more unique area pages (audit §5.3); the service-page local sections are done (#6) | CLIENT APPROVAL REQUIRED (new copy) |
-| 14 | Homepage H1 is the slogan, without service or city (as on Hamilton) | CLIENT APPROVAL REQUIRED (visible design) |
+| 14 | Homepage hero copy (2026-11-02): H1 "Vehicle wraps. PPF. Auto styling.", label "Tri-City Studio · Waterloo, ON", and a supporting line naming Waterloo Region. Replaces the slogan H1 | CLIENT APPROVAL REQUIRED (new visible copy) |
 | 15 | Legal pages / online store (hidden until they exist) | NOT STARTED |
 | 16 | Map still image and Tri-City emblem (`media.mapImage`, `media.studioEmblem`) | NOT STARTED |
 | 17 | "Built with the world's most iconic names" brand strip wording | CLIENT APPROVAL REQUIRED (low) |
@@ -44,7 +46,12 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 |---|---|
 | **Address and contact** (client, 2026-10-30): 745 Bridge St W #8, Waterloo, ON N2V 2G6, Canada · 647.990.WRAP (9727) · wrap@wraptorstricity.com · www.wraptorstricity.com. In the footer, Visit Us, `/book/`, `/locations/` and the LocalBusiness schema | VERIFIED LOCALLY |
 | **Redirect map**: 68 rows in `SEO-URL-MAPPING.csv`; 70 legacy URLs pass in one hop or as a real 404 | VERIFIED LOCALLY |
-| **Technical SEO**: titles, descriptions, H1s, canonicals, trailing slashes, internal links, breadcrumbs, sitemap, robots.txt, schema, prerendering; noindex on preview/branch/local builds only | VERIFIED LOCALLY (`MIGRATION-CHECK.md`, 623/623) |
+| **Technical SEO**: titles, descriptions, H1s, canonicals, trailing slashes, internal links, breadcrumbs, sitemap, robots.txt, schema, prerendering; noindex on preview/branch/local builds only | VERIFIED LOCALLY (`MIGRATION-CHECK.md`, 657/657) |
+| **Localhost URLs** removed from the build (hero videos, edition flag); the verifier fails any page or built file that contains one (2026-11-02) | VERIFIED LOCALLY |
+| **`½ ¼` FAQ redirect** written with upper-case `%C2%BD` (Netlify ignores the lower-case form), plus an ASCII-prefix rule for raw UTF-8 requests (2026-11-02) | VERIFIED LOCALLY (confirm on the preview) |
+| **Lint** clean (`npm run lint`) | VERIFIED LOCALLY |
+| **Forms** (mocked; nothing sent): validation, error and retry states, honeypot, customer/franchise key separation, Tri-City subjects, service preselection; disabled with phone/email shown when no keys are set. Real delivery not tested | VERIFIED LOCALLY (33/33) |
+| **Browser**: 33 pages at 1440/834/390, no console errors, failed requests, broken images or overflow | VERIFIED LOCALLY |
 | Unverified `priceRange: "$$$"` removed from the schema | VERIFIED LOCALLY |
 | Visible breadcrumbs + BreadcrumbList on all 11 service pages (in the hero text group) and the 3 area pages (replacing the back link) | VERIFIED LOCALLY (623/623; browser at 1440/834/390) |
 | Old blog posts reviewed one by one; "5 things you might not know about vehicle wraps" → `/services/wraps/` (the other two stay on the commercial section) | VERIFIED LOCALLY |
@@ -62,6 +69,7 @@ The values go in Netlify's environment variables only, and need a rebuild to tak
 ## Business details to verify
 
 - Address, phone and email: **confirmed by the client 2026-10-30** (see Done above). Only the map pin is still open.
+- Address format: the 2026-11-02 brief writes "745 Bridge St W, Unit 8"; the site uses "#8" as on the live site. Same address; confirm which form matches the Google Business Profile.
 - Opening hours aren't published on the live site; a window decal suggests Mon–Sat 10 am–6 pm (see below). None are shown.
 - The Facebook, YouTube and TikTok links are the wider brand's accounts, as linked from the live site.
 

@@ -1,8 +1,8 @@
 # Migration check — local dist/ (Netlify emulation)
 
-Generated 2026-10-30T14:57:32.647Z by `node scripts/verify-migration.mjs --report MIGRATION-CHECK.md`.
+Generated 2026-11-02T21:23:57.745Z by `node scripts/verify-migration.mjs --report MIGRATION-CHECK.md`.
 
-**623 passed, 0 failed.**
+**657 passed, 0 failed.**
 
 | Group | Checks | Passed | Failed |
 |---|---|---|---|
@@ -11,7 +11,7 @@ Generated 2026-10-30T14:57:32.647Z by `node scripts/verify-migration.mjs --repor
 | Routes | 65 | 65 | 0 |
 | Metadata | 165 | 165 | 0 |
 | Indexing | 33 | 33 | 0 |
-| Content | 67 | 67 | 0 |
+| Content | 101 | 101 | 0 |
 | Structured data | 117 | 117 | 0 |
 | NAP | 66 | 66 | 0 |
 | Internal links | 36 | 36 | 0 |
