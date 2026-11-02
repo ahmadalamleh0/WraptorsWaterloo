@@ -57,7 +57,12 @@
 # (FAQS_PENDING_APPROVAL in src/data/faqs.js) land on the page itself, as
 # do the old /ufaq/ archive and anything else under /ufaq/.
 /ufaq/what-is-a-vehicle-wrap/              /faqs/#what-is-a-vehicle-wrap              301
-/ufaq/whats-the-difference-between-a-%c2%bd-%c2%bc-and-full-wrap/  /faqs/#whats-the-difference-between-a-half-quarter-and-full-wrap  301
+# "½ ¼" in this old URL: Netlify only matches the rule when it is written
+# with UPPERCASE percent-encoding (it then matches %c2%bd, %C2%BD and the
+# slash-less form). A rule with lowercase encoding or the raw characters
+# never matches (tested on the Hamilton Netlify draft, 2026-11-02). The
+# ASCII-prefix rule after the list catches clients that send raw UTF-8.
+/ufaq/whats-the-difference-between-a-%C2%BD-%C2%BC-and-full-wrap/  /faqs/#whats-the-difference-between-a-half-quarter-and-full-wrap  301
 /ufaq/will-the-car-wrap-damage-my-paint/   /faqs/#will-the-car-wrap-damage-my-paint   301
 /ufaq/can-a-car-wrap-be-removed/           /faqs/#can-a-car-wrap-be-removed           301
 /ufaq/will-you-wrap-a-leased-vehicle/      /faqs/#will-you-wrap-a-leased-vehicle      301
@@ -65,6 +70,7 @@
 /ufaq/are-car-wraps-applied-to-windows/    /faqs/#are-car-wraps-applied-to-windows    301
 /ufaq/if-the-company-information-on-my-vehicle-wrap-changes-can-it-be-replaced/  /faqs/#if-the-company-information-on-my-vehicle-wrap-changes-can-it-be-replaced  301
 /ufaq/will-you-pay-me-to-drive-my-car-with-someone-elses-advertising/  /faqs/#will-you-pay-me-to-drive-my-car-with-someone-elses-advertising  301
+/ufaq/whats-the-difference-between-a-*    /faqs/#whats-the-difference-between-a-half-quarter-and-full-wrap  301
 /ufaq/                                     /faqs/                                     301
 /ufaq/*                                    /faqs/                                     301
 

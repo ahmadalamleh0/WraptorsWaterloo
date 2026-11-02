@@ -13,6 +13,11 @@
 // Kept to plain data + asset URLs: vite.config.js imports this file too,
 // to write the static SEO tags and structured data into index.html.
 
+// Root-relative asset URL. `.href` would be absolute to whatever origin the
+// page runs on, and the prerender would bake its own localhost origin into
+// the static HTML. Inlined (data:) assets stay as they are.
+const asset = (url) => (url.protocol === 'data:' ? url.href : url.pathname);
+
 export const LOCATION = {
   id: 'tricity',
   brandName: 'Wraptors Tri-City',
@@ -21,7 +26,7 @@ export const LOCATION = {
   // "Tri-City [flag] Edition" label above the logo (hero intro + navbar).
   edition: {
     label: 'Tri-City',
-    flag: new URL('../../CANADA(FLAG).svg', import.meta.url).href,
+    flag: asset(new URL('../../CANADA(FLAG).svg', import.meta.url)),
   },
 
   // Matches the live Tri-City site, which serves from the www host.
@@ -92,8 +97,8 @@ export const LOCATION = {
     // meet, not the Tri-City studio), vertical 1080x1920: mobile is the full
     // frame at 720x1280, desktop a centred 16:9 crop. Replace with Tri-City
     // footage when supplied.
-    heroVideoMobile: new URL('../../hero-carmeet-mobile.mp4', import.meta.url).href,
-    heroVideoDesktop: new URL('../../hero-carmeet-desktop.mp4', import.meta.url).href,
+    heroVideoMobile: asset(new URL('../../hero-carmeet-mobile.mp4', import.meta.url)),
+    heroVideoDesktop: asset(new URL('../../hero-carmeet-desktop.mp4', import.meta.url)),
     // Still image the Visit Us map zooms into before the live map loads.
     // mapImagePin is where the pin's tip sits in the image. TODO(tricity):
     // no Waterloo still yet (null = no still; the live map still loads on
