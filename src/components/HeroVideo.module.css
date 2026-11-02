@@ -204,22 +204,6 @@
   will-change: transform, opacity;
 }
 
-/* ── Supporting line under the headline — names the city ── */
-.heroSupport {
-  font-family: var(--font-ui);
-  font-size: clamp(0.82rem, 1vw, 1rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.74);
-  text-align: center;
-  max-width: 36em;
-  margin: 16px auto 0;
-  text-wrap: balance;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
-  will-change: transform, opacity;
-}
-
 /* ── Red blade separator ── */
 .ruler {
   width: 56px;
@@ -359,7 +343,6 @@
   }
   .ruler       { margin: 22px auto 20px; will-change: auto; }
   .heroLabel   { font-size: 0.56rem; letter-spacing: 0.26em; margin-bottom: 12px; will-change: auto; }
-  .heroSupport { font-size: 0.8rem; line-height: 1.55; max-width: 30em; margin-top: 12px; will-change: auto; }
   .subLine     {
     font-size: clamp(0.62rem, 3.2vw, 0.85rem);
     color: rgba(255, 255, 255, 0.55);

@@ -38,7 +38,6 @@ export default function HeroVideo() {
   const videoRef      = useRef(null); // Video Mode only
   const labelRef       = useRef(null);
   const line1Ref       = useRef(null);
-  const supportRef     = useRef(null);
   const line2Ref       = useRef(null);
   const rulerRef        = useRef(null);
   const subLineRef     = useRef(null);
@@ -68,7 +67,7 @@ export default function HeroVideo() {
     // gap: Hero.jsx's own slide-away just uncovered *another* opaque black
     // layer, which then had its own fade still left to run.
     gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 36 });
-    gsap.set([labelRef.current, supportRef.current], { opacity: 0, y: 14 });
+    gsap.set(labelRef.current, { opacity: 0, y: 14 });
     gsap.set(rulerRef.current, { scaleX: 0, transformOrigin: 'center center' });
     gsap.set(subLineRef.current, { opacity: 0, y: 20 });
     gsap.set(ctaRef.current, { opacity: 0, y: 16 });
@@ -79,7 +78,6 @@ export default function HeroVideo() {
       .to(labelRef.current,   { opacity: 1, y: 0, duration: 0.8 }, 0)
       .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.08)
       .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.25)
-      .to(supportRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.40)
       .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       0.40)
       .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, 0.57)
       .to(ctaRef.current,     { opacity: 1, y: 0, duration: 0.8 }, 0.70)
@@ -297,10 +295,9 @@ export default function HeroVideo() {
             page (and its most important heading) with no H1 at all. */}
         <p ref={labelRef} className={styles.heroLabel}>{LOCATION.hero.label}</p>
         <h1 className={styles.mainHeadline}>
-          <span ref={line1Ref} className={styles.mainLine}>{LOCATION.hero.headline[0]}</span>
-          <span ref={line2Ref} className={styles.mainLine}>{LOCATION.hero.headline[1]}</span>
+          <span ref={line1Ref} className={styles.mainLine}>Crafted with purpose.</span>
+          <span ref={line2Ref} className={styles.mainLine}>Built for legacy.</span>
         </h1>
-        <p ref={supportRef} className={styles.heroSupport}>{LOCATION.hero.support}</p>
       </div>
 
       {/* Lower group — ruler, subline and CTA, positioned above the scroll

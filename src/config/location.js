@@ -29,13 +29,10 @@ export const LOCATION = {
     flag: asset(new URL('../../CANADA(FLAG).svg', import.meta.url)),
   },
 
-  // Homepage hero copy: small location label, the two headline lines (the
-  // homepage H1), and a short supporting line under it. Services only: no
-  // ratings, review counts or rankings here.
+  // Small location label above the homepage H1. No ratings, review counts
+  // or rankings here.
   hero: {
     label: 'Tri-City Studio · Waterloo, ON',
-    headline: ['Vehicle wraps. PPF.', 'Auto styling.'],
-    support: 'Wraps, paint protection film and styling from our Waterloo studio, for drivers across Waterloo Region.',
   },
 
   // Matches the live Tri-City site, which serves from the www host.
