@@ -381,6 +381,17 @@
   .colServices { grid-column: 1 / -1; }
   .colServices nav { columns: 2; column-gap: 20px; }
   .colServices nav > a { break-inside: avoid; }
+
+  /* Photo footer: Services starts just below the boat instead of over it.
+     The extra room would grow the footer and, with it, the cover-fit photo
+     (bigger boat, lower boat), so the photo and its gradient keep their
+     previous height and the added strip at the bottom is the footer's own
+     black, which is where the gradient already ends. */
+  .footer:not(.footerSolid) { --services-drop: 92px; }
+  .footer:not(.footerSolid) .colServices { margin-top: var(--services-drop); }
+  .footer:not(.footerSolid) .bg,
+  .footer:not(.footerSolid) .overlay { bottom: auto; height: calc(100% - var(--services-drop)); }
+  .footer:not(.footerSolid) .contentScrim { height: calc((100% - var(--services-drop)) * 0.62 + var(--services-drop)); }
   .footerSolid .brand { grid-column: 1 / -1; margin-bottom: 4px; }
   .logoSolid { width: 64px; }
 }

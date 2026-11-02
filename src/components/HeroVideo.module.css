@@ -320,7 +320,9 @@
   .textOverlay { padding: 9vh 28px 4vh; }
   .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); gap: 7px; }
   .mainLine    {
-    font-size: clamp(2.6rem, 11vw, 4rem);
+    /* ~22% smaller than before: each phrase holds one line (two lines
+       total), sitting lighter over the video. */
+    font-size: clamp(1.75rem, 8.6vw, 3.1rem);
     line-height: 0.95;
     letter-spacing: 0.04em;
     will-change: auto;
