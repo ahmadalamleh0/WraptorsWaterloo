@@ -35,7 +35,8 @@ SEO detail behind each item: `SEO-MIGRATION-AUDIT.md`. Nothing has been deployed
 | # | Item | Status |
 |---|---|---|
 | 13 | Per-location `TRUST_COPY` for more unique area pages (audit §5.3); the service-page local sections are done (#6) | CLIENT APPROVAL REQUIRED (new copy) |
-| 14 | Homepage hero copy (2026-11-02): H1 "Vehicle wraps. PPF. Auto styling.", label "Tri-City Studio · Waterloo, ON", and a supporting line naming Waterloo Region. Replaces the slogan H1 | CLIENT APPROVAL REQUIRED (new visible copy) |
+| 14 | Homepage hero (2026-11-02): slogan H1 "Crafted with purpose. / Built for legacy." restored at the client's request; only the label "Tri-City Studio · Waterloo, ON" above it is new | CLIENT APPROVAL REQUIRED (label only) |
+| 18 | **Wider service area (2026-11-02)**: two new area pages, `/areas/guelph/` and `/areas/london/` (35 pages now); the Service Areas section names Brantford, Woodstock, Stratford, Milton, Fergus, Elmira, New Hamburg and Paris in one line, with "every appointment at the Waterloo studio, no mobile service"; site-wide JSON-LD `areaServed` lists all 13 places (`LOCATION.serviceArea`). No pages for Brantford or Milton (next to the Hamilton and GTA studios' areas), nor for Woodstock or Stratford (would repeat the London/Cambridge copy). Drive times ("about half an hour" Guelph, "a little over an hour" London) and road references need a check | CLIENT APPROVAL REQUIRED (new visible copy) |
 | 15 | Legal pages / online store (hidden until they exist) | NOT STARTED |
 | 16 | Map still image and Tri-City emblem (`media.mapImage`, `media.studioEmblem`) | NOT STARTED |
 | 17 | "Built with the world's most iconic names" brand strip wording | CLIENT APPROVAL REQUIRED (low) |

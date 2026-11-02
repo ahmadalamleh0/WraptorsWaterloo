@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ServiceAreas.module.css';
-import { getFeaturedLocations, SERVICE_AREAS_INTRO } from '../data/geoLocations';
+import { getFeaturedLocations, SERVICE_AREAS_INTRO, SERVICE_AREAS_WIDER } from '../data/geoLocations';
 
 const INITIAL_COUNT = 5;
 
@@ -29,6 +29,8 @@ export default function ServiceAreas() {
             </Link>
           ))}
         </div>
+
+        {SERVICE_AREAS_WIDER && <p className={styles.wider}>{SERVICE_AREAS_WIDER}</p>}
 
         {hasMore && !expanded && (
           <button type="button" className={styles.viewAll} onClick={() => setExpanded(true)}>

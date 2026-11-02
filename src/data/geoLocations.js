@@ -35,7 +35,7 @@ const STUDIO = `${LOCATION.address.street}, ${LOCATION.address.locality}`;
 
 // One line under the homepage "Service Areas" heading: there is a single
 // studio, and the area pages are about where its customers come from.
-export const SERVICE_AREAS_INTRO = `${LOCATION.brandName} works from one studio, at ${LOCATION.address.display}. Drivers from Waterloo, Kitchener, Cambridge and the surrounding townships bring their vehicles to us.`;
+export const SERVICE_AREAS_INTRO = `${LOCATION.brandName} works from one studio, at ${LOCATION.address.display}. Drivers from across Waterloo Region, Guelph, London and the rest of Southwestern Ontario bring their vehicles to us.`;
 
 export const SERVICE_CATALOG = {
   wraps:     { label: 'Vehicle Wraps',        path: '/services/wraps/' },
@@ -101,10 +101,13 @@ export const COMMON_FAQS = [
   },
 ];
 
-// Area pages for the three cities of Waterloo Region. One studio, in
-// Waterloo; Kitchener and Cambridge describe drivers coming in from there.
-// Only the three cities are covered — no township pages written just to
-// target more place names.
+// Area pages: the three cities of Waterloo Region, plus Guelph and London,
+// the two larger markets beyond it with their own driving to write about.
+// One studio, in Waterloo; every other page describes drivers coming in
+// from there. Brantford, Woodstock, Stratford and the smaller towns are
+// named in SERVICE_AREAS_WIDER rather than given near-identical pages;
+// Brantford and Milton also border the Wraptors Hamilton and GTA studios'
+// areas, so this site doesn't target them with pages.
 export const LOCATIONS = [
   {
     // The only page that presents itself as the physical location.
@@ -144,7 +147,7 @@ export const LOCATIONS = [
       { q: 'What can be done at the studio besides wraps?', a: 'Paint protection film, window tint, ceramic coating, auto detailing, custom interiors, starlight and galaxy headliners, racing stripes, decals, and caliper and wheel painting.' },
       ...COMMON_FAQS,
     ],
-    relatedAreas: ['kitchener', 'cambridge'],
+    relatedAreas: ['kitchener', 'cambridge', 'guelph', 'london'],
     featuredOnHomepage: true,
     homepageDisplayOrder: 1,
   },
@@ -185,7 +188,7 @@ export const LOCATIONS = [
       { q: 'Can a wrap and PPF be done at the same time?', a: 'Yes. They can be planned together so the finish and the protection suit each other, for example a colour-change wrap with clear film over the front end.' },
       ...COMMON_FAQS,
     ],
-    relatedAreas: ['waterloo', 'cambridge'],
+    relatedAreas: ['waterloo', 'cambridge', 'guelph'],
     featuredOnHomepage: true,
     homepageDisplayOrder: 2,
   },
@@ -226,11 +229,103 @@ export const LOCATIONS = [
       { q: 'Does window tint help on long highway drives?', a: 'Tint reduces glare and the heat that builds up through the glass, which makes long drives more comfortable. Which film and shade suit the car is worth talking through at the studio.' },
       ...COMMON_FAQS,
     ],
-    relatedAreas: ['waterloo', 'kitchener'],
+    relatedAreas: ['waterloo', 'kitchener', 'london'],
     featuredOnHomepage: true,
     homepageDisplayOrder: 3,
   },
+  {
+    // East of Waterloo Region on Highway 7; Wellington County around it.
+    locationName: 'Guelph',
+    slug: 'guelph',
+    primaryKeyword: 'car wrapping Guelph',
+    secondaryKeywords: ['car wrap Guelph', 'PPF Guelph', 'window tint Guelph', 'ceramic coating Guelph'],
+    seoTitle: 'Car Wraps, PPF & Window Tint for Guelph Drivers | Wraptors',
+    metaDescription: 'Guelph drivers bring their vehicles to the Wraptors Tri-City studio in Waterloo, about half an hour away, for wraps, PPF, window tint and ceramic coating.',
+    h1: 'Car Wraps, PPF & Window Tint for Guelph Drivers',
+    eyebrow: 'Wraptors Tri-City · Guelph',
+    heroCopy: [
+      `Guelph sits just east of Waterloo Region, and for most Guelph drivers the Wraptors Tri-City studio at ${STUDIO} is about half an hour away, by Highway 7 through Kitchener or by Highway 6 and the 401.`,
+      'There is no Wraptors studio in Guelph itself. Every wrap, film, tint and coating is planned and installed at the Waterloo studio, so a full build can be organised around one drop-off.',
+    ],
+    localAngleHeading: 'The Hanlon and the county roads.',
+    localAngle: [
+      'In the city, a lot of driving runs along the Hanlon Expressway and the roads that feed it, with stop-and-go traffic and plenty of loose grit in winter. Commuters heading toward Waterloo Region or the GTA add highway kilometres on Highway 7, Highway 6 and the 401, and that is where front ends pick up chips.',
+      'Out of town in Wellington County the roads change: rural concessions, gravel shoulders and farm traffic throw stones and dust at the lower doors and rocker panels. Film low on the car and a coating that sheds road film make both kinds of driving easier on the finish.',
+    ],
+    trustHeading: 'Looking for a car wrap shop near Guelph?',
+    services: [
+      { id: 'ppf',     title: 'PPF for Guelph Commuters',           description: 'Front-end film for Highway 7 and 401 commuting, plus rocker and lower-door coverage for cars that see county roads.' },
+      { id: 'wraps',   title: 'Car Wraps for Guelph Drivers',       description: 'Colour changes, partial wraps, stripes and decals, planned around the car and installed at the Waterloo studio.' },
+      { id: 'ceramic', title: 'Ceramic Coating for Guelph Drivers', description: 'A coating that helps winter salt and summer dust from gravel roads rinse off paint, wheels or film more easily.' },
+      { id: 'tint',    title: 'Window Tint for Guelph Drivers',     description: "Privacy, glare and heat control for commuting and summer drives, chosen within Ontario's rules for each window." },
+    ],
+    whyWraptorsLocal: {
+      title: 'One Drop-Off, Full Build',
+      description: 'Wrap, film, tint and coating can be planned together, so a Guelph customer can have the whole build handled at the Waterloo studio.',
+    },
+    faqs: [
+      { q: 'Is there a Wraptors studio in Guelph?', a: `No. The Tri-City studio is in Waterloo, at ${LOCATION.address.display}, and Guelph customers bring their vehicles there. All work is done at the studio; there is no mobile service.` },
+      { q: 'Can I plan the build before I drive in?', a: `Yes. Call ${LOCATION.contact.phoneDisplay} or email ${LOCATION.contact.email} with the vehicle and what you have in mind, and the options can be talked through before you make the trip. The final quote is confirmed once the team has seen the car.` },
+      { q: 'Is it worth protecting the lower panels on a car driven on county roads?', a: 'If the car regularly sees gravel or rural roads, usually yes. Stones thrown up by the tires hit the lower doors, rocker panels and the area behind the wheels, so film there pairs well with front-end coverage.' },
+      { q: 'Can a wrap and PPF be combined?', a: 'Yes. A colour-change wrap with clear film over the front end is a common pairing, and planning both at once means the finish and the protection suit each other.' },
+      ...COMMON_FAQS,
+    ],
+    relatedAreas: ['waterloo', 'kitchener', 'cambridge'],
+    featuredOnHomepage: true,
+    homepageDisplayOrder: 4,
+  },
+  {
+    // Southwestern Ontario's largest city, west on the 401.
+    locationName: 'London',
+    slug: 'london',
+    primaryKeyword: 'car wrapping London Ontario',
+    secondaryKeywords: ['car wrap London Ontario', 'PPF London Ontario', 'window tint London Ontario', 'ceramic coating London Ontario'],
+    seoTitle: 'Car Wraps, PPF & Window Tint for London, ON Drivers | Wraptors',
+    metaDescription: 'London, Ontario drivers make the trip up the 401 to the Wraptors Tri-City studio in Waterloo for wraps, paint protection film, window tint and ceramic coating.',
+    h1: 'Car Wraps, PPF & Window Tint for London Drivers',
+    eyebrow: 'Wraptors Tri-City · London',
+    heroCopy: [
+      `London is the largest city in Southwestern Ontario, and drivers there make the trip along Highway 401 to the Wraptors Tri-City studio at ${STUDIO}, a little over an hour away.`,
+      'Because it is a longer drive, it makes sense to plan the whole build at once: wrap, film, tint and coating can all be handled at the Waterloo studio.',
+    ],
+    localAngleHeading: 'Where the 401 meets the 402.',
+    localAngle: [
+      'London sits where Highway 401 meets Highway 402, so a lot of local driving is highway driving: toward Toronto, Windsor or Sarnia, often in heavy truck traffic. That is the quickest way to chip a front bumper, hood and mirrors, and the drive to Waterloo is 401 kilometres too.',
+      'In the city, lake-effect snow off Lake Huron makes for a long season of salt and slush, and busy lots and street parking add their own scuffs. Front-end protection and a coating that makes washing easier are the sensible places to start.',
+    ],
+    trustHeading: 'Looking for a car wrap shop near London?',
+    services: [
+      { id: 'ppf',     title: 'PPF for 401 and 402 Drivers',        description: 'Clear film on the bumper, hood, fenders and mirrors, the panels that take chips on long highway runs behind trucks.' },
+      { id: 'wraps',   title: 'Car Wraps for London Drivers',       description: 'Colour changes, partial wraps, stripes and decals, planned in advance so the build fits around your trip to the studio.' },
+      { id: 'ceramic', title: 'Ceramic Coating for London Drivers', description: 'Easier washing through a snowbelt winter, on paint, wheels or over paint protection film.' },
+      { id: 'tint',    title: 'Window Tint for Highway Driving',    description: "Less glare and heat on long drives, with the film and shade chosen within Ontario's rules for each window." },
+    ],
+    whyWraptorsLocal: {
+      title: 'Planned Around The Drive',
+      description: 'Options and timing can be talked through by phone or email first, so the trip to Waterloo is for the work itself.',
+    },
+    faqs: [
+      { q: 'Is there a Wraptors studio in London?', a: `No. The Tri-City studio is in Waterloo, at ${LOCATION.address.display}, and London customers bring their vehicles there. All work is done at the studio; there is no mobile service.` },
+      { q: 'Can I talk through the build before making the drive?', a: `Yes. Call ${LOCATION.contact.phoneDisplay}, email ${LOCATION.contact.email} or send a quote request through this site with the vehicle and what you have in mind. The final quote is confirmed once the team has seen the car.` },
+      { q: 'Can several services be done in one visit?', a: 'They can be planned as one build, for example a colour-change wrap with clear film on the front end and window tint. How long the car stays at the studio depends on the work, and is confirmed at consultation.' },
+      { q: 'Does film or a coating help with snowbelt winters?', a: 'Neither stops snow and salt from landing on the car. Film takes the hit from grit and stones on the panels it covers, and a ceramic coating makes salt and slush easier to rinse off, so the two are often paired.' },
+      ...COMMON_FAQS,
+    ],
+    relatedAreas: ['waterloo', 'cambridge', 'kitchener'],
+    featuredOnHomepage: true,
+    homepageDisplayOrder: 5,
+  },
 ];
+
+// Places customers come from that have no page of their own, shown as one
+// line in the Service Areas section. Derived from LOCATION.serviceArea, so a
+// place that later gets a page drops out of this line automatically.
+const AREA_PAGE_NAMES = new Set(LOCATIONS.map((loc) => loc.locationName));
+const WIDER = [...LOCATION.serviceArea.priority, ...LOCATION.serviceArea.surrounding]
+  .filter((name) => !AREA_PAGE_NAMES.has(name));
+export const SERVICE_AREAS_WIDER = WIDER.length
+  ? `We also welcome drivers from ${WIDER.slice(0, -1).join(', ')} and ${WIDER.at(-1)}. Every appointment takes place at our Waterloo studio; we don't offer mobile service.`
+  : '';
 
 export function getLocationBySlug(slug) {
   return LOCATIONS.find((loc) => loc.slug === slug);

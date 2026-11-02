@@ -25,7 +25,7 @@ export const SERVICE_LOCAL = {
   wraps: {
     heading: 'Wrapped In Waterloo.',
     body: [
-      `Every wrap is planned and installed at our studio at ${STUDIO}. ${LOCATION.brandName} has one studio, here in Waterloo, and customers from Kitchener, Cambridge and the surrounding townships bring their vehicles to it.`,
+      `Every wrap is planned and installed at our studio at ${STUDIO}. ${LOCATION.brandName} has one studio, here in Waterloo, and customers from across Waterloo Region, Guelph, London and the rest of Southwestern Ontario bring their vehicles to it.`,
       'For a business vehicle, the Region is the audience. A van or pickup that works the 401, the Conestoga Parkway and Highway 8 every day is seen by a lot of local drivers, so we lay out commercial designs to read at a distance and in traffic, and to stay legible under a winter of road spray.',
     ],
   },
@@ -47,7 +47,7 @@ export const SERVICE_LOCAL = {
     heading: 'Summer Sun, Winter Glare.',
     body: [
       'Southern Ontario summers bring long, hot days, and a car parked in an open lot all day gets the full sun through the glass. Low winter sun reflecting off snow can be just as hard on the eyes. A quality film helps with heat and glare in both seasons and keeps the interior out of the sun.',
-      `Ontario's Highway Traffic Act sets rules for tint on vehicle windows, so we go through what applies to each window of your car before anything is fitted. Tint is installed at our studio in ${LOCATION.address.locality}; customers come in from across Waterloo Region.`,
+      `Ontario's Highway Traffic Act sets rules for tint on vehicle windows, so we go through what applies to each window of your car before anything is fitted. Tint is installed at our studio in ${LOCATION.address.locality}; customers come in from across Waterloo Region and beyond.`,
     ],
   },
   detailing: {

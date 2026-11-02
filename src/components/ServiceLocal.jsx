@@ -23,7 +23,8 @@ export default function ServiceLocal({ service }) {
           <span className={styles.areasLabel}>Areas we serve</span>
           {areas.map((loc, i) => (
             <span key={loc.slug}>
-              {i > 0 && <span className={styles.dot} aria-hidden="true">·</span>}
+              {/* <wbr> lets the row wrap between areas on narrow screens. */}
+              {i > 0 && <><span className={styles.dot} aria-hidden="true">·</span><wbr /></>}
               <Link to={`/areas/${loc.slug}/`}>{loc.locationName}</Link>
             </span>
           ))}

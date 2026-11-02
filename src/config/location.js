@@ -120,11 +120,22 @@ export const LOCATION = {
     ogImage: '/og-image.jpg',
   },
 
+  // Where customers come from. Every appointment is at the one Waterloo
+  // studio: no mobile service and no other Tri-City locations. Only core
+  // and some priority places have their own /areas/ page (geoLocations.js);
+  // the rest are named on the Service Areas section and in the site-wide
+  // JSON-LD. Brantford and Milton sit next to the Wraptors Hamilton and GTA
+  // studios' areas, so they are listed but get no dedicated page.
+  serviceArea: {
+    core: ['Waterloo', 'Kitchener', 'Cambridge'],
+    priority: ['Guelph', 'London', 'Brantford', 'Woodstock', 'Stratford'],
+    surrounding: ['Milton', 'Fergus', 'Elmira', 'New Hamburg', 'Paris'],
+  },
+
   seo: {
     title: 'Wraptors Tri-City | Car Wraps, PPF, Window Tint & Ceramic Coating',
-    description: 'Vehicle wraps, paint protection film, window tint, ceramic coating and custom interiors from the Wraptors Tri-City studio in Waterloo, Ontario.',
+    description: 'Vehicle wraps, PPF, window tint, ceramic coating and custom interiors at the Wraptors Tri-City studio in Waterloo, for drivers across Southwestern Ontario.',
     businessDescription: 'Vehicle wraps, paint protection film, window tint, ceramic coating and custom automotive styling in Waterloo, Ontario.',
-    areaServed: 'Waterloo, Kitchener and Cambridge, Ontario, Canada',
     appName: 'WRAPTORS — Tri-City Wraps, PPF, Tint & Styling',
     appDescription: 'Vehicle wraps, PPF, window tint and automotive styling in Waterloo, Ontario.',
   },
@@ -151,7 +162,7 @@ export const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&desti
 // The business entity behind every page — used for the site-wide JSON-LD
 // in index.html and as the provider on GEO pages.
 export function localBusinessSchema() {
-  const { brandName, contact, address, seo } = LOCATION;
+  const { brandName, contact, address, serviceArea } = LOCATION;
   return {
     '@type': 'AutomotiveBusiness',
     name: brandName,
@@ -165,7 +176,8 @@ export function localBusinessSchema() {
       ...(address.postalCode && { postalCode: address.postalCode }),
       addressCountry: address.country,
     },
-    areaServed: seo.areaServed,
+    areaServed: [...serviceArea.core, ...serviceArea.priority, ...serviceArea.surrounding]
+      .map((name) => ({ '@type': 'Place', name: `${name}, Ontario` })),
     ...(address.mapsUrl && { hasMap: address.mapsUrl }),
   };
 }
