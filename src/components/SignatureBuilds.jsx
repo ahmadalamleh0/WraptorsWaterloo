@@ -199,11 +199,11 @@ const BUILDS = [
 // Wraptors brand follow at the end of each row. Rows look builds up by
 // brandName in BUILDS above.
 const MASTERPIECE_ROW_1 = [
-  'Chevrolet Corvette C7', 'Mercedes-AMG E 63 S', 'Audi RS Q8', 'Classic Lincoln',
+  'McLaren 720S', 'Mercedes-AMG E 63 S', 'Audi RS Q8', 'Classic Lincoln',
   'Lamborghini LBWK', 'Ferrari F8', 'Porsche 911 GTS', 'Aston Martin',
 ];
 const MASTERPIECE_ROW_2 = [
-  'McLaren 720S', 'Nissan Skyline R34', 'Tesla Model Y',
+  'Chevrolet Corvette C7', 'Nissan Skyline R34', 'Tesla Model Y',
   'Bentley', 'McLaren', 'BRABUS 800 S-Class', 'Lamborghini', 'Ferrari 488 Spider',
 ];
 const MASTERPIECE_ROWS = [MASTERPIECE_ROW_1, MASTERPIECE_ROW_2].map(
