@@ -3,32 +3,32 @@
 ## Setup
 | | |
 |---|---|
-| Project |  (id d1c3ec3c-d50d-498e-b0cb-15fe1cbccfff), team thediablo |
+| Project | `wraptors-tricity-staging` (id d1c3ec3c-d50d-498e-b0cb-15fe1cbccfff), team thediablo |
 | Deploy | Manual **draft** 6ae921d5dd698f1e5481ba6a: https://6ae921d5dd698f1e5481ba6a--wraptors-tricity-staging.netlify.app |
 | Source | Local commit b6efb45 (includes the McLaren reorder f2b422c and the Guelph/London service-area work); not on GitHub yet |
-| Isolation | No Git repo connected, no custom domain or alias, nothing published (project URL returns 404). Never deployed with  |
-| Build |  with no CONTEXT, so every page has  |
-| Staging-only header |  appended to  before upload; not in source, never on main. Netlify also adds its own  to draft URLs |
+| Isolation | No Git repo connected, no custom domain or alias, nothing published (the project URL returns 404). Never deployed with `--prod` |
+| Build | `npm run build` with no CONTEXT, so every page has `<meta name="robots" content="noindex, nofollow">` |
+| Staging-only header | `/*  X-Robots-Tag: noindex, nofollow` appended to `dist/_headers` before upload; not in source, never on main. Netlify also adds its own `X-Robots-Tag: noindex` to draft URLs |
 | Forms | Disabled (no Web3Forms keys); phone and email shown instead. Not tested here |
 
 ## Results (real Netlify HTTP responses)
 | Check | Result |
 |---|---|
-|  (detail below) | **692/692 PASS** (local run is 693: the extra check scans the local dist/ folder for localhost URLs and only runs locally; it passed) |
+| `verify-migration.mjs --base <draft> --expect-noindex` (detail below) | **692/692 PASS** (the local run is 693: the extra check scans the local dist/ folder for localhost URLs and only runs locally; it passed) |
 | Pages in sitemap | 35, all 200 |
 | noindex in **both** HTML meta and X-Robots-Tag header | 35/35 pages; also on 404 responses |
 | Legacy URLs | 70/70 reach their expected target. 52 redirect hops, **all 301** (no 302/307/308); 8 intended 404s |
-| 404s | Unknown paths (, , ) return 404 with the site's 404 page |
-| Trailing slash |  and  301 to the slash URL |
+| 404s | Unknown paths (`/this-page-does-not-exist/`, `/areas/toronto/`, `/services/nope/`) return 404 with the site's 404 page |
+| Trailing slash | `/areas/guelph` and `/services/ppf` 301 to the slash URL |
 | Canonicals, titles, descriptions, H1s, structured data, NAP, internal links | PASS (groups below) |
-| sitemap.xml / robots.txt | 200; robots.txt  + production sitemap URL (intended for launch; staging is held out by noindex) |
-| Assets | 198/198 referenced files return 200;  served  |
-| Browser, 35 pages × 1440 / 834 / 390 | **105 loads, 0 issues** (no console errors, failed requests, broken images or horizontal overflow) |
+| sitemap.xml / robots.txt | 200; robots.txt is `Allow: /` plus the production sitemap URL (intended for launch; staging is held out by noindex) |
+| Assets | 198/198 referenced files return 200; `/assets/*` served `public,max-age=31536000,immutable` |
+| Browser, 35 pages × 1440 / 834 / 390 | **105 loads, 0 issues** (no console errors, failed requests, broken images or horizontal overflow). A first run was cut off by a local internet dropout and re-run in full |
 
 Failed checks: **none**. Unverified: real form delivery (forms disabled), production-context indexing (A2 / launch only).
 
 ## Page count 33 → 35
-The two new area pages from b6efb45,  and . They come from  in , which also drives the prerender route list and the sitemap. Live sitemap has both; each has its own title, description, canonical, single H1, Service + BreadcrumbList JSON-LD, and appears in the per-route groups (Indexing 33→35, Metadata 165→175, Structured data 117→125, NAP 66→70, Internal links 36→38).
+The two new area pages from b6efb45, `/areas/guelph/` and `/areas/london/`. They come from `LOCATIONS` in `src/data/geoLocations.js`, which also drives the prerender route list and the sitemap. The live sitemap lists both; each has its own title, description, canonical, single H1 and Service + BreadcrumbList JSON-LD, and is covered by the per-route groups (Indexing 33→35, Metadata 165→175, Structured data 117→125, NAP 66→70, Internal links 36→38).
 
 ---
 
