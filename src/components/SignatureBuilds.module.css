@@ -316,9 +316,10 @@
   align-items: center;
 }
 .logo {
-  height: 68px;
+  /* Smaller, quieter brand mark (was 68px / 160px). */
+  height: 44px;
   width: auto;
-  max-width: 160px;
+  max-width: 104px;
   object-fit: contain;
   /* Keep the filter constant — never animate it. Safari flashes black when
      a filter transition starts because it briefly drops the compositing layer.
