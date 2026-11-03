@@ -4,7 +4,7 @@ import styles from './MobileQuoteCta.module.css';
 
 // Mobile-only floating "Get a Quote" link. Fades in once the visitor has
 // scrolled past the hero, and steps aside whenever a quote form (#cta) is
-// on screen. Bottom-left, opposite the WhatsApp button and the same height,
+// on screen (or the footer, which has its own quote link). Bottom-left, opposite the WhatsApp button and the same height,
 // so the two read as a pair. Goes to the page's own quote form if it has
 // one, otherwise to the homepage form.
 export default function MobileQuoteCta() {
@@ -22,7 +22,11 @@ export default function MobileQuoteCta() {
         const r = form.getBoundingClientRect();
         formInView = r.top < window.innerHeight && r.bottom > 0;
       }
-      setVisible(pastHero && !formInView);
+      // The footer has its own Get a Quote link, and the pill would sit over
+      // its text, so step aside there too.
+      const footer = document.querySelector('footer');
+      const footerInView = Boolean(footer) && footer.getBoundingClientRect().top < window.innerHeight;
+      setVisible(pastHero && !formInView && !footerInView);
     };
     const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
