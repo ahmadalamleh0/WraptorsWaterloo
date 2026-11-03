@@ -1,0 +1,74 @@
+/* ══ MOBILE QUOTE CTA ══
+   Same family as the floating WhatsApp button: dark, thin white border, no
+   colour block. Bottom-left at the WhatsApp button's height (46px, 18px
+   from the edge) so the pair sits level. Mobile and small tablets only. */
+.cta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .cta {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 60;
+    height: 46px;
+    padding: 0 18px 0 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: 999px;
+    background: rgba(8, 8, 8, 0.72);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    backdrop-filter: blur(12px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.45s,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .cta:active,
+  .cta:focus-visible {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.88);
+  }
+
+  .arrow {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  .cta, .visible { transform: none; }
+}

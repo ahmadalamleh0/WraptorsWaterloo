@@ -203,7 +203,7 @@ const MASTERPIECE_ROW_1 = [
   'Lamborghini LBWK', 'Ferrari F8', 'Porsche 911 GTS', 'Aston Martin',
 ];
 const MASTERPIECE_ROW_2 = [
-  'Chevrolet Corvette C7', 'Nissan Skyline R34', 'Tesla Model Y',
+  'Nissan Skyline R34', 'Chevrolet Corvette C7', 'Tesla Model Y',
   'Bentley', 'McLaren', 'BRABUS 800 S-Class', 'Lamborghini', 'Ferrari 488 Spider',
 ];
 const MASTERPIECE_ROWS = [MASTERPIECE_ROW_1, MASTERPIECE_ROW_2].map(

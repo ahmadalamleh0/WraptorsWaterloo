@@ -64,6 +64,7 @@ import YoutubeReel from './components/YoutubeReel';
 // restore by re-adding this import and <Academy /> below Reviews.
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import MobileQuoteCta from './components/MobileQuoteCta';
 
 // Service page template
 import ServicePage from './components/ServicePage';
@@ -345,12 +346,12 @@ function HomePage() {
         )}
         <Statement />
         <SignatureBuilds />
-        {/* Where the studio is, who it serves, the wider network, then the quote form. */}
+        {/* Where the studio is, who it serves (brands banner after it, as before), the wider network, then the quote form. */}
         <VisitUs />
         <ServiceAreas />
+        <TrustedBrands />
         <GlobalLocations />
         <QuoteSection id="cta" />
-        <TrustedBrands />
         <ClientReviews />
         <Icons />
         <YoutubeReel />
@@ -401,6 +402,8 @@ export default function App() {
       <Route path="/articles" element={<PressPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    {/* Mobile-only floating Get a Quote link, site-wide. */}
+    <MobileQuoteCta />
     </>
   );
 }

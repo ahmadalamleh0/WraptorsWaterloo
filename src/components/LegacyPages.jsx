@@ -94,7 +94,7 @@ export function VideosPage() {
       seoDescription="Wraptors build and transformation videos: widebody builds, colour changes and studio openings from the Wraptors YouTube channel."
       eyebrow={LOCATION.brandName}
       title="Videos"
-      intro="Build and transformation videos from the Wraptors YouTube channel."
+      intro="Build and transformation videos from the Wraptors YouTube channel: widebody builds, colour changes, protection work and studio openings from across the Wraptors network. Each video plays right here on the page, or open it on YouTube to see more from the channel."
     >
       <YoutubeReel />
     </SectionPage>
