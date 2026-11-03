@@ -345,6 +345,8 @@ function HomePage() {
         )}
         <Statement />
         <SignatureBuilds />
+        {/* Quote form sits just before the Visit Us map. */}
+        <QuoteSection id="cta" />
         <VisitUs />
         {/* Service Areas sits with Visit Us: where the studio is, then who it serves. */}
         <ServiceAreas />
@@ -353,8 +355,6 @@ function HomePage() {
         <ClientReviews />
         <Icons />
         <YoutubeReel />
-        {/* The quote form is the last major section before the footer. */}
-        <QuoteSection id="cta" />
       </main>
       <Footer />
       <FloatingWhatsApp />
