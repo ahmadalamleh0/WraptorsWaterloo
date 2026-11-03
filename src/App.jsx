@@ -346,13 +346,15 @@ function HomePage() {
         <Statement />
         <SignatureBuilds />
         <VisitUs />
+        {/* Service Areas sits with Visit Us: where the studio is, then who it serves. */}
+        <ServiceAreas />
         <TrustedBrands />
         <GlobalLocations />
-        <QuoteSection id="cta" />
         <ClientReviews />
-        <ServiceAreas />
         <Icons />
         <YoutubeReel />
+        {/* The quote form is the last major section before the footer. */}
+        <QuoteSection id="cta" />
       </main>
       <Footer />
       <FloatingWhatsApp />

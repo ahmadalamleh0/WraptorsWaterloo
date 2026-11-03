@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ServiceAreas.module.css';
-import { getFeaturedLocations, SERVICE_AREAS_INTRO, SERVICE_AREAS_WIDER } from '../data/geoLocations';
+import { getFeaturedLocations, SERVICE_AREAS_WIDER } from '../data/geoLocations';
 
 const INITIAL_COUNT = 5;
 
@@ -20,7 +20,6 @@ export default function ServiceAreas() {
       <div className={styles.inner}>
         <span className={styles.eyebrow}>Where We Work</span>
         <h2 className={styles.title}>Service Areas</h2>
-        {SERVICE_AREAS_INTRO && <p className={styles.intro}>{SERVICE_AREAS_INTRO}</p>}
 
         <div className={styles.pillRow}>
           {visible.map((loc) => (

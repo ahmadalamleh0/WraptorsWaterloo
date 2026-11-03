@@ -33,10 +33,6 @@ export { SITE_URL } from '../lib/siteConfig.js';
 const STUDIO = `${LOCATION.address.street}, ${LOCATION.address.locality}`;
 
 
-// One line under the homepage "Service Areas" heading: there is a single
-// studio, and the area pages are about where its customers come from.
-export const SERVICE_AREAS_INTRO = `${LOCATION.brandName} works from one studio, at ${LOCATION.address.display}. Drivers from across Waterloo Region, Guelph, London and the rest of Southwestern Ontario bring their vehicles to us.`;
-
 export const SERVICE_CATALOG = {
   wraps:     { label: 'Vehicle Wraps',        path: '/services/wraps/' },
   ppf:       { label: 'Paint Protection Film', path: '/services/ppf/' },
@@ -324,7 +320,7 @@ const AREA_PAGE_NAMES = new Set(LOCATIONS.map((loc) => loc.locationName));
 const WIDER = [...LOCATION.serviceArea.priority, ...LOCATION.serviceArea.surrounding]
   .filter((name) => !AREA_PAGE_NAMES.has(name));
 export const SERVICE_AREAS_WIDER = WIDER.length
-  ? `We also welcome drivers from ${WIDER.slice(0, -1).join(', ')} and ${WIDER.at(-1)}. Every appointment takes place at our Waterloo studio; we don't offer mobile service.`
+  ? `We also welcome drivers from ${WIDER.slice(0, -1).join(', ')} and ${WIDER.at(-1)}. Every appointment takes place at our Waterloo studio.`
   : '';
 
 export function getLocationBySlug(slug) {
