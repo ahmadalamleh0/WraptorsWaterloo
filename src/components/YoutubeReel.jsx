@@ -70,9 +70,6 @@ function ReelCard({ video, isActive, cardRef }) {
             >
               <ArrowIcon />
             </a>
-            <div className={styles.cardInfo}>
-              <span className={styles.cardTitle}>{video.title}</span>
-            </div>
           </>
         )}
       </div>
