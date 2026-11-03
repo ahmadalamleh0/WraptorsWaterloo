@@ -46,7 +46,8 @@ export const LOCATION = {
     phoneIntl: '+1 647-990-9727',
     // Digits only, for wa.me links. null = WhatsApp isn't offered: WhatsApp
     // buttons hide and enquiry fallbacks point to the phone instead.
-    whatsapp: null,
+    // Client request 2026-11-03: WhatsApp on the studio number.
+    whatsapp: '16479909727',
     email: 'wrap@wraptorstricity.com',
   },
 

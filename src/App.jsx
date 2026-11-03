@@ -345,13 +345,12 @@ function HomePage() {
         )}
         <Statement />
         <SignatureBuilds />
-        {/* Quote form sits just before the Visit Us map. */}
-        <QuoteSection id="cta" />
+        {/* Where the studio is, who it serves, the wider network, then the quote form. */}
         <VisitUs />
-        {/* Service Areas sits with Visit Us: where the studio is, then who it serves. */}
         <ServiceAreas />
-        <TrustedBrands />
         <GlobalLocations />
+        <QuoteSection id="cta" />
+        <TrustedBrands />
         <ClientReviews />
         <Icons />
         <YoutubeReel />
