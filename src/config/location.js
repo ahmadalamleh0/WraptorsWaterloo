@@ -106,11 +106,10 @@ export const LOCATION = {
     heroVideoMobile: asset(new URL('../../hero-carmeet-mobile.mp4', import.meta.url)),
     heroVideoDesktop: asset(new URL('../../hero-carmeet-desktop.mp4', import.meta.url)),
     // Still image the Visit Us map zooms into before the live map loads.
-    // mapImagePin is where the pin's tip sits in the image. TODO(tricity):
-    // no Waterloo still yet (null = no still; the live map still loads on
-    // "Explore Location").
-    mapImage: null,
-    mapImagePin: '50% 50%',
+    // mapImagePin is where the pin's tip sits in the image (Kitchener–Waterloo
+    // satellite still, supplied 2026-11-03; pin on the Bridge St W studio).
+    mapImage: asset(new URL('../assets/tricity-satellite.webp', import.meta.url)),
+    mapImagePin: '46% 16.9%',
     mapImageAlt: 'Satellite view of Waterloo with the Wraptors Tri-City studio marked',
     // Location coin emblem on the Vehicle Wraps page. TODO(tricity): no
     // Tri-City emblem yet (null = the standard Wraptors monogram is shown).
@@ -145,7 +144,6 @@ export const LOCATION = {
 export const UNCONFIRMED = [
   "address.coords + mapsUrl (from the live site's Google listing; confirm the pin marks #8)",
   'media.heroVideo* (stand-in car-meet footage, not Tri-City)',
-  'media.mapImage (no Waterloo still yet)',
   'legal.privacy / legal.terms (no policies yet)',
   'shopUrl (store unavailable)',
   'media.studioEmblem (no Tri-City emblem yet)',
