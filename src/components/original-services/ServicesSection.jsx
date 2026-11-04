@@ -11,8 +11,8 @@ import styles from './ServicesSection.module.css';
 import imgWraps from '../../../Wraptors Media/Wraps/wraps-aventador-pink-carbon.jpg';
 // Client-supplied 2026-11-04: gloss red Porsche 911 front end.
 import imgPPF from '../../../Wraptors Media/PPF/ppf-porsche-red.jpg';
-// Client-supplied 2026-11-04: coating wiped onto a matte-pink SRT bonnet.
-import imgCeramic from '../../../Ceramic_coating(3).jpeg';
+// Client-supplied 2026-11-04: coating wiped onto a matte-pink SRT bonnet (wide edit).
+import imgCeramic from '../../../Wraptors Media/Ceramic/ceramic-srt-wide.jpg';
 // Client-supplied 2026-11-04: matte-black G-Wagon with dark tinted windows.
 import imgTint from '../../../Wraptors Media/Tint/tint-gwagon-black.jpg';
 // Last photo in the Starlight page's "A Closer Look" gallery.
@@ -43,7 +43,7 @@ const SERVICES = [
     to: '/services/ceramic/',
     description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
     image: imgCeramic,
-    imgFit: 'contain',
+    imgPos: 'center 50%',
     size: 'standard',
   },
   {
