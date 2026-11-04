@@ -9,7 +9,9 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 // length of time — this Lamborghini shot is what should show instead,
 // instantly on mount, for as long as the video hasn't started playing (or
 // forever, if it never does).
-import heroFallbackImage from '../assets/hero-safe-mode.jpg';
+// Tri-City: client-supplied still of the hero clip's loading-dock line-up
+// (2026-11-04).
+import heroFallbackImage from '../assets/hero-tricity-fallback.jpg';
 import { LOCATION } from '../config/location.js';
 // Mobile: natively portrait footage. Desktop: separate, natively landscape
 // footage. Neither is stored pre-rotated, so both use the same plain
