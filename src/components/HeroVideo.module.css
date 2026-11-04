@@ -154,7 +154,7 @@
   display: block;
 }
 
-/* ── Lower group — ruler, subline and CTA ──
+/* ── Lower group — subline and CTA ──
    Sits low in the hero, above .scrollCue, leaving the vertical middle of
    the frame clear (hero-video.mp4 has its own "DUBAI" lettering there).
    Already inside the bottom 28% darkened by .fadeBottom, so it stays
@@ -163,7 +163,7 @@
 .heroLowerGroup {
   position: absolute;
   left: 50%;
-  bottom: 148px;
+  bottom: 128px;
   transform: translateX(-50%);
   z-index: 4;
   display: flex;
@@ -204,16 +204,6 @@
   margin: 0 0 18px;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
   will-change: transform, opacity;
-}
-
-/* ── Red blade separator ── */
-.ruler {
-  width: 56px;
-  height: 1px;
-  background: rgba(190, 10, 10, 0.80);
-  margin: 30px auto 28px;
-  box-shadow: 0 0 10px rgba(190, 10, 10, 0.30);
-  will-change: transform;
 }
 
 /* ── Subline — small caps, ultra-refined ── */
@@ -283,7 +273,7 @@
 .scrollCue {
   position: absolute;
   left: 50%;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
   transform: translateX(-50%);
   z-index: 4;
   display: flex;
@@ -299,7 +289,7 @@
   font-weight: 700;
   letter-spacing: 0.42em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.92);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
 }
 
@@ -307,13 +297,13 @@
   display: block;
   width: 1px;
   height: 26px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.65), rgba(190, 10, 10, 0.85));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.35));
   animation: scrollCuePulse 2.4s ease-in-out infinite;
 }
 
 .scrollCueChevron {
-  color: rgba(190, 10, 10, 0.9);
-  filter: drop-shadow(0 0 4px rgba(190, 10, 10, 0.35));
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.6));
   animation: scrollCueBounce 2.4s ease-in-out infinite;
 }
 
@@ -347,7 +337,6 @@
     letter-spacing: 0.04em;
     will-change: auto;
   }
-  .ruler       { margin: 22px auto 20px; will-change: auto; }
   .heroLabel   { font-size: 0.56rem; letter-spacing: 0.26em; margin-bottom: 12px; will-change: auto; }
   .subLine     {
     font-size: clamp(0.62rem, 3.2vw, 0.85rem);

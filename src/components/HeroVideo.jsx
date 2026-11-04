@@ -41,7 +41,6 @@ export default function HeroVideo() {
   const labelRef       = useRef(null);
   const line1Ref       = useRef(null);
   const line2Ref       = useRef(null);
-  const rulerRef        = useRef(null);
   const subLineRef     = useRef(null);
   const ctaRef         = useRef(null);
   const scrollCueRef   = useRef(null);
@@ -70,7 +69,6 @@ export default function HeroVideo() {
     // layer, which then had its own fade still left to run.
     gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 36 });
     gsap.set(labelRef.current, { opacity: 0, y: 14 });
-    gsap.set(rulerRef.current, { scaleX: 0, transformOrigin: 'center center' });
     gsap.set(subLineRef.current, { opacity: 0, y: 20 });
     gsap.set(ctaRef.current, { opacity: 0, y: 16 });
     gsap.set(scrollCueRef.current, { opacity: 0, y: 8 });
@@ -80,7 +78,6 @@ export default function HeroVideo() {
       .to(labelRef.current,   { opacity: 1, y: 0, duration: 0.8 }, 0)
       .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.08)
       .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.25)
-      .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       0.40)
       .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, 0.57)
       .to(ctaRef.current,     { opacity: 1, y: 0, duration: 0.8 }, 0.70)
       .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.80);
@@ -287,7 +284,6 @@ export default function HeroVideo() {
       {/* Lower group — ruler, subline and CTA, positioned above the scroll
           cue rather than immediately under the headline. */}
       <div className={styles.heroLowerGroup}>
-        <div ref={rulerRef} className={styles.ruler} aria-hidden="true" />
         <p ref={subLineRef} className={styles.subLine}>
           Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation
         </p>
