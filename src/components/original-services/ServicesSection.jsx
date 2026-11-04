@@ -13,7 +13,8 @@ import imgCeramic from '../../../Ceramic Coating(new1).jpeg';
 import imgTint from '../../../tint.jpeg';
 // Last photo in the Starlight page's "A Closer Look" gallery.
 import imgStarlight from '../../../Starlight(7).jpeg';
-import imgCustomBuilds from '../../../Wraptors Media/Custom Builds/621837139_18385536877146462_5187708123866638297_n - Copy.jpg';
+// Client-supplied 2026-11-04: Audi RS5 widebody, carbon fender, forged wheel.
+import imgCustomBuilds from '../../../Wraptors Media/Custom Builds/custom-builds-rs5-widebody.jpg';
 
 const SERVICES = [
   {
@@ -57,6 +58,7 @@ const SERVICES = [
     to: '/services/custom-builds/',
     description: 'Aggressive styling upgrades built for a stronger road presence.',
     image: imgCustomBuilds,
+    imgPos: 'center 46%',
     size: 'featured',
   },
 ];
