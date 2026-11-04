@@ -100,12 +100,13 @@ export const LOCATION = {
   },
 
   media: {
-    // TODO(tricity): stand-in hero. Wraptors car-meet footage (a Toronto
-    // meet, not the Tri-City studio), vertical 1080x1920: mobile is the full
-    // frame at 720x1280, desktop a centred 16:9 crop. Replace with Tri-City
-    // footage when supplied.
-    heroVideoMobile: asset(new URL('../../hero-carmeet-mobile.mp4', import.meta.url)),
-    heroVideoDesktop: asset(new URL('../../hero-carmeet-desktop.mp4', import.meta.url)),
+    // Hero clip supplied by the client 2026-11-04 (blacked-out Lamborghini,
+    // G-Wagons and Maybach at a loading-dock lot). Source is only 360x640,
+    // 13s: mobile is the full frame (audio dropped), desktop a 16:9 crop
+    // around the cars upscaled to 1280x720, so it is soft on large screens.
+    // TODO(tricity): swap in the original high-resolution file when supplied.
+    heroVideoMobile: asset(new URL('../../hero-tricity-mobile.mp4', import.meta.url)),
+    heroVideoDesktop: asset(new URL('../../hero-tricity-desktop.mp4', import.meta.url)),
     // Still image the Visit Us map zooms into before the live map loads.
     // mapImagePin is where the pin's tip sits in the image (Kitchener–Waterloo
     // satellite still, supplied 2026-11-03; pin on the Bridge St W studio).
@@ -144,7 +145,7 @@ export const LOCATION = {
 // Fields still needing a confirmed Tri-City value — printed as a build warning.
 export const UNCONFIRMED = [
   "address.coords + mapsUrl (from the live site's Google listing; confirm the pin marks #8)",
-  'media.heroVideo* (stand-in car-meet footage, not Tri-City)',
+  'media.heroVideo* (client clip is 360x640; need the high-resolution original)',
   'legal.privacy / legal.terms (no policies yet)',
   'shopUrl (store unavailable)',
   'media.studioEmblem (no Tri-City emblem yet)',
