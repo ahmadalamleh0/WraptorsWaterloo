@@ -10,7 +10,8 @@ import styles from './ServicesSection.module.css';
 // Client-supplied 2026-11-04: gloss-pink Aventador, carbon bonnet, bronze wheels.
 import imgWraps from '../../../Wraptors Media/Wraps/wraps-aventador-pink-carbon.jpg';
 import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
-import imgCeramic from '../../../Ceramic Coating(new1).jpeg';
+// Client-supplied 2026-11-04: coating wiped onto a matte-pink SRT bonnet.
+import imgCeramic from '../../../Ceramic Coating(new3).jpeg';
 // Client-supplied 2026-11-04: matte-black G-Wagon with dark tinted windows.
 import imgTint from '../../../Wraptors Media/Tint/tint-gwagon-black.jpg';
 // Last photo in the Starlight page's "A Closer Look" gallery.
@@ -40,6 +41,7 @@ const SERVICES = [
     to: '/services/ceramic/',
     description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
     image: imgCeramic,
+    imgPos: 'center 45%',
     size: 'standard',
     imgPos: 'center 25%',
   },
