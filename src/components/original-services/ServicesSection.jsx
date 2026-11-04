@@ -58,7 +58,7 @@ const SERVICES = [
     to: '/services/custom-builds/',
     description: 'Aggressive styling upgrades built for a stronger road presence.',
     image: imgCustomBuilds,
-    imgPos: 'center 80%',
+    imgPos: 'center 68%',
     size: 'featured',
   },
 ];
