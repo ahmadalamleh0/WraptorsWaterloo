@@ -22,7 +22,7 @@ const SERVICES = [
   {
     name: 'Vehicle Wraps',
     to: '/services/wraps/',
-    description: 'Premium color changes and custom finishes designed for a standout presence.',
+    description: 'Premium color changes and custom finishes.',
     image: imgWraps,
     imgPos: 'center 64%',
     size: 'wide',
@@ -30,7 +30,7 @@ const SERVICES = [
   {
     name: 'Paint Protection Film',
     to: '/services/ppf/',
-    description: 'Invisible protection built to preserve paint against road wear, chips, and daily driving.',
+    description: 'Invisible protection from chips and road wear.',
     image: imgPPF,
     size: 'standard',
   },
