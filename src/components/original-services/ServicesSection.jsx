@@ -47,7 +47,7 @@ const SERVICES = [
     to: '/services/tint/',
     description: 'Refined privacy, heat rejection, and a sharper exterior profile.',
     image: imgTint,
-    imgPos: 'center 42%',
+    imgPos: 'center 45%',
     size: 'wide',
   },
   {
