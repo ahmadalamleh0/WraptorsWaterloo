@@ -5,14 +5,14 @@ import { SERVICE_FAQS } from '../data/serviceFaqs';
 // Customer-facing FAQs for a service page, sourced from
 // src/data/serviceFaqs.js. Renders nothing for a service with no approved
 // copy yet, rather than showing placeholder questions.
-export default function ServiceFaqSection({ service }) {
+export default function ServiceFaqSection({ service, eyebrow = 'FAQ' }) {
   const faqs = SERVICE_FAQS[service];
   if (!faqs || faqs.length === 0) return null;
 
   return (
     <section className={styles.section}>
       <div className={styles.head}>
-        <span className={styles.eyebrow}>FAQ</span>
+        {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}
         <h2 className={styles.title}>Common Questions</h2>
       </div>
       <FaqAccordion faqs={faqs} light />

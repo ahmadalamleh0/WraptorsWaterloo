@@ -11,7 +11,8 @@ import imgWraps from '../../../Wrappin(1new).jpeg';
 import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
 import imgCeramic from '../../../Ceramic Coating(new1).jpeg';
 import imgTint from '../../../tint.jpeg';
-import imgStarlight from '../../../Starlight(2).jpeg';
+// Last photo in the Starlight page's "A Closer Look" gallery.
+import imgStarlight from '../../../Starlight(7).jpeg';
 import imgCustomBuilds from '../../../Wraptors Media/Custom Builds/621837139_18385536877146462_5187708123866638297_n - Copy.jpg';
 
 const SERVICES = [

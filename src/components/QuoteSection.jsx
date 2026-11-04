@@ -241,7 +241,7 @@ export default function QuoteSection({
   return (
     <section id={id} className={`${styles.section} ${compact ? styles.sectionCompact : ''}`}>
       <div className={styles.head}>
-        <span className={styles.eyebrow}>{eyebrow}</span>
+        {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.sub}>{subtitle}</p>
       </div>

@@ -408,6 +408,7 @@ export default function StarlightPage() {
       <ServiceHero
         eyebrow={`${LOCATION.brandName} · Starlight`}
         breadcrumbName="Starlight & Galaxy Ceilings"
+        hideEyebrow
         headline="Night, Built In."
         supportingLine="Starlight Headliners · Galaxy Ceilings · Custom Patterns"
         media={<StarfieldBg />}
@@ -417,7 +418,6 @@ export default function StarlightPage() {
       <section className={styles.previewSection} ref={previewRef}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
-            <span className={styles.eyebrow}>Interactive Preview</span>
             <h2 className={styles.sectionTitle}>Design Your Night Sky</h2>
             <p className={styles.sectionSub}>Every option updates the simulation in real time.</p>
           </div>
@@ -497,7 +497,6 @@ export default function StarlightPage() {
       <section className={styles.baSection}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
-            <span className={styles.eyebrow}>The Transformation</span>
             <h2 className={styles.sectionTitle}>Drag to Compare</h2>
           </div>
           <BeforeAfter />
@@ -508,7 +507,6 @@ export default function StarlightPage() {
       <section className={styles.gallerySection}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
-            <span className={styles.eyebrow}>Real Installations</span>
             <h2 className={styles.sectionTitle}>A Closer Look</h2>
             <p className={styles.sectionSub}>A closer look at completed starlight interiors.</p>
           </div>
@@ -541,11 +539,12 @@ export default function StarlightPage() {
       <QuoteSection
         id="cta"
         initialService="starlight"
+        eyebrow={null}
         subtitle="Ready to take the next step?"
         compact
       />
 
-      <ServiceFaqSection service="starlight" />
+      <ServiceFaqSection service="starlight" eyebrow={null} />
 
       <Footer solid />
     </>

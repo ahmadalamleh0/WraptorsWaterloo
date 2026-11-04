@@ -24,6 +24,8 @@ export default function ServiceHero({
   // Last step of the Home / Services / <service> trail. Defaults to the
   // service part of the eyebrow ("Wraptors Tri-City · Window Tint").
   breadcrumbName,
+  // Hide the eyebrow visually; it stays in the H1 for search engines.
+  hideEyebrow = false,
 }) {
   const { pathname } = useLocation();
   const crumbName = breadcrumbName || String(eyebrow).split(' · ').pop();
@@ -44,7 +46,7 @@ export default function ServiceHero({
             the cinematic line. .heading is display: contents — the layout
             is identical to the eyebrow and headline as separate siblings. */}
         <h1 className={styles.heading}>
-          <span className={styles.eyebrow}>{eyebrow}</span>{' '}
+          <span className={hideEyebrow ? styles.eyebrowHidden : styles.eyebrow}>{eyebrow}</span>{' '}
           <span className={`${styles.headline} ${compactHeadline ? styles.headlineCompact : ''}`}>{headline}</span>
         </h1>
         <span className={styles.heroSubline}>{supportingLine}</span>
