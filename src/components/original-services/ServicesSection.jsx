@@ -9,9 +9,10 @@ import styles from './ServicesSection.module.css';
 // Descriptions are the landing page's original copy for each service.
 // Client-supplied 2026-11-04: gloss-pink Aventador, carbon bonnet, bronze wheels.
 import imgWraps from '../../../Wraptors Media/Wraps/wraps-aventador-pink-carbon.jpg';
-import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
+// Client-supplied 2026-11-04: gloss red Porsche 911 front end.
+import imgPPF from '../../../Wraptors Media/PPF/ppf-porsche-red.jpg';
 // Client-supplied 2026-11-04: coating wiped onto a matte-pink SRT bonnet.
-import imgCeramic from '../../../Ceramic Coating(new3).jpeg';
+import imgCeramic from '../../../Ceramic_coating(3).jpeg';
 // Client-supplied 2026-11-04: matte-black G-Wagon with dark tinted windows.
 import imgTint from '../../../Wraptors Media/Tint/tint-gwagon-black.jpg';
 // Last photo in the Starlight page's "A Closer Look" gallery.
@@ -34,6 +35,7 @@ const SERVICES = [
     to: '/services/ppf/',
     description: 'Invisible protection from chips and road wear.',
     image: imgPPF,
+    imgPos: 'center 55%',
     size: 'standard',
   },
   {
@@ -41,9 +43,8 @@ const SERVICES = [
     to: '/services/ceramic/',
     description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
     image: imgCeramic,
-    imgPos: 'center 45%',
+    imgPos: 'center 58%',
     size: 'standard',
-    imgPos: 'center 25%',
   },
   {
     name: 'Window Tint',
