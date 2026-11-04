@@ -9,7 +9,7 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 // length of time — this Lamborghini shot is what should show instead,
 // instantly on mount, for as long as the video hasn't started playing (or
 // forever, if it never does).
-// Tri-City: client-supplied still (pink Urus and Aventador close-up)
+// Tri-City: client-supplied still (pink Aventador, doors up, cherry blossoms)
 // (2026-11-04).
 import heroFallbackImage from '../assets/hero-tricity-fallback.jpg';
 import { LOCATION } from '../config/location.js';
@@ -138,25 +138,9 @@ export default function HeroVideo() {
       video.setAttribute('playsinline', '');
       video.setAttribute('webkit-playsinline', '');
 
-      // ── Start time: skip to the 3-second mark ─────────────────────────
-      // Setting currentTime before readyState >= 1 silently fails on mobile.
-      // We set it the moment metadata is available instead.
-      const applyStartTime = () => {
-        if (video.currentTime < 2.9) video.currentTime = 3;
-      };
-
-      if (video.readyState >= 1) {
-        // Metadata already available (cached load)
-        applyStartTime();
-      } else {
-        video.addEventListener('loadedmetadata', applyStartTime, { once: true });
-      }
-
-      // On every loop the browser rewinds to 0 — snap back to 3s immediately
-      const skipIntro = () => {
-        if (video.currentTime < 2.9) video.currentTime = 3;
-      };
-      video.addEventListener('timeupdate', skipIntro);
+      // Tri-City: the client's montage plays from 0:00 on every loop (the
+      // old car-meet footage skipped its first 3 seconds; removed
+      // 2026-11-04 at the client's request).
 
       // Reveal the video over the permanent image only once real frames are
       // actually being rendered — not merely when play() resolves.
@@ -226,8 +210,6 @@ export default function HeroVideo() {
         if (idleHandle !== null && typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(idleHandle);
         if (idleTimer !== null) clearTimeout(idleTimer);
         playIo.disconnect();
-        video.removeEventListener('loadedmetadata', applyStartTime);
-        video.removeEventListener('timeupdate',     skipIntro);
         video.removeEventListener('playing',        onPlaying);
         document.removeEventListener('touchstart',       retryOnInteraction);
         document.removeEventListener('click',            retryOnInteraction);

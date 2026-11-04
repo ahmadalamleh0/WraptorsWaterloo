@@ -35,9 +35,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Tri-City fallback: anchored slightly low so a widescreen crop keeps
-     the Aventador's headlight and bonnet. */
-  object-position: center 58%;
+  /* Tri-City fallback: anchored low so a widescreen crop keeps
+     the whole Aventador, doors to front splitter. */
+  object-position: center 64%;
   opacity: 1;
   z-index: 0;
 }
@@ -334,7 +334,9 @@
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .textOverlay { padding: 9vh 28px 4vh; }
-  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); gap: 7px; }
+  /* Cue and lower group sit ~24px lower than before (client request
+     2026-11-04), keeping the same gap between them. */
+  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 8px); gap: 5px; }
   .mainLine    {
     /* ~22% smaller than before: each phrase holds one line (two lines
        total), sitting lighter over the video. */
@@ -354,7 +356,7 @@
   }
   .heroCta        { margin-top: 0; padding: 16px 22px; }
   .heroCtaLabel   { font-size: 0.82rem; }
-  .heroLowerGroup { bottom: 104px; padding: 0 28px; }
+  .heroLowerGroup { bottom: calc(env(safe-area-inset-bottom, 0px) + 80px); padding: 0 28px; }
 }
 
 @media (max-width: 480px) {
