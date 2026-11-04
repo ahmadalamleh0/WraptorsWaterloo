@@ -7,8 +7,8 @@ import styles from './ServicesSection.module.css';
 // original grid's own classes so the three original row heights are kept:
 // wide + standard + standard / wide + wide / featured (full width).
 // Descriptions are the landing page's original copy for each service.
-// Client-supplied 2026-11-04: red Audi RS5 with "13" livery and carbon bonnet.
-import imgWraps from '../../../Wraptors Media/Wraps/wraps-rs5-livery.jpg';
+// Client-supplied 2026-11-04: satin-pink Lamborghini Aventador.
+import imgWraps from '../../../Wraptors Media/Wraps/wraps-aventador-pink.jpg';
 import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
 import imgCeramic from '../../../Ceramic Coating(new1).jpeg';
 // Client-supplied 2026-11-04: matte-black G-Wagon with dark tinted windows.
