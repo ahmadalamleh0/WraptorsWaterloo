@@ -104,6 +104,17 @@ export const COMMON_FAQS = [
 // named in SERVICE_AREAS_WIDER rather than given near-identical pages;
 // Brantford and Milton also border the Wraptors Hamilton and GTA studios'
 // areas, so this site doesn't target them with pages.
+// Per-area onward links, shown as a short "before you book" row on each
+// area page (ported from the Hamilton site, 2026-11-04): two Waterloo
+// guides that fit the area's driving, plus any specialist service page.
+export const AREA_LINKS = {
+  'waterloo':  { guides: ['ceramic-coating-aftercare', 'window-tint-appointment-aftercare'], services: [] },
+  'kitchener': { guides: ['wrapping-a-leased-car', 'window-tint-appointment-aftercare'], services: [] },
+  'cambridge': { guides: ['matte-and-satin-ppf', 'ceramic-coating-aftercare'], services: [] },
+  'guelph':    { guides: ['matte-and-satin-ppf', 'wrapping-a-leased-car'], services: [] },
+  'london':    { guides: ['matte-and-satin-ppf', 'ceramic-coating-aftercare'], services: [] },
+};
+
 export const LOCATIONS = [
   {
     // The only page that presents itself as the physical location.

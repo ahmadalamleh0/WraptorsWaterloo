@@ -285,7 +285,7 @@ export default function HeroVideo() {
           cue rather than immediately under the headline. */}
       <div className={styles.heroLowerGroup}>
         <p ref={subLineRef} className={styles.subLine}>
-          Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation
+          Car&nbsp;wraps&nbsp;&nbsp;·&nbsp;&nbsp;PPF<span className={styles.subLineSep}>&nbsp;&nbsp;·&nbsp;&nbsp;</span><br className={styles.subLineBreak} />Ceramic&nbsp;coating&nbsp;&nbsp;·&nbsp;&nbsp;Window&nbsp;tint
         </p>
         <a ref={ctaRef} href="/#cta" className={styles.heroCta}>
           <span className={styles.heroCtaLabel}>

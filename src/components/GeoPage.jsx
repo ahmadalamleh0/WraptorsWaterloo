@@ -6,8 +6,9 @@ import Breadcrumbs from './Breadcrumbs';
 import styles from './GeoPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
-import { LOCATION, localBusinessSchema } from '../config/location.js';
-import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, getLocationBySlug } from '../data/geoLocations';
+import { LOCATION, localBusinessSchema, MAPS_DIRECTIONS_URL } from '../config/location.js';
+import { ARTICLES } from '../data/articles';
+import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, AREA_LINKS, getLocationBySlug } from '../data/geoLocations';
 
 // One reusable template rendered entirely from a location object — see
 // src/data/geoLocations.js for the field reference and how to add/edit
@@ -28,6 +29,13 @@ export default function GeoPage({ location }) {
   });
 
   const whyWraptors = [...WHY_WRAPTORS_SHARED, location.whyWraptorsLocal];
+  const areaLinks = AREA_LINKS[location.slug] || { guides: [], services: [] };
+  const guides = areaLinks.guides
+    .map((slug) => ARTICLES.find((a) => a.slug === slug))
+    .filter(Boolean);
+  const extraServices = areaLinks.services
+    .map((id) => SERVICE_CATALOG[id])
+    .filter(Boolean);
   const relatedLocations = (location.relatedAreas || [])
     .map((slug) => getLocationBySlug(slug))
     .filter(Boolean);
@@ -117,6 +125,25 @@ export default function GeoPage({ location }) {
         </section>
 
         {/* ── FAQs ── */}
+        {/* ── Before you book — two guides that fit this area, plus any
+             specialist services offered at the studio. ── */}
+        {(guides.length > 0 || extraServices.length > 0) && (
+          <section className={styles.relatedSection}>
+            <div className={styles.sectionHead}>
+              <span className={styles.eyebrowSmall}>Before You Book</span>
+              <h2 className={styles.sectionTitle}>Guides &amp; Specialist Work</h2>
+            </div>
+            <div className={styles.relatedRow}>
+              {guides.map((a) => (
+                <Link key={a.slug} to={`/learn/${a.slug}/`} className={styles.relatedPill}>{a.title}</Link>
+              ))}
+              {extraServices.map((svc) => (
+                <Link key={svc.path} to={svc.path} className={styles.relatedPill}>{svc.label}</Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className={styles.faqSection}>
           <div className={styles.sectionHead}>
             <span className={styles.eyebrowSmall}>Questions</span>
@@ -151,6 +178,15 @@ export default function GeoPage({ location }) {
               Request a Quote <span aria-hidden="true">→</span>
             </a>
             <a href={`tel:${LOCATION.contact.phone}`} className={styles.ctaSecondary}>Call {LOCATION.contact.phoneDisplay}</a>
+            {/* Every area page points to the studio: the Waterloo page (the
+                physical studio) links to directions, the rest to it. */}
+            {location.isPhysicalStudio ? (
+              <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className={styles.ctaSecondary}>
+                Get Directions To The Studio
+              </a>
+            ) : (
+              <Link to="/areas/waterloo/" className={styles.ctaSecondary}>Visit The Waterloo Studio</Link>
+            )}
           </div>
         </section>
 

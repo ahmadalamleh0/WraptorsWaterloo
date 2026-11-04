@@ -323,8 +323,13 @@
 }
 
 /* ── Mobile ── */
+/* Services line: one line on desktop, two balanced lines on mobile. */
+.subLineBreak { display: none; }
+
 @media (max-width: 768px) {
   .textOverlay { padding: 9vh 28px 4vh; }
+  .subLineSep   { display: none; }
+  .subLineBreak { display: inline; }
   /* Cue and lower group sit ~38px lower than the original (client request
      2026-11-04), keeping the same gap between them. */
   .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 4px); gap: 5px; }

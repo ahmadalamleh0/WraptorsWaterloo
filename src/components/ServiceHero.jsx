@@ -24,6 +24,8 @@ export default function ServiceHero({
   // Last step of the Home / Services / <service> trail. Defaults to the
   // service part of the eyebrow ("Wraptors Tri-City · Window Tint").
   breadcrumbName,
+  // Pages that render their own trail (FocusServicePage) pass false.
+  breadcrumbs = true,
   // Hide the eyebrow visually; it stays in the H1 for search engines.
   hideEyebrow = false,
 }) {
@@ -33,14 +35,16 @@ export default function ServiceHero({
     <section className={styles.hero}>
       <div className={styles.media}>{media}</div>
       <div className={`${styles.heroOverlay} ${lowerContent ? styles.heroOverlayLower : ''}`}>
-        <Breadcrumbs
-          className={styles.crumbs}
-          items={[
-            { name: 'Home', path: '/' },
-            { name: 'Services', path: '/services' },
-            { name: crumbName, path: pathname },
-          ]}
-        />
+        {breadcrumbs && (
+          <Breadcrumbs
+            className={styles.crumbs}
+            items={[
+              { name: 'Home', path: '/' },
+              { name: 'Services', path: '/services' },
+              { name: crumbName, path: pathname },
+            ]}
+          />
+        )}
         {/* The eyebrow sits inside the H1 so the page heading carries the
             service + city ("Wraptors Tri-City · Window Tint") as well as
             the cinematic line. .heading is display: contents — the layout
