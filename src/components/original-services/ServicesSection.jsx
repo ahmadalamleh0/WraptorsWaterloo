@@ -23,8 +23,9 @@ const SERVICES = [
     name: 'Vehicle Wraps',
     to: '/services/wraps/',
     description: 'Premium color changes and custom finishes.',
+    // Anchored low so the car sits above the card title, not under it.
     image: imgWraps,
-    imgPos: 'center 64%',
+    imgPos: 'center 77%',
     size: 'wide',
   },
   {
