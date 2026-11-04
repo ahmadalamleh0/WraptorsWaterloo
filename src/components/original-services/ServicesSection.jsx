@@ -7,7 +7,8 @@ import styles from './ServicesSection.module.css';
 // original grid's own classes so the three original row heights are kept:
 // wide + standard + standard / wide + wide / featured (full width).
 // Descriptions are the landing page's original copy for each service.
-import imgWraps from '../../../Wrappin(1new).jpeg';
+// Client-supplied 2026-11-04: red Audi RS5 with "13" livery and carbon bonnet.
+import imgWraps from '../../../Wraptors Media/Wraps/wraps-rs5-livery.jpg';
 import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
 import imgCeramic from '../../../Ceramic Coating(new1).jpeg';
 import imgTint from '../../../tint.jpeg';
@@ -22,6 +23,7 @@ const SERVICES = [
     to: '/services/wraps/',
     description: 'Premium color changes and custom finishes designed for a standout presence.',
     image: imgWraps,
+    imgPos: 'center 62%',
     size: 'wide',
   },
   {
