@@ -210,6 +210,61 @@
   visibility: hidden;
 }
 
+/* ── Call / Email (left side of the bar) ── */
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: -10px;               /* optical: icon edge lines up with the bar padding */
+  transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+.navHeroMode .contact {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.contactBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+.contactBtn svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+.contactBtn:hover,
+.contactBtn:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.contactBtn:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.contactLabel { display: none; }
+@media (min-width: 1360px) {
+  .contactLabel { display: inline; }
+}
+@media (max-width: 960px) {
+  .contact    { margin-left: -12px; gap: 0; }
+  .contactBtn { min-width: 44px; padding: 0; }
+}
+
 /* ── Mobile burger ── */
 .burger {
   display: none;
