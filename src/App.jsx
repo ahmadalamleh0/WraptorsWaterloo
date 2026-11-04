@@ -100,6 +100,11 @@ import lambo1         from '../Wraptors Media/572658115_18375844528146462_704401
 import lambo2         from '../Wraptors Media/573643633_18375844501146462_1338566802707597600_n.jpg';
 import lambo3         from '../Wraptors Media/574454404_18375844462146462_4088331334435453680_n.jpg';
 import heroCustomBuilds from '../Wraptors Media/Custom Builds/531390763_18364031848146462_3978469811072555494_n.jpg';
+// Cadillac Escalade widebody (client photos, 2026-11-04) — second
+// collection on the Custom Builds page.
+import escaladeWidebody1 from '../Wraptors Media/Custom Builds/escalade-widebody-1.jpg';
+import escaladeWidebody2 from '../Wraptors Media/Custom Builds/escalade-widebody-2.jpg';
+import escaladeWidebody3 from '../Wraptors Media/Custom Builds/escalade-widebody-3.jpg';
 import customBuild1     from '../Wraptors Media/Custom Builds/673155098_18356001145208168_5151499152980611431_n.jpg';
 import customBuild2     from '../Wraptors Media/Custom Builds/561637580_18371224492146462_3850630907551928576_n.jpg';
 import customBuild3     from '../Wraptors Media/Custom Builds/773757448_18417489721146462_1403236065123085975_n.jpg';
@@ -206,6 +211,8 @@ const SERVICE_PAGES = [
       mainImage: bentley1,
       detailImages: [bentley4, bentley2, bentley5, bentley3],
     },
+    secondaryGalleryImages: [escaladeWidebody1, escaladeWidebody2, escaladeWidebody3],
+    secondaryGalleryCaption: 'Cadillac Escalade Widebody',
     learnCategory: 'custom-builds',
   },
   // ── Services carried over from the old WordPress site ──
