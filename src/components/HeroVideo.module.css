@@ -223,7 +223,8 @@
   font-weight: 500;
   letter-spacing: 0.40em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
   text-align: center;
   line-height: 1.8;
   margin: 0;
@@ -334,9 +335,10 @@
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .textOverlay { padding: 9vh 28px 4vh; }
-  /* Cue and lower group sit ~24px lower than before (client request
+  /* Cue and lower group sit ~38px lower than the original (client request
      2026-11-04), keeping the same gap between them. */
-  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 8px); gap: 5px; }
+  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 4px); gap: 5px; }
+  .scrollCueLine { height: 16px; }
   .mainLine    {
     /* ~22% smaller than before: each phrase holds one line (two lines
        total), sitting lighter over the video. */
@@ -349,14 +351,14 @@
   .heroLabel   { font-size: 0.56rem; letter-spacing: 0.26em; margin-bottom: 12px; will-change: auto; }
   .subLine     {
     font-size: clamp(0.62rem, 3.2vw, 0.85rem);
-    color: rgba(255, 255, 255, 0.55);
+    color: #fff;
     letter-spacing: 0.28em;
     white-space: normal;
     will-change: auto;
   }
   .heroCta        { margin-top: 0; padding: 16px 22px; }
   .heroCtaLabel   { font-size: 0.82rem; }
-  .heroLowerGroup { bottom: calc(env(safe-area-inset-bottom, 0px) + 80px); padding: 0 28px; }
+  .heroLowerGroup { bottom: calc(env(safe-area-inset-bottom, 0px) + 66px); padding: 0 28px; }
 }
 
 @media (max-width: 480px) {
