@@ -94,6 +94,26 @@ export default function Footer({ solid = false }) {
             </p>
           </div>
 
+          {/* Order: brand, Contact, Navigation, Services (client request 2026-11-04). */}
+          {/* Contact */}
+          <div id="contact" className={styles.col}>
+            <h4 className={styles.colHeading}>Contact</h4>
+            {CONTACT.map(c => (
+              <a
+                key={c.text}
+                href={c.href}
+                className={styles.contactRow}
+                target={c.href?.startsWith('http') ? '_blank' : undefined}
+                rel={c.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                <span className={styles.contactIcon} aria-hidden="true">{c.icon}</span>
+                {c.sub ? (
+                  <span>{c.text}<span className={styles.contactSub}>{c.sub}</span></span>
+                ) : c.text}
+              </a>
+            ))}
+          </div>
+
           {/* Navigation */}
           <div className={styles.col}>
             <h4 className={styles.colHeading}>Navigation</h4>
@@ -116,25 +136,6 @@ export default function Footer({ solid = false }) {
                 </a>
               ))}
             </nav>
-          </div>
-
-          {/* Contact */}
-          <div id="contact" className={styles.col}>
-            <h4 className={styles.colHeading}>Contact</h4>
-            {CONTACT.map(c => (
-              <a
-                key={c.text}
-                href={c.href}
-                className={styles.contactRow}
-                target={c.href?.startsWith('http') ? '_blank' : undefined}
-                rel={c.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                <span className={styles.contactIcon} aria-hidden="true">{c.icon}</span>
-                {c.sub ? (
-                  <span>{c.text}<span className={styles.contactSub}>{c.sub}</span></span>
-                ) : c.text}
-              </a>
-            ))}
           </div>
 
         </div>
