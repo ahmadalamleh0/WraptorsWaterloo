@@ -2,14 +2,54 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './ClientReviews.module.css';
 import { LOCATION } from '../config/location.js';
 
-// The studio's own Google rating and reviews. Empty for Wraptors Tri-City
-// until the client supplies them: reviews from another location were not
-// carried over. Each review needs the reviewer's name, rating and exact
-// wording from the Tri-City Google listing; the rating and count must be
-// checked on that listing. With no reviews the section is hidden.
+// Wraptors Tri-City's own Google reviews, copied word for word (typos
+// included) from the Trustindex Google widget on the live
+// wraptorstricity.com homepage, checked 2026-11-04. All are 5 stars there.
+// Frank Leone's review (Jan 24, 2026) is left out because it names
+// "Wraptors Toronto". The widget shows no overall rating or count, so the
+// score is hidden until the client confirms both from the Google listing.
+// TODO(tricity): set GOOGLE_RATING and GOOGLE_REVIEW_COUNT once confirmed.
+// "tag" is the work each review describes.
 const GOOGLE_RATING = null;
 const GOOGLE_REVIEW_COUNT = null;
-const REVIEWS = [];
+const REVIEWS = [
+  {
+    name: 'Parmjit Rehal',
+    rating: 5,
+    text: 'Wraptors did an amazing job on my G-Wagon. The quality, attention to detail, and the finish are next level. Always get compliments. Huge thank you to Mr. Wraptors and the whole team. Highly recommend.',
+    tag: 'G-Wagon',
+  },
+  {
+    name: 'Jim Fleming',
+    rating: 5,
+    text: 'The staff explained the blackout options for what I was interested in doing very well . They did a great job on what I wanted done including making the 2 front windows darker . The vehicle looks great , black on black on black !',
+    tag: 'Window Tint · Blackout',
+  },
+  {
+    name: 'muhammed lusack',
+    rating: 5,
+    text: 'The customer sevice was Superb,Christel was really helpful and the team pulled up a a great job,Starlights look good and the ambient lighting was perfect',
+    tag: 'Starlight · Ambient Lighting',
+  },
+  {
+    name: 'Matt Smith',
+    rating: 5,
+    text: 'Took my car here for a commercial wrap and couldn’t be happier, service was amazing and the turn around time was quick, I can highly recommend!',
+    tag: 'Commercial Wrap',
+  },
+  {
+    name: 'Shawn Gabad',
+    rating: 5,
+    text: "Great service! This is the third car l've brought in for tinting, and I'm always satisfied with the results.",
+    tag: 'Window Tint',
+  },
+  {
+    name: 'Pedro Sousa',
+    rating: 5,
+    text: 'Extremely helpful, professional and would recommend.',
+    tag: 'Wraptors Tri-City',
+  },
+];
 
 function GoogleG(props) {
   return (
@@ -90,7 +130,7 @@ export default function ClientReviews() {
     return () => io.disconnect();
   }, []);
 
-  if (REVIEWS.length === 0 || GOOGLE_RATING == null) return null;
+  if (REVIEWS.length === 0) return null;
 
   return (
     <section className={styles.section}>
@@ -104,11 +144,15 @@ export default function ClientReviews() {
             <GoogleG className={styles.summaryGoogleG} />
             <div className={styles.summaryText}>
               <span className={styles.summarySource}>Google Reviews</span>
-              <span className={styles.summaryRatingRow}>
-                <span className={styles.summaryScore}>{GOOGLE_RATING.toFixed(1)}</span>
-                <Stars rating={Math.round(GOOGLE_RATING)} />
-                <span className={styles.summaryCount}>({GOOGLE_REVIEW_COUNT} reviews)</span>
-              </span>
+              {GOOGLE_RATING != null && (
+                <span className={styles.summaryRatingRow}>
+                  <span className={styles.summaryScore}>{GOOGLE_RATING.toFixed(1)}</span>
+                  <Stars rating={Math.round(GOOGLE_RATING)} />
+                  {GOOGLE_REVIEW_COUNT != null && (
+                    <span className={styles.summaryCount}>({GOOGLE_REVIEW_COUNT} reviews)</span>
+                  )}
+                </span>
+              )}
             </div>
           </div>
           <a
