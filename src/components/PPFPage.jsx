@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import FloatingWhatsApp from './FloatingWhatsApp';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import RelatedInsights from './RelatedInsights';
@@ -599,7 +598,6 @@ export default function PPFPage() {
       </section>
 
       <Footer solid />
-      <FloatingWhatsApp />
     </>
   );
 }

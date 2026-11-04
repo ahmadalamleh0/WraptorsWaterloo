@@ -364,7 +364,6 @@ function HomePage() {
         <YoutubeReel />
       </main>
       <Footer />
-      <FloatingWhatsApp />
     </>
   );
 }
@@ -411,6 +410,9 @@ export default function App() {
     </Routes>
     {/* Mobile-only floating Get a Quote link, site-wide. */}
     <MobileQuoteCta />
+    {/* Site-wide floating WhatsApp button (every route), opposite the
+        mobile Get a Quote pill. */}
+    <FloatingWhatsApp />
     </>
   );
 }

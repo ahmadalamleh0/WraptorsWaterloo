@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import FloatingWhatsApp from './FloatingWhatsApp';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import TintCompareSection from './TintCompareSection';
@@ -135,7 +134,6 @@ export default function TintPage() {
       <RelatedInsights category="window-tint" />
 
       <Footer solid />
-      <FloatingWhatsApp />
     </>
   );
 }

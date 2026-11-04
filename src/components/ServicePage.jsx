@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import FloatingWhatsApp from './FloatingWhatsApp';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceProcess from './ServiceProcess';
@@ -294,7 +293,6 @@ export default function ServicePage({
 
       </main>
       <Footer solid />
-      <FloatingWhatsApp />
     </>
   );
 }
