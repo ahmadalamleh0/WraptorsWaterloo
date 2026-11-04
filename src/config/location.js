@@ -100,11 +100,9 @@ export const LOCATION = {
   },
 
   media: {
-    // Hero clip supplied by the client 2026-11-04 (blacked-out Lamborghini,
-    // G-Wagons and Maybach at a loading-dock lot). Source is only 360x640,
-    // 13s: mobile is the full frame (audio dropped), desktop a 16:9 crop
-    // around the cars upscaled to 1280x720, so it is soft on large screens.
-    // TODO(tricity): swap in the original high-resolution file when supplied.
+    // Hero clip supplied by the client 2026-11-04 (202611041005.mp4, a
+    // 1080x1920 13s montage of Wraptors builds). Mobile is the full frame
+    // at 720x1280, desktop a 1080x608 16:9 crop; audio dropped.
     heroVideoMobile: asset(new URL('../../hero-tricity-mobile.mp4', import.meta.url)),
     heroVideoDesktop: asset(new URL('../../hero-tricity-desktop.mp4', import.meta.url)),
     // Still image the Visit Us map zooms into before the live map loads.
@@ -145,7 +143,6 @@ export const LOCATION = {
 // Fields still needing a confirmed Tri-City value — printed as a build warning.
 export const UNCONFIRMED = [
   "address.coords + mapsUrl (from the live site's Google listing; confirm the pin marks #8)",
-  'media.heroVideo* (client clip is 360x640; need the high-resolution original)',
   'legal.privacy / legal.terms (no policies yet)',
   'shopUrl (store unavailable)',
   'media.studioEmblem (no Tri-City emblem yet)',
