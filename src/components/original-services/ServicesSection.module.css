@@ -117,6 +117,21 @@
   will-change: transform;
 }
 
+.cardImageContain {
+  object-fit: contain;
+}
+
+/* Blurred, dimmed copy behind a 'contain' photo so the card stays full-bleed. */
+.cardImageBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(18px) brightness(0.55) saturate(1.1);
+  transform: scale(1.12);
+}
+
 .cardOverlay {
   position: absolute;
   inset: 0;

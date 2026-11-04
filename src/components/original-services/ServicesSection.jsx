@@ -43,7 +43,7 @@ const SERVICES = [
     to: '/services/ceramic/',
     description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
     image: imgCeramic,
-    imgPos: 'center 58%',
+    imgFit: 'contain',
     size: 'standard',
   },
   {
@@ -77,7 +77,7 @@ export default function ServicesSection() {
       <Reveal as="h2" className={styles.kicker}>Our Services</Reveal>
 
       <div className={styles.grid}>
-        {SERVICES.map(({ name, to, image, size, description, imgPos }, i) => (
+        {SERVICES.map(({ name, to, image, size, description, imgPos, imgFit }, i) => (
           <Reveal
             key={name}
             as={Link}
@@ -85,7 +85,19 @@ export default function ServicesSection() {
             className={`${styles.card} ${styles[size]}`}
             delay={Math.min(i * 70, 280)}
           >
-            <img src={image} alt={name} className={styles.cardImage} loading="lazy" style={imgPos ? { objectPosition: imgPos } : undefined} />
+            {/* imgFit 'contain': show the whole photo, with a blurred copy of
+                it filling the rest of the card (used where a tall photo
+                needs to be seen in full). */}
+            {imgFit === 'contain' && (
+              <img src={image} alt="" aria-hidden="true" className={styles.cardImageBackdrop} loading="lazy" />
+            )}
+            <img
+              src={image}
+              alt={name}
+              className={`${styles.cardImage} ${imgFit === 'contain' ? styles.cardImageContain : ''}`}
+              loading="lazy"
+              style={imgPos ? { objectPosition: imgPos } : undefined}
+            />
             <div className={styles.cardOverlay} aria-hidden="true" />
             <div className={styles.cardContent}>
               <p className={styles.cardDesc}>{description}</p>
