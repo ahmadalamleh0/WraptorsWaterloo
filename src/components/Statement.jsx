@@ -6,11 +6,11 @@ import styles from './Statement.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 // Editorial transition between the service tiles and the next section.
-// The white panel wipes in from the top (clip-path) as the section enters,
+// The near-black panel wipes in from the top (clip-path) as the section enters,
 // then the intro line, the red rule and "YOU SET THE TONE." rise out of
 // their masks. One scrubbed timeline, no pin — so no added scroll distance
 // and it reverses cleanly on scroll up. With reduced motion the CSS default
-// (everything visible, panel fully white) is left untouched.
+// (everything visible, panel fully shown) is left untouched.
 export default function Statement() {
   const sectionRef = useRef(null);
 

@@ -1,6 +1,7 @@
-/* ══ STATEMENT — editorial white panel between the service tiles and the
-   next section. The section itself is black (continuous with the tiles
-   above); the white comes from .panel, which GSAP wipes in from the top. ══ */
+/* ══ STATEMENT — editorial near-black panel between the service tiles and
+   the next section. The section itself is black (continuous with the tiles
+   above); the panel tone comes from .panel, which GSAP wipes in from the
+   top. ══ */
 .section {
   position: relative;
   background: #000;
@@ -12,12 +13,17 @@
   padding: 120px 48px;
 }
 
-/* Full-bleed white plane. Visible by default (no JS / reduced motion);
-   GSAP clips it to nothing and wipes it open as the section enters. */
+/* Full-bleed near-black plane. Visible by default (no JS / reduced
+   motion); GSAP clips it to nothing and wipes it open as the section
+   enters. A touch lighter than its neighbours in the middle, easing to
+   the services section's #050505 at the top and to black at the bottom so
+   both edges blend into the surrounding sections. */
 .panel {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 255, 255, 0.025), transparent 70%),
+    linear-gradient(180deg, #050505 0%, #0b0b0b 30%, #0b0b0b 70%, #000 100%);
   z-index: 0;
   will-change: clip-path;
 }
@@ -50,7 +56,7 @@
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.46);
   line-height: 1.25;
   margin: 0;
 }
@@ -59,7 +65,7 @@
 .ruler {
   width: 52px;
   height: 1px;
-  background: rgba(180, 0, 0, 0.75);
+  background: rgba(180, 0, 0, 0.5);
   margin: 40px auto;
   transform-origin: center;
 }
@@ -72,20 +78,20 @@
   -webkit-text-stroke: 0.5px currentColor;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #000;
+  color: #ecebe8;
   line-height: 0.95;
   margin: 0;
 }
 
 @media (max-width: 768px) {
-  .section      { min-height: 0; padding: 72px 32px 68px; }
+  .section      { min-height: 0; padding: 64px 32px 60px; }
   .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; }
   .ruler        { margin: 16px auto 22px; }
   .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); }
 }
 
 @media (max-width: 480px) {
-  .section      { padding: 60px 26px 56px; }
+  .section      { padding: 54px 26px 50px; }
   .contextLine  { font-size: 6vw; }
   .mainLine     { font-size: 12.5vw; }
 }
