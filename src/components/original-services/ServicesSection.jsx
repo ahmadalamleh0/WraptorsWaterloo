@@ -11,7 +11,8 @@ import styles from './ServicesSection.module.css';
 import imgWraps from '../../../Wraptors Media/Wraps/wraps-rs5-livery.jpg';
 import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
 import imgCeramic from '../../../Ceramic Coating(new1).jpeg';
-import imgTint from '../../../tint.jpeg';
+// Client-supplied 2026-11-04: grey G-Wagon in the studio bay.
+import imgTint from '../../../Wraptors Media/Tint/tint-gwagon-studio.jpg';
 // Last photo in the Starlight page's "A Closer Look" gallery.
 import imgStarlight from '../../../Starlight(7).jpeg';
 // Client-supplied 2026-11-04: Lamborghini Urus, carbon vented bonnet.
@@ -46,6 +47,7 @@ const SERVICES = [
     to: '/services/tint/',
     description: 'Refined privacy, heat rejection, and a sharper exterior profile.',
     image: imgTint,
+    imgPos: 'center 58%',
     size: 'wide',
   },
   {
