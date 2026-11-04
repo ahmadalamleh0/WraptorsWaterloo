@@ -35,7 +35,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  /* Tri-City fallback: the cars sit in the lower part of the photo, so a
+     widescreen crop is anchored low enough to keep the Aventador's nose. */
+  object-position: center 72%;
   opacity: 1;
   z-index: 0;
 }
