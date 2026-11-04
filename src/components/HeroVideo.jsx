@@ -9,7 +9,7 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 // length of time — this Lamborghini shot is what should show instead,
 // instantly on mount, for as long as the video hasn't started playing (or
 // forever, if it never does).
-// Tri-City: client-supplied still (pink Aventador, doors up, cherry blossoms)
+// Tri-City: client-supplied studio still (Aventador and Huracan in the bays)
 // (2026-11-04).
 import heroFallbackImage from '../assets/hero-tricity-fallback.jpg';
 import { LOCATION } from '../config/location.js';

@@ -35,9 +35,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Tri-City fallback: anchored low so a widescreen crop keeps
-     the whole Aventador, doors to front splitter. */
-  object-position: center 64%;
+  /* Tri-City fallback: anchored below centre so a widescreen crop keeps
+     the red Huracan and the pink Aventador in frame. */
+  object-position: center 62%;
   opacity: 1;
   z-index: 0;
 }
