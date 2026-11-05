@@ -41,7 +41,6 @@ import Services from './components/Services';
 import OriginalServicesSection from './components/original-services/ServicesSection';
 const HOME_SERVICES = 'original'; // 'original' | 'tiles'
 import SignatureBuilds from './components/SignatureBuilds';
-import NeonSign from './components/NeonSign';
 // Vehicle selector and quote form preserved but disabled for this deploy —
 // see src/features/vehicle-selector/README.md and
 // src/features/quote-form-draft/README.md to restore either one.
@@ -353,7 +352,6 @@ function HomePage() {
           <Services />
         )}
         <Statement />
-        <NeonSign location="Tri-City" />
         <SignatureBuilds />
         {/* Where the studio is, who it serves (brands banner after it, as before), the wider network, then the quote form. */}
         <VisitUs />
