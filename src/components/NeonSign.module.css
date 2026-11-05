@@ -1,0 +1,146 @@
+/* ══ NEON SIGN — branded intro above Masterpieces ══
+   Off: the tubes read as unlit glass. Lit (.lit, set once on scroll-in):
+   a short flicker, then a steady, controlled glow. */
+
+.section {
+  --tube: #fde9ff;                       /* hot core of the tube */
+  --glow: 214, 64, 255;                  /* violet-magenta halo (rgb) */
+  --glow-deep: 150, 28, 220;
+  position: relative;
+  background: #000;
+  padding: 120px 24px 104px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sign {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.2em;
+}
+
+/* Soft light the sign throws onto the wall behind it. */
+.wall {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 150%;
+  height: 230%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(var(--glow-deep), 0.16) 0%, rgba(var(--glow-deep), 0.05) 38%, transparent 66%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.6s ease 0.5s;
+}
+
+.word {
+  position: relative;
+  font-family: 'BrittanySignature', cursive;
+  font-size: clamp(4.4rem, 10.5vw, 9.5rem);
+  line-height: 1.15;
+  padding: 0 0.12em;
+  transform: rotate(-4deg);
+  white-space: nowrap;
+  color: rgba(150, 110, 170, 0.22);       /* unlit glass */
+  text-shadow: none;
+}
+
+/* Underline swash — the slash that runs beneath the word on the real sign. */
+.swash {
+  position: relative;
+  width: min(78%, 560px);
+  height: clamp(18px, 2.6vw, 32px);
+  margin-top: -0.55em;
+  margin-left: 6%;
+  transform: rotate(-4deg);
+  overflow: visible;
+  fill: none;
+  stroke: rgba(150, 110, 170, 0.22);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.place {
+  position: relative;
+  align-self: flex-end;
+  margin-top: 0.9em;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.5vw, 1.15rem);
+  letter-spacing: 0.55em;
+  margin-right: 0.05em;                  /* trailing tracking already pads the right */
+  text-transform: uppercase;
+  color: rgba(150, 110, 170, 0.22);
+}
+
+/* ── Lit ── */
+.lit .wall { opacity: 1; }
+
+.lit .word {
+  animation: powerOn 1.5s linear forwards;
+}
+.lit .swash {
+  animation: powerOnSvg 1.5s linear 0.08s forwards;
+}
+.lit .place {
+  animation: powerOnPlace 0.9s linear 0.9s forwards;
+}
+
+/* Lit look, shared by the final keyframe of each. */
+@keyframes powerOn {
+  0%, 6%, 11%, 20%   { color: rgba(150, 110, 170, 0.22); text-shadow: none; }
+  4%, 9%             { color: var(--tube); text-shadow: 0 0 4px rgba(var(--glow), 0.9), 0 0 18px rgba(var(--glow), 0.6); }
+  14%                { color: rgba(240, 200, 255, 0.7); text-shadow: 0 0 10px rgba(var(--glow), 0.45); }
+  34%                { color: rgba(250, 220, 255, 0.85); text-shadow: 0 0 2px rgba(255, 255, 255, 0.4), 0 0 8px rgba(var(--glow), 0.7), 0 0 22px rgba(var(--glow), 0.4), 0 0 46px rgba(var(--glow-deep), 0.2); }
+  100% {
+    color: var(--tube);
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.9),
+      0 0 5px rgba(var(--glow), 0.95),
+      0 0 14px rgba(var(--glow), 0.75),
+      0 0 32px rgba(var(--glow), 0.45),
+      0 0 70px rgba(var(--glow-deep), 0.35);
+  }
+}
+
+@keyframes powerOnSvg {
+  0%, 6%, 11%, 20%   { stroke: rgba(150, 110, 170, 0.22); filter: none; }
+  4%, 9%             { stroke: var(--tube); filter: drop-shadow(0 0 5px rgba(var(--glow), 0.8)); }
+  14%                { stroke: rgba(240, 200, 255, 0.7); filter: drop-shadow(0 0 6px rgba(var(--glow), 0.4)); }
+  100% {
+    stroke: var(--tube);
+    filter: drop-shadow(0 0 3px rgba(var(--glow), 0.95)) drop-shadow(0 0 12px rgba(var(--glow), 0.6)) drop-shadow(0 0 28px rgba(var(--glow-deep), 0.4));
+  }
+}
+
+@keyframes powerOnPlace {
+  0%, 18%  { color: rgba(150, 110, 170, 0.22); text-shadow: none; }
+  10%      { color: rgba(240, 210, 255, 0.8); text-shadow: 0 0 8px rgba(var(--glow), 0.5); }
+  100% {
+    color: #f4dcff;
+    text-shadow: 0 0 4px rgba(var(--glow), 0.85), 0 0 14px rgba(var(--glow), 0.5), 0 0 30px rgba(var(--glow-deep), 0.3);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .section { padding: 84px 20px 76px; }
+  .word    { font-size: 13.5vw; }
+}
+@media (max-width: 600px) {
+  .section { padding: 64px 16px 58px; }
+  .word    { font-size: clamp(3.6rem, 19vw, 5rem); }
+  .swash   { stroke-width: 2.5; }
+  .place   { letter-spacing: 0.45em; }
+}
+
+/* No flicker for reduced motion — simply on. */
+@media (prefers-reduced-motion: reduce) {
+  .lit .word, .lit .swash, .lit .place { animation-duration: 0.01s; animation-delay: 0s; }
+  .wall { transition: none; }
+}
