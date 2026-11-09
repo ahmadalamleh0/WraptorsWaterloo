@@ -3,6 +3,7 @@
 
 /site.webmanifest
   Cache-Control: no-cache
+  Content-Type: application/manifest+json
 
 /registerSW.js
   Cache-Control: no-cache
