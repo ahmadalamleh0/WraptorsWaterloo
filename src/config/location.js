@@ -119,7 +119,7 @@ export const LOCATION = {
     studioEmblem: null,
     studioEmblemAlt: 'Wraptors Tri-City',
     // Social share image, served unhashed from public/ (brand-neutral).
-    ogImage: '/og-image.jpg',
+    ogImage: '/og-image-v2.jpg',   // regenerate with scripts/icons/make-icons.py
   },
 
   // Where customers come from. Every appointment is at the one Waterloo

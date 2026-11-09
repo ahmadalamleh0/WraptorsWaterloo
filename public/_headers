@@ -1,7 +1,7 @@
 /sw.js
   Cache-Control: no-cache
 
-/manifest.webmanifest
+/site.webmanifest
   Cache-Control: no-cache
 
 /registerSW.js

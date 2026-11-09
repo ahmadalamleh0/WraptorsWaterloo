@@ -186,23 +186,26 @@ export default defineConfig({
       injectRegister: 'auto',
       includeAssets: [
         'favicon.ico',
-        'favicon-32x32.png',
-        'apple-touch-icon-180x180.png',
+        'favicon-v2.svg',
+        'favicon-16x16-v2.png',
+        'favicon-32x32-v2.png',
+        'favicon-48x48-v2.png',
+        'apple-touch-icon-v2.png',
       ],
+      manifestFilename: 'site.webmanifest',
       manifest: {
         name: LOCATION.seo.appName,
         short_name: 'Wraptors',
         description: LOCATION.seo.appDescription,
         theme_color: '#0a0a0a',
-        background_color: '#0a0a0a',
+        background_color: '#000000',   // the icons' own black, for the splash screen
         display: 'standalone',
         start_url: '/',
         scope: '/',
         icons: [
-          { src: 'pwa-64x64.png', sizes: '64x64', type: 'image/png' },
-          { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-          { src: 'maskable-icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'android-chrome-192x192-v2.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: 'android-chrome-512x512-v2.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: 'maskable-icon-512x512-v2.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
