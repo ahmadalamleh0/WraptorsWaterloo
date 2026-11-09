@@ -102,7 +102,8 @@ export const LOCATION = {
   media: {
     // Hero clip supplied by the client 2026-11-04 (202611041005 (3) (1).mp4, a
     // 1080x1920 17s montage of Wraptors builds ending on the Wraptors Mafia mark). Mobile is the full frame
-    // at 720x1280, desktop a 1080x608 16:9 crop; audio dropped.
+    // at 720x1280, desktop a 1080x608 16:9 crop (near-lossless, CRF 14, from the
+    // 6.8 Mbps master so it stays sharp); audio dropped.
     heroVideoMobile: asset(new URL('../../hero-tricity-mobile.mp4', import.meta.url)),
     heroVideoDesktop: asset(new URL('../../hero-tricity-desktop.mp4', import.meta.url)),
     // Still image the Visit Us map zooms into before the live map loads.
