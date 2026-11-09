@@ -100,10 +100,12 @@ export const LOCATION = {
   },
 
   media: {
-    // Hero clip supplied by the client 2026-11-04 (202611041005 (3) (1).mp4, a
-    // 1080x1920 17s montage of Wraptors builds ending on the Wraptors Mafia mark). Mobile is the full frame
-    // at 720x1280, desktop a 1080x608 16:9 crop (near-lossless, CRF 14, from the
-    // 6.8 Mbps master so it stays sharp); audio dropped.
+    // Mobile hero: Canada_hero (1).mp4 (client, 2026-11-09), a 17.6s montage
+    // of Wraptors builds. Its 1920x1080 frame is vertical footage with black
+    // side bars, so the mobile file is the 608x1080 picture alone (CRF 24).
+    // Desktop: the 2026-11-04 montage (202611041005 (3).mp4), a 1080x608 16:9
+    // crop encoded near-lossless (CRF 14) - kept because the new clip has no
+    // real widescreen footage. No audio, faststart. Plays from 0:00.
     heroVideoMobile: asset(new URL('../../hero-tricity-mobile.mp4', import.meta.url)),
     heroVideoDesktop: asset(new URL('../../hero-tricity-desktop.mp4', import.meta.url)),
     // Still image the Visit Us map zooms into before the live map loads.
